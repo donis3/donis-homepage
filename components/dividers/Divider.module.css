@@ -32,5 +32,17 @@
 	display: block;
 	width: calc(129% + 1.3px);
 	height: 104px;
-    z-index: 0;
+	z-index: 0;
 }
+
+.waves2 {
+	position: absolute;
+	top: -1px;
+	left: 0;
+	width: 100%;
+	overflow: hidden;
+	line-height: 0;
+	z-index: 0;
+}
+
+

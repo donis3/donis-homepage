@@ -4,10 +4,11 @@ import { cn } from "@/lib/utilities";
 type SectionProps = {
 	children: React.ReactNode;
 	className?: string;
-	divider?: "wave" | "waves";
+	divider?: "wave" | "waves" | "waves2";
 	dividerClass?: string;
 	dividerFillClass?: string;
 	dividerFlip?: boolean;
+	fillColors?: string[];
 };
 
 export default function Section({
@@ -17,12 +18,13 @@ export default function Section({
 	dividerClass,
 	dividerFillClass,
 	dividerFlip,
+	fillColors,
 	...props
 }: SectionProps) {
 	return (
 		<section
 			className={cn(
-				"relative w-full min-h-[400px] py-14 px-[10vw]",
+				"relative w-full min-h-[400px] py-24 px-[10vw]",
 				className,
 			)}
 			{...props}>
@@ -46,6 +48,15 @@ export default function Section({
 					fillClass={dividerFillClass}
 					flip={dividerFlip}
 					className={dividerClass}
+				/>
+			)}
+
+			{divider === "waves2" && (
+				<Divider.waves2
+					fillClass={dividerFillClass}
+					flip={dividerFlip}
+					className={dividerClass}
+					fillColors={fillColors}
 				/>
 			)}
 		</section>

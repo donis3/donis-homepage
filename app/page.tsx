@@ -17,7 +17,10 @@ export default function Home() {
 						neque, commodi nisi soluta quo!
 					</p>
 				</Section>
-				<Section className="bg-red-400" divider="wave" dividerFillClass="fill-blue-400">
+				<Section
+					className="bg-red-400"
+					divider="wave"
+					dividerFillClass="fill-blue-400">
 					<h2 className="font-medium text-lg mb-2">Im section 2</h2>
 					<p className="font-normal text-base leading-tight">
 						Lorem ipsum, dolor sit amet consectetur adipisicing
@@ -26,7 +29,16 @@ export default function Home() {
 						neque, commodi nisi soluta quo!
 					</p>
 				</Section>
-				<Section className="bg-green-400" divider="waves" dividerFillClass="fill-red-400" dividerFlip>
+				<Section
+					className="bg-green-400"
+					divider="waves2"
+					fillColors={[
+						"rgb(74 222 128)",
+						"rgb(108 193 115)",
+						"rgb(138 163 117)",
+						"rgb(158 143 120)",
+						"rgb(248 113 113)",
+					]}>
 					<h2 className="font-medium text-lg mb-2">Im section 3</h2>
 					<p className="font-normal text-base leading-tight">
 						Lorem ipsum, dolor sit amet consectetur adipisicing
