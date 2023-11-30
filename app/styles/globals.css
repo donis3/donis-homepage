@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	.h-dscreen {
+		height: 100vh; /* fallback for older browsers */
+		height: 100dvh;
+	}
+	.min-h-dscreen {
+		min-height: 100vh; /* fallback for older browsers */
+		min-height: 100dvh;
+	}
+}
