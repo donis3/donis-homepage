@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import "./styles/globals.css";
+import "./_styles/globals.css";
+import { rubik } from "./_fonts/fonts";
 
 export const metadata: Metadata = {
 	title: "Donis3.com - Dony the Dev",
@@ -12,8 +13,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en">
-			<body className="bg-gradient-to-tr from-indigo-100 via-red-100 to-yellow-100">
+		<html lang="en" className={rubik.variable}>
+			<body className="bg-gradient-to-tr from-indigo-100 via-red-100 to-yellow-100 font-sans">
 				{children}
 			</body>
 		</html>

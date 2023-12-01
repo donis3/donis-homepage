@@ -1,5 +1,7 @@
+import Fade from "@/components/awesome-reveal/Fade";
 import Section from "./_homepage/Section";
-import Divider from "@/components/dividers/Divider";
+import Slide from "@/components/awesome-reveal/Slide";
+import Bounce from "@/components/awesome-reveal/Bounce";
 
 export default function Home() {
 	return (
@@ -8,44 +10,52 @@ export default function Home() {
 				CompanyLogo
 			</header>
 			<main className="flex-1">
-				<Section className="bg-blue-400">
-					<h2 className="font-medium text-lg mb-2">Im section 1</h2>
-					<p className="font-normal text-base leading-tight">
-						Lorem ipsum, dolor sit amet consectetur adipisicing
-						elit. A temporibus quis deserunt vel vero odit illum
-						doloribus amet magni dolore nulla cum ab architecto nemo
-						neque, commodi nisi soluta quo!
-					</p>
+				<Section className="bg-primary-200 text-light">
+					<Fade cascade damping={0.4} duration={2700} triggerOnce>
+						<h2 className="font-medium text-lg mb-2">
+							Im section 1
+						</h2>
+
+						<p className="font-normal text-base leading-tight ">
+							Lorem ipsum, dolor sit amet consectetur adipisicing
+							elit. A temporibus quis deserunt vel vero odit illum
+							doloribus amet magni dolore nulla cum ab architecto
+							nemo neque, commodi nisi soluta quo!
+						</p>
+					</Fade>
 				</Section>
 				<Section
-					className="bg-red-400"
+					className="bg-primary-400"
 					divider="wave"
-					dividerFillClass="fill-blue-400">
-					<h2 className="font-medium text-lg mb-2">Im section 2</h2>
-					<p className="font-normal text-base leading-tight">
-						Lorem ipsum, dolor sit amet consectetur adipisicing
-						elit. A temporibus quis deserunt vel vero odit illum
-						doloribus amet magni dolore nulla cum ab architecto nemo
-						neque, commodi nisi soluta quo!
-					</p>
+					dividerFillClass="fill-primary-200">
+					<Slide>
+						<h2 className="font-medium text-lg mb-2">
+							Im section 2
+						</h2>
+						<p className="font-normal text-base leading-tight">
+							Lorem ipsum, dolor sit amet consectetur adipisicing
+							elit. A temporibus quis deserunt vel vero odit illum
+							doloribus amet magni dolore nulla cum ab architecto
+							nemo neque, commodi nisi soluta quo!
+						</p>
+					</Slide>
 				</Section>
 				<Section
-					className="bg-green-400"
-					divider="waves2"
-					fillColors={[
-						"rgb(74 222 128)",
-						"rgb(108 193 115)",
-						"rgb(138 163 117)",
-						"rgb(158 143 120)",
-						"rgb(248 113 113)",
-					]}>
-					<h2 className="font-medium text-lg mb-2">Im section 3</h2>
-					<p className="font-normal text-base leading-tight">
-						Lorem ipsum, dolor sit amet consectetur adipisicing
-						elit. A temporibus quis deserunt vel vero odit illum
-						doloribus amet magni dolore nulla cum ab architecto nemo
-						neque, commodi nisi soluta quo!
-					</p>
+					className="bg-muted-300"
+					divider="waves"
+					dividerFillClass="fill-primary-400"
+					dividerFlip>
+					<Bounce>
+						<h2 className="font-medium text-lg mb-2">
+							Im section 3
+						</h2>
+						<p className="font-normal text-base leading-tight">
+							Lorem ipsum, dolor sit amet consectetur adipisicing
+							elit. A temporibus quis deserunt vel vero odit illum
+							doloribus amet magni dolore nulla cum ab architecto
+							nemo neque, commodi nisi soluta quo!
+						</p>
+					</Bounce>
 				</Section>
 			</main>
 			<footer className="bg-slate-700/80 text-white p-4 text-sm font-light">

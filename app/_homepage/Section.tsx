@@ -24,7 +24,7 @@ export default function Section({
 	return (
 		<section
 			className={cn(
-				"relative w-full min-h-[400px] py-24 px-[10vw]",
+				"relative w-full min-h-[400px] py-60 px-[10vw]",
 				className,
 			)}
 			{...props}>
