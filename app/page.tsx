@@ -2,15 +2,18 @@ import Fade from "@/components/awesome-reveal/Fade";
 import Section from "./_homepage/Section";
 import Slide from "@/components/awesome-reveal/Slide";
 import Bounce from "@/components/awesome-reveal/Bounce";
+import Blob from "./_homepage/Blob";
+import Hero from "./_homepage/Hero";
 
 export default function Home() {
 	return (
 		<div className="flex flex-col justify-between min-h-dscreen w-full overflow-x-clip">
-			<header className="bg-slate-500/20 p-4 text-xl font-bold">
-				CompanyLogo
-			</header>
 			<main className="flex-1">
-				<Section className="bg-primary-200 text-light">
+				<Hero />
+				<header className="bg-muted p-4 text-xl font-bold fixed top-0 left-0 w-full h-[var(--navbar-h)] flex items-center justify-start">
+					CompanyLogo
+				</header>
+				<Section className="bg-primary-200 text-light" divider="wave" dividerFillClass="fill-primary-100">
 					<Fade cascade damping={0.4} duration={2700} triggerOnce>
 						<h2 className="font-medium text-lg mb-2">
 							Im section 1

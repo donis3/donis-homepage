@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+	--navbar-h: 60px;
+}
+
+@media screen and (max-width: 640px) {
+	:root {
+		/* Change base variable used for element variable */
+		--navbar-h: 80px;
+	}
+}
+
 @layer base {
 	.h-dscreen {
 		height: 100vh; /* fallback for older browsers */
