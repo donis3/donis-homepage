@@ -10,11 +10,12 @@ export default function Home() {
 		<div className="flex flex-col justify-between min-h-dscreen w-full overflow-x-clip">
 			<main className="flex-1">
 				<Hero />
-				<header className="bg-muted p-4 text-xl font-bold fixed top-0 left-0 w-full h-[var(--navbar-h)] flex items-center justify-start">
-					CompanyLogo
-				</header>
-				<Section className="bg-primary-200 text-light" divider="wave" dividerFillClass="fill-primary-100">
-					<Fade cascade damping={0.4} duration={2700} triggerOnce>
+
+				<Section
+					className="bg-primary-200 text-light"
+					divider="wave"
+					dividerFillClass="fill-primary-100">
+					<Fade cascade damping={0.4} duration={2000} triggerOnce>
 						<h2 className="font-medium text-lg mb-2">
 							Im section 1
 						</h2>

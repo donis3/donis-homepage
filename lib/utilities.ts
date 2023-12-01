@@ -26,3 +26,13 @@ env: {
 export function log(...params: any[]) {
 	if (process.env.build_mode === "development") console.log(...params);
 }
+
+export function median(param: number[]) {
+	if (param.length === 0) return 0;
+
+	const total = param.reduce((previous, current, i) => {
+		return previous + current;
+	}, 0);
+
+	return total / param.length;
+}

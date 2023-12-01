@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-	--navbar-h: 60px;
+	--navbar-h: 50px;
 }
 
 @media screen and (max-width: 640px) {
 	:root {
 		/* Change base variable used for element variable */
-		--navbar-h: 80px;
+		--navbar-h: 70px;
 	}
 }
 
