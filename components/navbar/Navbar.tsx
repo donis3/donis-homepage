@@ -1,67 +1,36 @@
 "use client";
+import useScrollDir, { ScrollData } from "@/hooks/useScrollDir";
 import { median } from "@/lib/utilities";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 export default function Navbar() {
+	useScrollDir(navbarScrollHandler);
 	const headerRef = useRef<HTMLDivElement>(null);
-	const yOffsetRef = useRef(0); // last y position
-	const lastMovementDeltasRef = useRef<number[]>([0]); //Save last 10 y position changes in an array
 
-	useEffect(() => {
-		//Get initial y
-		if (window) yOffsetRef.current = window.scrollY;
+	function navbarScrollHandler(data: ScrollData) {
+		// Validate header is loaded
+		if (!headerRef.current) return;
 
-		//Handle scroll
-		const handleScroll = () => {
-			//Get movement change
-			const delta = window.scrollY - yOffsetRef.current;
-			//Save current y pos
-			yOffsetRef.current = window.scrollY;
-			//Update latest movements array
-			if (delta !== 0) {
-				const arrLength = lastMovementDeltasRef.current.unshift(delta);
-				if (arrLength >= 10) {
-					//Keep the array at 10
-					lastMovementDeltasRef.current =
-						lastMovementDeltasRef.current.slice(0, 10);
-				}
-			}
-
-			const isScrollingUp = median(lastMovementDeltasRef.current) < -2;
-			if (isScrollingUp && headerRef.current) {
-				//Show navbar scrolling up
-				headerRef.current.style.transform = "translate(0, 0)";
-			} else if (
-				!isScrollingUp &&
-				headerRef.current &&
-				yOffsetRef.current > 400
-			) {
-				//Hide navbar scrolling down & at least 400px down
-				headerRef.current.style.transform = "translate(0, -100px)";
-			}
-
-			//Handle navbar background visibility
-			if (window.scrollY > 10 && headerRef.current) {
-				headerRef.current.classList.toggle("bg-muted-300", true);
-				headerRef.current.classList.toggle("bg-transparent", false);
-				headerRef.current.classList.toggle("text-white/70", false);
-			} else if (window.scrollY <= 10 && headerRef.current) {
-				headerRef.current.classList.toggle("bg-muted", false);
-				headerRef.current.classList.toggle("bg-transparent", true);
-				headerRef.current.classList.toggle("text-white/70", true);
-			}
-		};
-
-		//Run once on load
-		handleScroll();
-
-		//Add listener
-		document.addEventListener("scroll", handleScroll);
-
-		//Remove listener
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, []);
+		//Handle hide / show depending on direction
+		if (data.directionY === "down" && data.y > 400) {
+			//Hide navbar if we are at least 400px away from the top and going down
+			headerRef.current.style.transform = "translate(0, -100px)";
+		} else if (data.directionY === "up") {
+			//Show navbar when moving up
+			headerRef.current.style.transform = "translate(0, 0)";
+		}
+		//Handle background color visibility
+		if (data.y > 50) {
+			headerRef.current.classList.toggle("bg-muted-300", true);
+			headerRef.current.classList.toggle("bg-transparent", false);
+			headerRef.current.classList.toggle("text-white/70", false);
+		} else if (data.y <= 50) {
+			headerRef.current.classList.toggle("bg-muted", false);
+			headerRef.current.classList.toggle("bg-transparent", true);
+			headerRef.current.classList.toggle("text-white/70", true);
+		}
+	}
 
 	return (
 		<header
