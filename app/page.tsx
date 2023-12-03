@@ -7,7 +7,7 @@ import Hero from "./_homepage/Hero";
 
 export default function Home() {
 	return (
-		<div className="flex flex-col justify-between min-h-dscreen w-full overflow-x-clip">
+		<div className="flex flex-col justify-between min-h-dscreen w-full overflow-x-hidden">
 			<main className="flex-1">
 				<Hero />
 

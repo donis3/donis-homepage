@@ -1,34 +1,58 @@
 "use client";
-import useScrollDir, { ScrollData } from "@/hooks/useScrollDir";
-import { median } from "@/lib/utilities";
+
+import useScrollHandler, { ScrollData } from "@donis3/use-scroll-handler";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export default function Navbar() {
-	useScrollDir(navbarScrollHandler);
+	useScrollHandler(handleScroll, {
+		updateInterval: 100,
+	});
 	const headerRef = useRef<HTMLDivElement>(null);
 
-	function navbarScrollHandler(data: ScrollData) {
-		// Validate header is loaded
-		if (!headerRef.current) return;
-
-		//Handle hide / show depending on direction
-		if (data.directionY === "down" && data.y > 400) {
-			//Hide navbar if we are at least 400px away from the top and going down
-			headerRef.current.style.transform = "translate(0, -100px)";
-		} else if (data.directionY === "up") {
-			//Show navbar when moving up
-			headerRef.current.style.transform = "translate(0, 0)";
-		}
-		//Handle background color visibility
-		if (data.y > 50) {
+	//Navbar Behavior
+	const navbarActions = {
+		showBg: () => {
+			if (!headerRef.current) return;
 			headerRef.current.classList.toggle("bg-muted-300", true);
 			headerRef.current.classList.toggle("bg-transparent", false);
 			headerRef.current.classList.toggle("text-white/70", false);
-		} else if (data.y <= 50) {
-			headerRef.current.classList.toggle("bg-muted", false);
+		},
+		hideBg: () => {
+			if (!headerRef.current) return;
+			headerRef.current.classList.toggle("bg-muted-300", false);
 			headerRef.current.classList.toggle("bg-transparent", true);
 			headerRef.current.classList.toggle("text-white/70", true);
+		},
+		hide: () => {
+			if (!headerRef.current) return;
+			headerRef.current.style.transform = "translate(0, -100px)";
+		},
+		show: () => {
+			if (!headerRef.current) return;
+			headerRef.current.style.transform = "translate(0, 0)";
+		},
+	};
+
+	/**
+	 * Scroll event callback
+	 * @param data
+	 */
+	function handleScroll(data: ScrollData) {
+		if (data.atTop || data.y < 10) {
+			//If at top of the page, hide bg color
+			navbarActions.hideBg();
+		} else if (data.y >= 10 && !data.atTop) {
+			//If not at the top, show a background color
+			navbarActions.showBg();
+		}
+
+		if (data.y > 400 && data.directionY === "down" && !data.atTop) {
+			//If scrolling down, hide the navbar
+			navbarActions.hide();
+		} else if (data.directionY === "up" || data.atTop) {
+			//If scrolling up, show the navbar
+			navbarActions.show();
 		}
 	}
 
