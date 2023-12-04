@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@donis3/use-scroll-handler": "^1.0.0",
+    "@egjs/flicking-plugins": "^4.7.1",
+    "@egjs/react-flicking": "^4.11.1",
     "@emotion/react": "^11.11.1",
     "clsx": "^2.0.0",
     "next": "14.0.3",

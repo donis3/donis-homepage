@@ -86,6 +86,17 @@ const config: Config = {
 			fontFamily: {
 				sans: ["var(--font-rubik)", ...defaultTheme.fontFamily.sans],
 			},
+			animation: {
+				"text-gradient": "text-gradient 1.5s linear infinite",
+				"text-gradient-slow": "text-gradient 5s linear infinite",
+			},
+			keyframes: {
+				"text-gradient": {
+					to: {
+						backgroundPosition: "200% center",
+					},
+				},
+			},
 		},
 	},
 	plugins: [],

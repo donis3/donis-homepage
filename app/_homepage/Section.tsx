@@ -24,16 +24,17 @@ export default function Section({
 	return (
 		<section
 			className={cn(
-				"relative w-full min-h-[400px] py-60 px-[10vw]",
+				"relative w-full min-h-[400px] py-32 px-[10vw]",
 				className,
 			)}
 			{...props}>
 			{/* If there is a divider, wrap the children with a div to apply z-index */}
-			{!divider ? (
+			{/* {!divider ? (
 				children
 			) : (
 				<div className="relative z-10">{children}</div>
-			)}
+			)} */}
+			<div className="relative z-10 container mx-auto">{children}</div>
 
 			{/* Render the divider if requested */}
 			{divider === "wave" && (

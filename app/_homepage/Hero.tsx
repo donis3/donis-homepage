@@ -25,7 +25,7 @@ export default function Hero() {
 					</Fade>
 				</div>
 				<div className="  min-h-[30px] order-first md:order-last flex justify-center items-start  md:col-span-5 ">
-					<Blob />
+					<Blob duration={10000} />
 				</div>
 			</div>
 		</section>
