@@ -9,7 +9,7 @@ type SectionProps = {
 	dividerFillClass?: string;
 	dividerFlip?: boolean;
 	fillColors?: string[];
-};
+} & React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
 
 export default function Section({
 	children,

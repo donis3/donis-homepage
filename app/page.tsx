@@ -14,27 +14,16 @@ export default function Home() {
 			<main className="flex-1">
 				<Hero />
 				<Section
-					className="bg-primary-800"
+					className="bg-primary-800 bg-repeat"
 					divider="wave"
 					dividerFillClass="fill-primary-100"
 					dividerFlip>
-					<Slide>
-						<h2 className="font-medium text-lg mb-2">My Skills</h2>
-						<p className="font-normal text-base leading-tight">
-							Lorem ipsum, dolor sit amet consectetur adipisicing
-							elit. A temporibus quis deserunt vel vero odit illum
-							doloribus amet magni dolore nulla cum ab architecto
-							nemo neque, commodi nisi soluta quo!
-						</p>
-					</Slide>
 					<Skills />
 				</Section>
 				<Section
 					className="bg-primary-200 text-light"
 					divider="wave"
 					dividerFillClass="fill-primary-800">
-					<h2 className="font-medium text-lg mb-2">PROJECTS</h2>
-
 					<Projects>
 						{/* TODO: https://www.npmjs.com/package/react-multi-carousel */}
 						<div>

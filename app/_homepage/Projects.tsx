@@ -30,9 +30,9 @@ export default function Projects({ children }: ProjectsProps) {
 		if (!ref.current) return;
 
 		try {
-			if (ref.current.index < ref.current.panelCount)
+			if (ref.current.index < ref.current.panelCount-1)
 				await ref.current.next();
-			if (ref.current.index === ref.current.panelCount - 1)
+			if (ref.current.index >= ref.current.panelCount - 2)
 				setEdge("right");
 			else setEdge(null);
 		} catch (e) {
