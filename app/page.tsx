@@ -1,12 +1,8 @@
-import Fade from "@/components/awesome-reveal/Fade";
 import Section from "./_homepage/Section";
 import Slide from "@/components/awesome-reveal/Slide";
-import Bounce from "@/components/awesome-reveal/Bounce";
-import Blob from "./_homepage/Blob";
 import Hero from "./_homepage/Hero";
-import Projects from "./_homepage/Projects";
-import ProjectCard from "./_homepage/ProjectCard";
 import Skills from "./_homepage/Skills";
+import ProjectSlider from "./_homepage/ProjectSlider";
 
 export default function Home() {
 	return (
@@ -24,21 +20,7 @@ export default function Home() {
 					className="bg-primary-200 text-light"
 					divider="wave"
 					dividerFillClass="fill-primary-800">
-					<Projects>
-						{/* TODO: https://www.npmjs.com/package/react-multi-carousel */}
-						<div>
-							<ProjectCard index={1} />
-						</div>
-						<div>
-							<ProjectCard index={2} />
-						</div>
-						<div>
-							<ProjectCard index={3} />
-						</div>
-						<div>
-							<ProjectCard index={4} />
-						</div>
-					</Projects>
+					<ProjectSlider />
 				</Section>
 				<Section
 					className="bg-light-400"

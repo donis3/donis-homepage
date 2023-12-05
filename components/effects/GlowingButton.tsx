@@ -4,7 +4,7 @@ import { FaHome } from "react-icons/fa";
 type GlowingButtonProps = {
 	children: React.ReactNode;
 	className?: string;
-	variant?: "purple" | "red";
+	variant?: "purple" | "red" | "blue";
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const GlowingButton: FC<GlowingButtonProps> = ({
@@ -24,6 +24,8 @@ const GlowingButton: FC<GlowingButtonProps> = ({
 						"bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]",
 					variant === "red" &&
 						"bg-[conic-gradient(from_90deg_at_50%_50%,#D80032_0%,#3D0C11_50%,#C63D2F_100%)]",
+					variant === "blue" &&
+						"bg-[conic-gradient(from_90deg_at_50%_50%,#80B3FF_0%,#B6FFFA_50%,#687EFF_100%)]",
 				)}
 			/>
 			<span
