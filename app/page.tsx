@@ -1,5 +1,5 @@
 import Section from "./_homepage/Section";
-import Slide from "@/components/awesome-reveal/Slide";
+
 import Hero from "./_homepage/Hero";
 import Skills from "./_homepage/Skills";
 import ProjectSlider from "./_homepage/ProjectSlider";

@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" className={rubik.variable}>
-			<body className="bg-gradient-to-tr from-indigo-100 via-red-100 to-yellow-100 font-sans">
+			<body className="bg-primary-100 font-sans dark">
 				<Navbar />
 				{children}
 			</body>
