@@ -1,6 +1,5 @@
 "use client";
-
-import useScrollHandler, { ScrollData } from "@donis3/use-scroll-handler";
+import useScrollHandler, { ScrollData } from "@/hooks/useScrollHandler";
 import Link from "next/link";
 import { useRef } from "react";
 

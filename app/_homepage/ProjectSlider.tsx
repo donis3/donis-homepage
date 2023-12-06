@@ -38,7 +38,7 @@ const ProjectItem: FC<ProjectItemProps> = () => {
 	return (
 		<CarouselItem
 			className={cn(
-				"bg-gradient-to-br from-zinc-100 to-slate-300 rounded-lg shadow-md w-[400px] text-primary-100",
+				"bg-gradient-to-br from-zinc-100 to-slate-300 rounded-lg shadow-md w-[300px] md:w-[450px] text-primary-100",
 			)}>
 			<div
 				className=" overflow-hidden rounded-t-lg h-32 w-full bg-cover bg-center"

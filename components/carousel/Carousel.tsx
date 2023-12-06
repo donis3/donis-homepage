@@ -136,7 +136,7 @@ const CarouselItem: FC<CarouselItemProps> = ({ children, ...props }) => {
 		<div
 			{...props}
 			className={cn(
-				"transition-all snap-always snap-center duration-300 overflow-x-auto",
+				"transition-all snap-always snap-center duration-300 overflow-x-auto max-w-[320px] md:max-w-[600px] lg:max-w-[900px] xl:max-w-[1200px]",
 				props.className,
 			)}>
 			{children}

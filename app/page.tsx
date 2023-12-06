@@ -3,6 +3,7 @@ import Slide from "@/components/awesome-reveal/Slide";
 import Hero from "./_homepage/Hero";
 import Skills from "./_homepage/Skills";
 import ProjectSlider from "./_homepage/ProjectSlider";
+import Contact from "./_homepage/Contact";
 
 export default function Home() {
 	return (
@@ -23,19 +24,11 @@ export default function Home() {
 					<ProjectSlider />
 				</Section>
 				<Section
-					className="bg-light-400"
+					className="bg-light-400 px-2"
 					divider="wave"
 					dividerFillClass="fill-primary-200"
 					dividerFlip>
-					<Slide>
-						<h2 className="font-medium text-lg mb-2">Contact Me</h2>
-						<p className="font-normal text-base leading-tight">
-							Lorem ipsum, dolor sit amet consectetur adipisicing
-							elit. A temporibus quis deserunt vel vero odit illum
-							doloribus amet magni dolore nulla cum ab architecto
-							nemo neque, commodi nisi soluta quo!
-						</p>
-					</Slide>
+					<Contact />
 				</Section>
 			</main>
 			<footer className="bg-slate-700/80 text-white p-4 text-sm font-light">
