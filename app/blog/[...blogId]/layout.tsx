@@ -7,10 +7,8 @@ import type { Metadata } from "next";
 
 export default function MdxLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<main className="bg-primary-200 pt-[var(--navbar-h)] min-h-dscreen">
-			<article className="prose w-full max-w-none p-4 prose-invert">
-				{children}
-			</article>
-		</main>
+		<article className="pt-[var(--navbar-h)]  prose w-full max-w-none p-4 prose-invert">
+			{children}
+		</article>
 	);
 }

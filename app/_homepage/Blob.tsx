@@ -13,7 +13,7 @@ export default function Blob({ duration = 5000 }: { duration?: number }) {
 				width="100%"
 				height="100%"
 				clipPath="url(#shape)"
-				href="./assets/don-hero.jpg"
+				href="/assets/don-hero.jpg"
 				preserveAspectRatio="none"
 			/>
 
