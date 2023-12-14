@@ -1,13 +1,16 @@
 import React, { FC } from "react";
 import Section from "../_homepage/Section";
 import Timeline from "./Timeline";
+import Link from "next/link";
+import { FaEnvelope, FaFilePdf } from "react-icons/fa";
+import Social from "./Social";
 
 type pageProps = {};
 
 const page: FC<pageProps> = ({}) => {
 	return (
 		<>
-			<section className="w-full bg-gradient-to-b from-primary-400 to-primary-100  relative pt-[var(--navbar-h)] text-muted-800 pb-20 to-90%">
+			<section className="w-full bg-gradient-to-b from-primary-400 to-primary-100  relative pt-[var(--navbar-h)] text-muted-800  to-90%">
 				<div className="grid grid-cols-1 md:grid-cols-2  container mx-auto mt-8">
 					<div className="flex justify-center items-center px-4 py-8">
 						<img
@@ -27,6 +30,17 @@ const page: FC<pageProps> = ({}) => {
 							voluptatum. Impedit est labore obcaecati eius
 							molestiae fuga. Sit?
 						</p>
+						<div className="mt-4">
+							<Link
+								href={"./documents/cv.pdf"}
+								className="font-bold bg-zinc-50 text-primary p-3 rounded-md inline-flex items-center flex-row gap-3 hover:bg-zinc-200">
+								<FaFilePdf />
+								<span>Download Resume</span>
+							</Link>
+						</div>
+						<div className="border-t border-primary-500/50 mt-10 py-4">
+							<Social />
+						</div>
 					</div>
 				</div>
 			</section>

@@ -55,12 +55,6 @@ export default function Navbar() {
 		}
 	}
 
-	function scrollTo(selector: string) {
-		const target = document.querySelector(selector);
-		if (!target) return;
-		target.scrollIntoView({ behavior: "smooth" });
-	}
-
 	return (
 		<header
 			className=" bg-transparent text-white/70 fixed top-0 left-0 w-full h-[var(--navbar-h)] flex items-center justify-center z-50 transition-all duration-300"
@@ -74,9 +68,26 @@ export default function Navbar() {
 					/>
 				</Link>
 				<nav className="font-normal text-base flex-1 flex flex-row justify-center md:justify-end gap-4 whitespace-nowrap">
-					<Link href="/about" className="hover:text-white active:text-white active:-translate-y-0.5">About Me</Link>
-					<Link href="/blog" className="hover:text-white active:text-white active:-translate-y-0.5">Blog</Link>
-					<Link href="/contact" className="hover:text-white active:text-white active:-translate-y-0.5">Contact</Link>
+					<Link
+						href="/about"
+						className="hover:text-white active:text-white active:-translate-y-0.5">
+						About Me
+					</Link>
+					<Link
+						href="/projects"
+						className="hover:text-white active:text-white active:-translate-y-0.5">
+						Projects
+					</Link>
+					<Link
+						href="/blog"
+						className="hover:text-white active:text-white active:-translate-y-0.5">
+						Blog
+					</Link>
+					<Link
+						href="/contact"
+						className="hover:text-white active:text-white active:-translate-y-0.5">
+						Contact
+					</Link>
 				</nav>
 			</div>
 		</header>
