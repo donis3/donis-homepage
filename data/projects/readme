@@ -1,0 +1,5 @@
+Adding a new project:
+
+1: projects.ts: create a new entry for your project
+2: add a mdx file with project description inside. Name it {projectId}.mdx
+3: If project has images, go to public/projects/{projectId}/ and place images inside this folder
