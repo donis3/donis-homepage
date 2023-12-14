@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { FaEnvelope } from "react-icons/fa";
 import { social } from "@/data/about/social";
 import Link from "next/link";
 
