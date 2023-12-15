@@ -10,8 +10,8 @@ const page: FC<pageProps> = ({}) => {
 	return (
 		<>
 			<section className="w-full bg-gradient-to-b from-primary-400 to-light-100  relative pt-[var(--navbar-h)] text-muted-800  to-90%">
-				<div className="container mx-auto p-4">
-					<h1 className="text-4xl font-bold tracking-tight  mt-10">
+				<div className="container mx-auto p-4 mt-10">
+					<h1 className="text-4xl font-bold tracking-tight  ">
 						My Work
 					</h1>
 					<p className="py-2 leading-relaxed max-w-sm">

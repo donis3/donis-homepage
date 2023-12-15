@@ -3,7 +3,7 @@ import { getProjectImages } from "@/data/projects";
 import { cn } from "@/lib/utilities";
 import Link from "next/link";
 import React, { FC } from "react";
-import { FaCalendar, FaGithub, FaGlobe, FaInfoCircle } from "react-icons/fa";
+import { FaGithub, FaGlobe, FaInfoCircle } from "react-icons/fa";
 
 type ProjectProps = {
 	data?: ProjectType;
@@ -14,19 +14,21 @@ const Project: FC<ProjectProps> = ({ data }) => {
 	const images = getProjectImages(data.id);
 
 	return (
-		<div className="bg-slate-100 w-full rounded-md shadow-md flex flex-col gap-4 group md:flex-row group">
+		<div className="bg-slate-100 w-full rounded-md shadow-md flex flex-col gap-4 group md:flex-row group border border-slate-200">
 			<div className="overflow-hidden w-full h-48 rounded-t-md md:w-1/3 lg:w-1/4 md:h-full md:rounded-none md:rounded-l-md">
-				<div
-					className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-all duration-700"
-					style={{
-						boxShadow: "inset black 0px 0px 10px -3px",
-						backgroundImage: `url('${
-							images
-								? images[0]
-								: "/assets/projects/project-placeholder.jpg"
-						}')`,
-						backgroundSize: "cover",
-					}}></div>
+				<Link href={`/projects/${data.id}`}>
+					<div
+						className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-all duration-700"
+						style={{
+							boxShadow: "inset black 0px 0px 10px -3px",
+							backgroundImage: `url('${
+								images
+									? images[0]
+									: "/assets/projects/project-placeholder.jpg"
+							}')`,
+							backgroundSize: "cover",
+						}}></div>
+				</Link>
 			</div>
 			<div className="flex-1 p4 flex flex-col justify-center  gap-2 p-4 md:w-2/3 lg:w-3/4">
 				<h3 className="font-semibold text-xl flex flex-row items-center justify-between w-full overflow-hidden">
@@ -99,7 +101,7 @@ function ProjectLink({
 			href={href}
 			target={target}
 			className={cn(
-				"p-2 rounded-md font-medium text-base inline-flex items-center gap-2 transition-colors duration-500",
+				"p-2 rounded-md font-medium text-base inline-flex items-center gap-2 transition-colors duration-500 ",
 				outline
 					? "border border-primary-500 text-primary-500 hover:bg-primary-900"
 					: "bg-primary-500 text-white hover:bg-primary-600 ",
