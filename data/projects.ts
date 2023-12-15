@@ -15,7 +15,7 @@ const projects: ProjectType[] = [
 		title: "Test 1",
 		year: 2020,
 		subtitle: "A nice test application",
-		tech: ["Next.js 14", "SPA"],
+		tech: [],
 		images: [],
 		repo: "https://github.com/donis3/dony-react18-simple-starter",
 		link: "https://www.costotus.com",
@@ -33,7 +33,7 @@ const projects: ProjectType[] = [
 		title: "Test 3",
 		year: 2020,
 		subtitle:
-			"Voluptate eiusmod non velit nisi qui laborum sunt excepteur ipsum fugiat ad ipsum cillum. Sint excepteur consequat quis deserunt sint sit cillum fugiat consequat aute veniam tempor tempor. Dolor velit cillum non amet nulla consectetur laboris elit. Excepteur in aute velit mollit adipisicing adipisicing pariatur Lorem minim reprehenderit nulla anim nulla ex. Irure aliqua aliqua cupidatat Lorem cillum deserunt minim. Magna esse incididunt pariatur tempor officia labore ipsum aliquip.",
+			"Voluptate eiusmod non velit nisi qui laborum sunt excepteur ipsum fugiat ad ipsum cillum. Sint excepteur consequat quis deserunt sint sit ",
 		tech: ["Next.js 13", "SPA"],
 		images: ["test3_01.jpg"],
 	},

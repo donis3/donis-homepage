@@ -20,11 +20,11 @@ const Project: FC<ProjectProps> = ({ data }) => {
 					className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-all duration-700"
 					style={{
 						boxShadow: "inset black 0px 0px 10px -3px",
-						backgroundImage: `url(${
+						backgroundImage: `url('${
 							images
 								? images[0]
 								: "/assets/projects/project-placeholder.jpg"
-						})`,
+						}')`,
 						backgroundSize: "cover",
 					}}></div>
 			</div>
@@ -40,11 +40,13 @@ const Project: FC<ProjectProps> = ({ data }) => {
 				<p className="font-normal text-lg leading-snug tracking-tight">
 					{data.subtitle}
 				</p>
-				<ul className="flex flex-row gap-2 text-sm tracking-tighter font-light text-zinc-600 border-t w-full pt-2 mt-2">
-					{data.tech.map((item, i) => (
-						<li key={`${data.id}_tech_${i}`}>{item}</li>
-					))}
-				</ul>
+				{data.tech.length > 0 && (
+					<ul className="flex flex-row gap-2 text-sm tracking-tighter font-light text-zinc-600 border-t w-full pt-2 mt-2">
+						{data.tech.map((item, i) => (
+							<li key={`${data.id}_tech_${i}`}>{item}</li>
+						))}
+					</ul>
+				)}
 				<div className="mt-6 flex flex-wrap gap-4 items-center justify-center md:justify-start">
 					<ProjectLink href={`/projects/${data.id}`}>
 						<FaInfoCircle />
