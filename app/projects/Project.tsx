@@ -1,8 +1,9 @@
 import { ProjectType } from "@/data/ProjectType";
 import { getProjectImages } from "@/data/projects";
+import { cn } from "@/lib/utilities";
 import Link from "next/link";
 import React, { FC } from "react";
-import { FaCalendar } from "react-icons/fa";
+import { FaCalendar, FaGithub, FaGlobe, FaInfoCircle } from "react-icons/fa";
 
 type ProjectProps = {
 	data?: ProjectType;
@@ -16,7 +17,7 @@ const Project: FC<ProjectProps> = ({ data }) => {
 		<div className="bg-slate-100 w-full rounded-md shadow-md flex flex-col gap-4 group md:flex-row group">
 			<div className="overflow-hidden w-full h-48 rounded-t-md md:w-1/3 lg:w-1/4 md:h-full md:rounded-none md:rounded-l-md">
 				<div
-					className="w-full h-full bg-cover bg-center group-hover:scale-110 transition-all duration-700"
+					className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-all duration-700"
 					style={{
 						boxShadow: "inset black 0px 0px 10px -3px",
 						backgroundImage: `url(${
@@ -44,15 +45,65 @@ const Project: FC<ProjectProps> = ({ data }) => {
 						<li key={`${data.id}_tech_${i}`}>{item}</li>
 					))}
 				</ul>
+				<div className="mt-6 flex flex-wrap gap-4 items-center justify-center md:justify-start">
+					<ProjectLink href={`/projects/${data.id}`}>
+						<FaInfoCircle />
+						View Details
+					</ProjectLink>
 
-				<Link
-					href={"/"}
-					className="p-2 rounded-md bg-primary text-white font-medium text-base mt-6 place-self-center md:place-self-start">
-					View Details
-				</Link>
+					{data?.repo && (
+						<ProjectLink
+							href={data.repo}
+							outline
+							target="_blank"
+							className="border-purple-400 text-purple-900 hover:bg-purple-100">
+							<FaGithub />
+							Github Repo
+						</ProjectLink>
+					)}
+					{data?.link && (
+						<ProjectLink
+							href={data.link}
+							outline
+							target="_blank"
+							className="border-teal-700 text-teal-900 hover:bg-emerald-100">
+							<FaGlobe />
+							Visit Project
+						</ProjectLink>
+					)}
+				</div>
 			</div>
 		</div>
 	);
 };
 
 export default Project;
+
+function ProjectLink({
+	href,
+	className,
+	children,
+	outline,
+	target,
+}: {
+	href: string;
+	className?: string;
+	children: React.ReactNode;
+	outline?: boolean;
+	target?: string;
+}) {
+	return (
+		<Link
+			href={href}
+			target={target}
+			className={cn(
+				"p-2 rounded-md font-medium text-base inline-flex items-center gap-2 transition-colors duration-500",
+				outline
+					? "border border-primary-500 text-primary-500 hover:bg-primary-900"
+					: "bg-primary-500 text-white hover:bg-primary-600 ",
+				className,
+			)}>
+			{children}
+		</Link>
+	);
+}

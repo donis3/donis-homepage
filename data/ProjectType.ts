@@ -5,4 +5,6 @@ export type ProjectType = {
 	subtitle: string;
 	tech: string[];
 	images: string[];
+	link?: string;
+	repo?: string;
 };
