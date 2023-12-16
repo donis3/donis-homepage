@@ -1,3 +1,4 @@
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 
 export type ScrollData = {
@@ -70,6 +71,7 @@ export default function useScrollHandler(
 	callback: (data: ScrollData) => void,
 	options?: ScrollOptions,
 ) {
+	const path = usePathname();
 	const TICK = options?.updateInterval ?? 20; //How many milliseconds needs to pass between 2 scroll events for the data to update.
 	const internalData = useRef({ lastUpdate: Date.now(), lastY: 0, lastX: 0 });
 	const scrollData = useRef<ScrollData>({
@@ -83,6 +85,7 @@ export default function useScrollHandler(
 		atTop: true,
 	});
 
+	// Effect must run on each path change because component doesn't dismount when path changes 
 	useEffect(() => {
 		if (!window) return;
 		//Make sure we have a target
@@ -171,7 +174,7 @@ export default function useScrollHandler(
 				target.removeEventListener("scroll", onScroll);
 			}
 		};
-	}, []);
+	}, [path]);
 
 	return scrollData;
 }
