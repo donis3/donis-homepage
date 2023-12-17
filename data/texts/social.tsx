@@ -4,6 +4,7 @@ import {
 	FaFacebook,
 	FaGithub,
 	FaInstagram,
+	FaLinkedin,
 	FaTwitter,
 } from "react-icons/fa";
 
@@ -31,7 +32,7 @@ const social = [
 	{
 		id: "linkedin",
 		text: "LinkedIn",
-		icon: <FaTwitter />,
+		icon: <FaLinkedin />,
 		data: process.env.NEXT_PUBLIC_DEV_LINKEDIN,
 	},
 	{

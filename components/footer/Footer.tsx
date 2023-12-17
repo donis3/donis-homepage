@@ -3,14 +3,17 @@ import { menuItems } from "@/data/texts/shared";
 import { social } from "@/data/texts/social";
 import Link from "next/link";
 import { FaHeart } from "react-icons/fa";
+import { GoMoveToTop } from "react-icons/go";
+import MoveTop from "./MoveTop";
 
 type FooterProps = {};
 
 const Footer: FC<FooterProps> = ({}) => {
 	return (
-		<footer className="bg-slate-700/80 p-4 text-sm font-light">
+		<footer className="bg-slate-700/80 p-4 text-sm font-light relative z-10">
+			<MoveTop />
 			<div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-4">
-				<div className=" flex flex-col items-start gap-2">
+				<div className="">
 					<h3 className="text-2xl font-bold tracking-tighter h-auto md:h-10  flex items-end ">
 						<Link
 							href={"/"}
@@ -18,29 +21,8 @@ const Footer: FC<FooterProps> = ({}) => {
 							Donis.Dev
 						</Link>
 					</h3>
-					<ul className="flex flex-wrap gap-2 text-zinc-300 ">
-						{social.map((item, i) => {
-							if (!item.data) return <></>;
-							return (
-								<li
-									key={`footer_social_item_${i}`}
-									className="text-sm">
-									<Link
-										href={item.data}
-										target="_blank"
-										className="inline-flex gap-1 items-center hover:text-zinc-200">
-										{item.icon} {item.text}
-									</Link>
-								</li>
-							);
-						})}
-					</ul>
-				</div>
-				<div className="flex flex-col items-start md:items-end gap-2 ">
-					<h4 className="text-base font-medium tracking-tight h-auto md:h-10 flex items-end text-zinc-200 ">
-						Navigation
-					</h4>
-					<ul className="text-left md:text-right text-zinc-400 ">
+
+					<ul className=" text-zinc-400 ">
 						{menuItems.map((item, i) => {
 							return (
 								<li key={`footer_menu_item_${i}`}>
@@ -54,6 +36,28 @@ const Footer: FC<FooterProps> = ({}) => {
 						})}
 					</ul>
 				</div>
+				<div className=" flex flex-col items-end justify-start gap-2">
+					<h4 className="text-base font-medium tracking-tight h-auto md:h-10 flex items-end  text-zinc-200 w-full md:px-1 md:justify-end">
+						Get in touch!
+					</h4>
+					<ul className=" text-zinc-300 flex flex-wrap gap-2  w-full items-center justify-start md:justify-end ">
+						{social.map((item, i) => {
+							return (
+								<li
+									key={`footer_social_item_${i}`}
+									className="text-sm group">
+									<Link
+										href={item.data ?? "/"}
+										target="_blank"
+										className=" hover:text-white text-sm inline-flex items-center gap-1  w-auto group-first:pl-0 px-2 md:group-last:pr-0 md:group-first:pl-2 ">
+										{item.icon}
+									</Link>
+								</li>
+							);
+						})}
+					</ul>
+				</div>
+
 				<div className="py-1 col-span-1 md:col-span-2 border-t border-slate-600 flex flex-col md:flex-row items-center justify-between gap-2 text-gray-400 text-xs">
 					<span>©2023 All Rights Reserved</span>
 					<div className="flex flex-row gap-1 items-center">

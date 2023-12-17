@@ -50,7 +50,7 @@
 @media screen and (max-width: 640px) {
 	:root {
 		/* Change base variable used for element variable */
-		--navbar-h: 80px;
+		--navbar-h: 90px;
 	}
 }
 
