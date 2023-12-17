@@ -1,12 +1,12 @@
 import React, { FC } from "react";
-import { projects, getProjectImages } from "@/data/projects";
+import { projects } from "@/data/projects";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Section from "@/app/_homepage/Section";
 import Link from "next/link";
 import { FaArrowLeft, FaGithub, FaGlobe } from "react-icons/fa";
 import Album from "./Album";
-import ImageModal from "@/components/img-modal/ImageModal";
+import { cn } from "@/lib/utilities";
 
 /**
  * Each project must be generated
@@ -63,7 +63,11 @@ const project: FC<projectProps> = ({ params }) => {
 
 	return (
 		<>
-			<section className="w-full bg-gradient-to-b from-primary-400 to-light-100  relative pt-[var(--navbar-h)] text-muted-800  to-90%">
+			<section
+				className={cn(
+					"w-full bg-gradient-to-b   relative pt-[var(--navbar-h)] text-muted-800  to-90%",
+					`from-primary-100 to-accent-100`,
+				)}>
 				<div className="container mx-auto p-4 h-10">
 					<Link
 						href={"/projects"}
@@ -109,11 +113,15 @@ const project: FC<projectProps> = ({ params }) => {
 			</section>
 			<Section
 				divider="wave"
-				dividerFillClass="fill-light-100"
+				dividerFillClass="fill-accent-100"
 				className="bg-slate-100  pb-20 flex-1 min-h-[500px]"
 				dividerFlip={true}>
 				<div>
-					<Album images={data.images} projectId={projectId} caption={data.title} />
+					<Album
+						images={data.images}
+						projectId={projectId}
+						caption={data.title}
+					/>
 				</div>
 				<article className="prose w-full mt-10 ">
 					<ProjectMarkdown />

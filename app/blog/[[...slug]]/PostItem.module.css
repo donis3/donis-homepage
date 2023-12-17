@@ -1,0 +1,17 @@
+.path {
+	stroke-dasharray: 94.2618637084961;
+	stroke-dashoffset: 94.2618637084961;
+}
+
+.arrowRightAnimated:hover .path {
+	animation: dash 3s linear forwards;
+}
+
+@keyframes dash {
+	from {
+		stroke-dashoffset: 94.2618637084961;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}

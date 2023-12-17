@@ -7,8 +7,12 @@ import ImageModal from "@/components/img-modal/ImageModal";
 import ImageModalProvider from "@/components/img-modal/ImageContext";
 
 export const metadata: Metadata = {
-	title: "Donis3.com - Dony the Dev",
-	description: "A developers personal website",
+	title: {
+		template: "%s | Donis.dev",
+		default: "Deniz Özkan | Donis.dev",
+	},
+	description:
+		"Personal page for Deniz Ozkan, an aspiring fullstack web developer.",
 };
 
 export default function RootLayout({
