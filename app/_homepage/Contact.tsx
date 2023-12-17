@@ -9,11 +9,13 @@ import {
 } from "react-icons/fa";
 import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha";
+import Link from "next/link";
 
 type EmailStatus = "loading" | "success" | "error" | undefined;
 type ContactProps = {};
 
 const Contact: FC<ContactProps> = () => {
+	const [copyAvailable, setCopyAvailable] = useState(true);
 	const [copyFeedback, setCopyFeedback] = useState("");
 	const [emailStatus, setEmailStatus] = useState<EmailStatus>(undefined);
 	const formRef = useRef<HTMLFormElement>(null);
@@ -23,12 +25,23 @@ const Contact: FC<ContactProps> = () => {
 	];
 
 	function handleCopy() {
-		navigator.clipboard.writeText(devmail.join("@"));
-		setCopyFeedback("Copied");
-		setTimeout(() => {
-			setCopyFeedback("");
-		}, 1000);
+		if (!copyAvailable) return;
+		try {
+			navigator.clipboard.writeText(devmail.join("@"));
+			setCopyFeedback("Copied");
+			setTimeout(() => {
+				setCopyFeedback("");
+			}, 1000);
+		} catch (error) {}
 	}
+
+	useEffect(() => {
+		if (typeof navigator.clipboard == "undefined") {
+			setCopyAvailable(false);
+		} else {
+			setCopyAvailable(true);
+		}
+	}, []);
 
 	/**
 	 * When email status changes, remove the feedback after a duration
@@ -82,17 +95,27 @@ const Contact: FC<ContactProps> = () => {
 			<h2 className="mb-4 text-center text-3xl font-medium tracking-tight text-gray-900 ">
 				Contact Me
 			</h2>
+
 			<p className="mb-8 text-center font-light text-gray-800 sm:text-xl lg:mb-16">
 				Please feel free to send me a message using the form below. You
 				may also directly contact me at{" "}
-				<span className="font-normal">{devmail.join("@")}</span>
-				<button
-					type="button"
-					className="px-1 text-sm opacity-50 hover:opacity-100"
-					onClick={handleCopy}>
-					<FaCopy className="inline-block text-sm" />{" "}
-					<span className="text-green-600">{copyFeedback}</span>
-				</button>
+				{copyAvailable ? (
+					<span className="font-normal">{devmail.join("@")}</span>
+				) : (
+					<Link href={`mailto:${devmail.join("@")}`} target="_blank" className="font-normal">
+						{devmail.join("@")}
+					</Link>
+				)}
+				{/* Mobile devices might not support copy clipboard */}
+				{copyAvailable && (
+					<button
+						type="button"
+						className="px-1 text-sm opacity-50 hover:opacity-100"
+						onClick={handleCopy}>
+						<FaCopy className="inline-block text-sm" />{" "}
+						<span className="text-green-600">{copyFeedback}</span>
+					</button>
+				)}
 			</p>
 			<form
 				ref={formRef}
