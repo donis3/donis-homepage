@@ -1,7 +1,7 @@
 import Carousel, { CarouselItem } from "@/components/carousel/Carousel";
 import { cn, colorSHade } from "@/lib/utilities";
 import React, { FC } from "react";
-import skills from "@/data/skills/skills";
+import skills from "@/data/texts/skills";
 import Fade from "@/components/awesome-reveal/Fade";
 
 type SkillsProps = {};

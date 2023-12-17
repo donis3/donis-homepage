@@ -24,7 +24,7 @@ export default function Home() {
 			</Section>
 			<Section
 				id="contact_form"
-				className="bg-light-400 px-2"
+				className="bg-light-400 px-0 md:px-4"
 				divider="wave"
 				dividerFillClass="fill-primary-200"
 				dividerFlip>

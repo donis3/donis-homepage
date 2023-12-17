@@ -8,7 +8,7 @@ type pageProps = {};
 const page: FC<pageProps> = ({}) => {
 	return (
 		<>
-			<section className="w-full bg-gradient-to-b from-primary-400 to-primary-100  relative pt-[var(--navbar-h)] text-muted-800  to-90%">
+			<section className="w-full bg-gradient-to-b from-sky-600 to-indigo-900 relative pt-[var(--navbar-h)] text-muted-800  to-90%">
 				<div className="grid grid-cols-1 md:grid-cols-2  container mx-auto mt-8">
 					<div className="flex justify-center items-center px-4 py-8">
 						<img
@@ -36,8 +36,8 @@ const page: FC<pageProps> = ({}) => {
 			</section>
 			<Section
 				divider="wave"
-				dividerFillClass="fill-primary-100"
-				className="bg-secondary-500"
+				dividerFillClass="fill-indigo-900"
+				className="bg-slate-300 px-0 md:px-4"
 				dividerFlip={true}>
 				<Contact />
 			</Section>

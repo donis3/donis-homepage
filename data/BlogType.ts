@@ -3,7 +3,7 @@ export type BlogType = {
 	title: string;
 	date: Date;
 	readDuration: number;
-	link?: string;
+	link?: {href: string, text: string};
 	cover?: string;
 	description?: string;
 };

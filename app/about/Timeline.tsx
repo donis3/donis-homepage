@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utilities";
 import React, { FC } from "react";
 import { FaStar } from "react-icons/fa";
-import { timeline } from "@/data/about/timeline";
+import { timeline } from "@/data/texts/timeline";
 
 type TimelineProps = {};
 

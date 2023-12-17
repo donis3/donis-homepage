@@ -49,7 +49,7 @@ const BlogsPage: FC<BlogsPageProps> = ({ params }) => {
 
 	return (
 		<>
-			<section className="w-full bg-gradient-to-b from-primary-400 to-light-100  relative pt-[var(--navbar-h)] text-muted-800  to-90%">
+			<section className="w-full bg-gradient-to-b from-accent-300 to-accent-100  relative pt-[var(--navbar-h)] text-muted-800  to-90%">
 				<div className="container mx-auto p-4 mt-10">
 					<h1 className="text-4xl font-bold tracking-tight  ">
 						Dev Blog
@@ -63,8 +63,8 @@ const BlogsPage: FC<BlogsPageProps> = ({ params }) => {
 			</section>
 			<Section
 				divider="wave"
-				dividerFillClass="fill-light-100"
-				className="bg-secondary-900 pb-20 flex-1 min-h-[500px]"
+				dividerFillClass="fill-accent-100"
+				className="bg-zinc-200 pb-20"
 				dividerFlip={true}>
 				<div className="grid grid-cols-1 gap-x-4 gap-y-16">
 					{/* Blog Posts Grid */}

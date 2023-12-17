@@ -78,7 +78,7 @@ const Contact: FC<ContactProps> = () => {
 	};
 
 	return (
-		<div className="mx-auto  w-full max-w-3xl  rounded-lg bg-white bg-opacity-50 p-4 ">
+		<div className="mx-auto  w-full max-w-3xl  rounded-lg bg-white bg-opacity-50 py-4 px-4 ">
 			<h2 className="mb-4 text-center text-3xl font-medium tracking-tight text-gray-900 ">
 				Contact Me
 			</h2>

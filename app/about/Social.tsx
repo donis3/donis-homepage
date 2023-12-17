@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { social } from "@/data/about/social";
+import { social } from "@/data/texts/social";
 import Link from "next/link";
 
 const Social: FC = () => {
@@ -23,7 +23,7 @@ const SocialItem: FC<SocialItemProps> = ({ socialItemData }) => {
 	return (
 		<li className="flex flex-row gap-2 items-center">
 			{socialItemData.icon}
-			<Link href={socialItemData.data}>{socialItemData.text}</Link>
+			<Link href={socialItemData.data} target="_blank">{socialItemData.text}</Link>
 		</li>
 	);
 };

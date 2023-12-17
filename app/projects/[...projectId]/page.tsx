@@ -114,7 +114,7 @@ const project: FC<projectProps> = ({ params }) => {
 			<Section
 				divider="wave"
 				dividerFillClass="fill-accent-100"
-				className="bg-slate-100  pb-20 flex-1 min-h-[500px]"
+				className="bg-slate-100  pb-20 "
 				dividerFlip={true}>
 				<div>
 					<Album

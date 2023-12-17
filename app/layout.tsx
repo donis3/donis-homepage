@@ -27,7 +27,7 @@ export default function RootLayout({
 					<Navbar />
 					<ImageModal />
 					<div className="flex flex-col justify-between min-h-dscreen w-full overflow-x-hidden">
-						<main className="flex-1">{children}</main>
+						<main className="flex-1 flex flex-col justify-between">{children}</main>
 						<Footer />
 					</div>
 				</body>

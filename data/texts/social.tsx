@@ -1,4 +1,5 @@
 import {
+	FaDev,
 	FaEnvelope,
 	FaFacebook,
 	FaGithub,
@@ -50,6 +51,12 @@ const social = [
 		text: "GitHub",
 		icon: <FaGithub />,
 		data: process.env.NEXT_PUBLIC_DEV_GITHUB,
+	},
+	{
+		id: "devto",
+		text: "Dev.to",
+		icon: <FaDev />,
+		data: process.env.NEXT_PUBLIC_DEV_DEVTO,
 	},
 ];
 

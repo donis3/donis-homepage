@@ -18,6 +18,7 @@ const page: FC<pageProps> = ({}) => {
 						Here are some of my previous work. Visit my{" "}
 						<Link
 							href={process.env.NEXT_PUBLIC_DEV_GITHUB as string}
+							target="_blank"
 							className="underline font-medium hover:text-accent">
 							GitHub
 						</Link>{" "}
@@ -28,7 +29,7 @@ const page: FC<pageProps> = ({}) => {
 			<Section
 				divider="wave"
 				dividerFillClass="fill-light-100"
-				className="bg-secondary-900 pb-20 flex-1 min-h-[500px]"
+				className="bg-secondary-900 pb-20"
 				dividerFlip={true}>
 				<div className="grid grid-cols-1 gap-x-4 gap-y-16">
 					{projects.map((project) => {

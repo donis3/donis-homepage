@@ -25,6 +25,7 @@ const blogs: BlogType[] = [
 		title: "How to achieve something something",
 		cover: "test1_cover.jpg",
 		description: "Eiusmod occaecat aliquip minim aute dolor.",
+		// link: { href: "http://www.google.com", text: "Read at Dev.to" },
 	},
 ];
 
