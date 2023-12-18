@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import { projects } from "@/data/projects";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Section from "@/app/_homepage/Section";
@@ -7,16 +6,18 @@ import Link from "next/link";
 import { FaArrowLeft, FaGithub, FaGlobe } from "react-icons/fa";
 import Album from "./Album";
 import { cn } from "@/lib/utilities";
+import useProjects from "@/data/useProjects";
+import { notFound } from "next/navigation";
 
 /**
  * Each project must be generated
  * @returns
  */
 export async function generateStaticParams() {
-	if (projects.length === 0) return [];
+	const { filenames } = useProjects();
 
-	return projects.map((project) => {
-		return { projectId: [project.id] };
+	return filenames.map((filename) => {
+		return { projectId: [filename] };
 	});
 }
 
@@ -28,17 +29,15 @@ export async function generateStaticParams() {
 export async function generateMetadata({
 	params,
 }: projectProps): Promise<Metadata> {
+	const { getProjectData } = useProjects();
 	const projectId = params.projectId[0];
 
 	//Lazy load the mdx file for the project
 	try {
-		const file = await import(
-			"../../../data/projects/" + projectId + ".mdx"
-		);
-		if (file.metadata) return file.metadata;
-		else {
-			throw new Error();
-		}
+		const metadata = await getProjectData(projectId, "metadata");
+		if (!metadata) throw new Error();
+
+		return metadata;
 	} catch (error) {
 		//Err
 		console.log("Unable to fetch metadata for " + projectId);
@@ -53,10 +52,12 @@ type projectProps = {
 	params: { projectId: string[] };
 };
 
-const project: FC<projectProps> = ({ params }) => {
+const project: FC<projectProps> = async ({ params }) => {
+	const { getProjectData } = useProjects();
 	const projectId = params.projectId[0];
-	const data = projects.find((p) => p.id === projectId);
-	if (!data) return <></>;
+	const data = await getProjectData(projectId, "data");
+
+	if (!data) return notFound();
 	const ProjectMarkdown = dynamic(
 		() => import("../../../data/projects/" + projectId + ".mdx"),
 	);

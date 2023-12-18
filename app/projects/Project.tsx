@@ -1,5 +1,5 @@
 import { ProjectType } from "@/data/ProjectType";
-import { getProjectImages } from "@/data/projects";
+import useProjects from "@/data/useProjects";
 import { cn } from "@/lib/utilities";
 import Link from "next/link";
 import React, { FC } from "react";
@@ -10,13 +10,14 @@ type ProjectProps = {
 };
 
 const Project: FC<ProjectProps> = ({ data }) => {
+	const { getImages } = useProjects();
 	if (!data) return <></>;
-	const images = getProjectImages(data.id);
+	const images = getImages(data);
 
 	return (
 		<div className="bg-slate-100 w-full rounded-md shadow-md flex flex-col gap-4 group md:flex-row group border border-slate-200">
-			<div className="overflow-hidden w-full h-48 rounded-t-md md:w-1/3 lg:w-1/4 md:h-full md:rounded-none md:rounded-l-md">
-				<Link href={`/projects/${data.id}`}>
+			<div className="overflow-hidden w-full h-48 rounded-t-md md:w-1/3 lg:w-1/4 md:h-full md:rounded-none md:rounded-l-md relative">
+				<Link href={`/projects/${data.id}`} className="">
 					<div
 						className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-all duration-700"
 						style={{

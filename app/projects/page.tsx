@@ -2,11 +2,12 @@ import React, { FC } from "react";
 import Section from "../_homepage/Section";
 import Link from "next/link";
 import Project from "./Project";
-import { projects } from "@/data/projects";
+import useProjects from "@/data/useProjects";
 
-type pageProps = {};
+const ProjectsPage: FC = async () => {
+	const { getAllProjectsSorted } = useProjects();
 
-const page: FC<pageProps> = ({}) => {
+	const projects = await getAllProjectsSorted();
 	return (
 		<>
 			<section className="w-full bg-gradient-to-b from-primary-400 to-light-100  relative pt-[var(--navbar-h)] text-muted-800  to-90%">
@@ -41,4 +42,4 @@ const page: FC<pageProps> = ({}) => {
 	);
 };
 
-export default page;
+export default ProjectsPage;

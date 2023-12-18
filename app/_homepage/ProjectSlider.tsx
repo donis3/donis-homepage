@@ -3,12 +3,16 @@ import React, { FC } from "react";
 import GlowingButton from "@/components/effects/GlowingButton";
 import { cn } from "@/lib/utilities";
 import Fade from "@/components/awesome-reveal/Fade";
-import { getProjectImages, projects } from "@/data/projects";
 import Link from "next/link";
+import { ProjectType } from "@/data/ProjectType";
+import useProjects from "@/data/useProjects";
 
 type ProjectSliderProps = {};
 
-const ProjectSlider: FC<ProjectSliderProps> = () => {
+const ProjectSlider: FC<ProjectSliderProps> = async () => {
+	const { getAllProjectsSorted } = useProjects();
+	const projects = await getAllProjectsSorted();
+
 	if (!projects.length) {
 		return (
 			<div>
@@ -41,12 +45,13 @@ const ProjectSlider: FC<ProjectSliderProps> = () => {
 export default ProjectSlider;
 
 type ProjectItemProps = {
-	data?: (typeof projects)[0];
+	data?: ProjectType;
 };
 
 const ProjectItem: FC<ProjectItemProps> = ({ data }) => {
+	const { getImages } = useProjects();
 	if (!data) return <></>;
-	const images = getProjectImages(data.id);
+	const images = getImages(data);
 	const coverImageUrl =
 		images && images.length > 0
 			? images[0]
