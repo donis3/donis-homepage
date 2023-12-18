@@ -1,0 +1,58 @@
+export const metadata = {
+	title: "Blog Post 1",
+	description: "A nice one",
+};
+
+export const data = {
+	id: "post1",
+	title: "Blog Post 1",
+	date: new Date("2022-12-01"),
+	readDuration: 14,
+	link: { href: "http://www.google.com", text: "Read at Dev.to" },
+	cover: "post1_cover.jpg",
+	description: "Laboris voluptate minim excepteur laborum.",
+};
+
+# Remark-GFM Test
+
+Tests are below
+
+```js
+{
+id: string;
+title: string;
+date: Date;
+readDuration: number;
+link?: {href: string, text: string};
+cover?: string;
+description?: string;
+}
+```
+
+## Autolink literals
+
+www.example.com, https://example.com, and contact@example.com.
+
+## Footnote
+
+A note[^1]
+
+[^1]: Big note.
+
+## Strikethrough
+
+~one~ or ~~two~~ tildes.
+
+## Table
+
+| a   | b   |   c |  d  |
+| --- | :-- | --: | :-: |
+
+## Tasklist
+
+-   [ ] to do
+-   [x] done
+
+```
+
+```

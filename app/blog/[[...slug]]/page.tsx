@@ -1,11 +1,11 @@
 import Section from "@/app/_homepage/Section";
-import { BlogType } from "@/data/BlogType";
-import blogs, { blogStats } from "@/data/blogs";
 import { getItems } from "@/lib/arrayfuncs";
 import { Metadata } from "next";
 import React, { FC } from "react";
 import PostItem from "./PostItem";
 import Pagination from "./Pagination";
+import usePosts from "@/data/usePosts";
+import { PostType } from "@/data/PostType";
 
 type BlogsPageProps = {
 	params: { slug?: string[] };
@@ -34,19 +34,23 @@ export async function generateMetadata({
  * @param param0
  * @returns
  */
-const BlogsPage: FC<BlogsPageProps> = ({ params }) => {
+const BlogsPage: FC<BlogsPageProps> = async ({ params }) => {
 	const pageNumber = getPageNumber(params);
-	const result = getItems<BlogType>({
-		inputArray: blogs,
+	const { stats, getAllData } = usePosts();
+	const postsArray = await getAllData();
+
+	const posts = getItems<PostType>({
+		inputArray: postsArray,
 		page: pageNumber,
-		perPage: blogStats.perPage,
+		perPage: stats.perPage,
 		sort: "DESC",
 	});
 
 	const nextUrl =
-		pageNumber < blogStats.totalPages ? `/blog/${pageNumber + 1}` : null;
+		pageNumber < stats.pageCount ? `/blog/${pageNumber + 1}` : null;
 	const previousUrl = pageNumber > 1 ? `/blog/${pageNumber - 1}` : null;
 
+	if (!posts) return <></>;
 	return (
 		<>
 			<section className="w-full bg-gradient-to-b from-accent-300 to-accent-100  relative pt-[var(--navbar-h)] text-muted-800  to-90%">
@@ -68,7 +72,7 @@ const BlogsPage: FC<BlogsPageProps> = ({ params }) => {
 				dividerFlip={true}>
 				<div className="grid grid-cols-1 gap-x-4 gap-y-16">
 					{/* Blog Posts Grid */}
-					{result.map((postItem) => {
+					{posts.map((postItem) => {
 						return <PostItem data={postItem} key={postItem.id} />;
 					})}
 				</div>
@@ -78,7 +82,7 @@ const BlogsPage: FC<BlogsPageProps> = ({ params }) => {
 							nextUrl={nextUrl}
 							previousUrl={previousUrl}
 							page={pageNumber}
-							pageMax={blogStats.totalPages}
+							pageMax={stats.pageCount}
 						/>
 					</div>
 				</div>
@@ -110,8 +114,9 @@ function getPageNumber(params: BlogsPageProps["params"]): number {
  * @returns
  */
 export async function generateStaticParams() {
+	const { stats } = usePosts();
 	const result: { slug: string[] }[] = [];
-	for (let i = 1; i <= blogStats.totalPages; i++) {
+	for (let i = 1; i <= stats.pageCount; i++) {
 		result.push({ slug: [i.toString()] });
 	}
 	// for baseurl/blog to work, we must provide an empty object with slug: undefined

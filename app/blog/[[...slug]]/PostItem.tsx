@@ -4,10 +4,10 @@ import React, { FC } from "react";
 import style from "./PostItem.module.css";
 import { FaHourglassEnd } from "react-icons/fa";
 import DateString from "@/components/DateString";
-import { BlogType } from "@/data/BlogType";
+import { PostType } from "@/data/PostType";
 
 type PostItemProps = {
-	data: BlogType;
+	data: PostType;
 };
 
 const PostItem: FC<PostItemProps> = ({ data }) => {
@@ -20,8 +20,8 @@ const PostItem: FC<PostItemProps> = ({ data }) => {
 						style={{
 							boxShadow: "inset black 0px 0px 10px -3px",
 							backgroundImage: data.cover
-								? `url('/assets/blog/${data.id}/${data.cover}')`
-								: `url('/assets/blog/blog-placeholder.jpg')`,
+								? `url('/assets/posts/${data.id}/${data.cover}')`
+								: `url('/assets/posts/blog-placeholder.jpg')`,
 							backgroundSize: "cover",
 						}}></div>
 				</Link>

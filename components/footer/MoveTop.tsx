@@ -18,7 +18,7 @@ const MoveTop: FC = () => {
 					<button
 						type="button"
 						onClick={moveToTop}
-						className="flex flex-row gap-1 items-center text-xs bg-white/50 border px-1 rounded-md h-8 shadow-md font-medium text-primary-100/50 hover:text-primary ">
+						className="flex flex-row gap-1 items-center text-xs bg-white border px-1 rounded-md h-8 shadow-md font-medium text-primary-100 opacity-50 hover:opacity-100 ">
 						<GoMoveToTop />
 						Move To Top
 					</button>
