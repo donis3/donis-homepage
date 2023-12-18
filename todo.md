@@ -1,0 +1,1 @@
+TODO: Remove localhost from google captcha allowed domains.
