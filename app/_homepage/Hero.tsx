@@ -13,18 +13,31 @@ export default function Hero() {
 					</Fade>
 					<Fade delay={1000} duration={2000} triggerOnce>
 						<p className="max-w-sm text-lg">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Explicabo, incidunt totam? Quam alias, debitis
-							provident vero, dolorem rerum fugit minus quo dolor
-							pariatur eveniet aperiam, illum voluptatibus
-							consequatur ipsam itaque.
+							An aspiring fullstack developer, computer enthusiast
+							and a lifelong learner. Please browse the other
+							sections to learn more
+							{process.env.NEXT_PUBLIC_DEV_GITHUB && (
+								<>
+									{" "}
+									or visit my{" "}
+									<Link
+										href={
+											process.env.NEXT_PUBLIC_DEV_GITHUB
+										}
+										target="_blank"
+										className="underline">
+										github
+									</Link>{" "}
+									profile.
+								</>
+							)}
 						</p>
 						<div className=" py-4 mt-10 flex justify-center gap-4 ">
 							<HeroLink href={"/projects"} variation="accent">
 								Projects
 							</HeroLink>
 							<HeroLink href={"/about"} variation="outline">
-								More Info
+								About Deniz
 							</HeroLink>
 						</div>
 					</Fade>
