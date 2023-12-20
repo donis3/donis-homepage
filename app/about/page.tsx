@@ -24,17 +24,22 @@ const page: FC<pageProps> = ({}) => {
 							Hello, Im Deniz
 						</h1>
 						<p className="py-2 leading-relaxed font-normal">
-							I've been a tech and computer enthusiast since my childhood. 
-							My coding journey began when I discovered HTML while trying to design an email template at the age of 13. 
-							I've developed many projects after I discovered PHP and MySQL back in early 2000's. 
-							For the past few years, I've been learning Typescript, React and Tailwind and trying to keep up with industry standards. 
+							I've been a tech and computer enthusiast since my
+							childhood. My coding journey began when I discovered
+							HTML while trying to design an email template at the
+							age of 13. I've developed many projects after I
+							discovered PHP and MySQL back in early 2000's. For
+							the past few years, I've been learning Typescript,
+							React and Tailwind and trying to keep up with
+							industry standards.
 						</p>
 						<p className="py-2 leading-relaxed font-normal">
-							I enjoy learning both fundamental computer science and new technologies. 
+							I enjoy learning both fundamental computer science
+							and new technologies.
 						</p>
 						<div className="mt-4">
 							<Link
-								href={"./documents/cv.pdf"}
+								href={"./documents/deniz_ozkan_resume.pdf.pdf"}
 								target="_blank"
 								className="font-bold bg-zinc-50 text-primary p-3 rounded-md inline-flex items-center flex-row gap-3 hover:bg-zinc-200">
 								<FaFilePdf />
