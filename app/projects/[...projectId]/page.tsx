@@ -117,13 +117,15 @@ const project: FC<projectProps> = async ({ params }) => {
 				dividerFillClass="fill-accent-100"
 				className="bg-slate-100  pb-20 "
 				dividerFlip={true}>
-				<div>
-					<Album
-						images={data.images}
-						projectId={projectId}
-						caption={data.title}
-					/>
-				</div>
+				{data.images && data.images.length > 1 && (
+					<div>
+						<Album
+							images={data.images.slice(1)} // Skip first image because its the cover image
+							projectId={projectId}
+							caption={data.title}
+						/>
+					</div>
+				)}
 				<article className="prose w-full mt-10 ">
 					<ProjectMarkdown />
 				</article>

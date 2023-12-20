@@ -4,22 +4,16 @@ import { ProjectType } from "./ProjectType";
 export default function useProjects() {
 	const filenames = getDirFilenames("./data/projects/", false, ["readme"]);
 
-	async function getProjectData(filename: string, key: "data" | "metadata") {
+	async function getProjectData(
+		filename: string,
+		key: "data" | "metadata",
+	): Promise<ProjectType> {
 		//Lazy load the mdx file for the project
-		try {
-			if (!filenames.includes(filename)) throw new Error();
-			const file = await import("@/data/projects/" + filename + ".mdx");
-			if (file[key]) return file[key];
-			else {
-				throw new Error();
-			}
-		} catch (error) {
-			//Err
-			console.log(error);
-			console.log("Unable to fetch metadata for " + filename);
-
-			//Return default if not found
-			return undefined;
+		if (!filenames.includes(filename)) throw new Error();
+		const file = await import("@/data/projects/" + filename + ".mdx");
+		if (file[key]) return file[key];
+		else {
+			throw new Error();
 		}
 	}
 

@@ -55,7 +55,7 @@ function HeroLink({
 			className={cn(
 				" px-4 py-2 rounded-md  select-none text-xl font-medium  transition-colors duration-500",
 				variation === "accent" &&
-					"bg-accent active:bg-accent-200 hover:bg-accent-300",
+					"bg-accent-300 active:bg-accent-200 hover:bg-accent-500",
 				variation === "outline" &&
 					"border border-primary-700 hover:bg-primary-300 active:bg-primary-200",
 			)}

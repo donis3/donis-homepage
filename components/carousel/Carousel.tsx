@@ -96,6 +96,7 @@ const Carousel: FC<CarouselProps> = ({
 			<div className="flex flex-row justify-center gap-3 mt-4 items-center">
 				<button
 					type="button"
+					aria-label="Scroll back to previous"
 					className={cn(
 						"p-2 ",
 						buttonTheme === "dark" &&
@@ -109,6 +110,7 @@ const Carousel: FC<CarouselProps> = ({
 
 				<button
 					type="button"
+					aria-label="Scroll to Next"
 					className={cn(
 						"p-2 ",
 						buttonTheme === "dark" &&

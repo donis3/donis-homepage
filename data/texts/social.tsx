@@ -29,24 +29,24 @@ const social = [
 		icon: <FaTwitter />,
 		data: process.env.NEXT_PUBLIC_DEV_x,
 	},
-	{
-		id: "linkedin",
-		text: "LinkedIn",
-		icon: <FaLinkedin />,
-		data: process.env.NEXT_PUBLIC_DEV_LINKEDIN,
-	},
+	// {
+	// 	id: "linkedin",
+	// 	text: "LinkedIn",
+	// 	icon: <FaLinkedin />,
+	// 	data: process.env.NEXT_PUBLIC_DEV_LINKEDIN,
+	// },
 	{
 		id: "instagram",
 		text: "Instagram",
 		icon: <FaInstagram />,
 		data: process.env.NEXT_PUBLIC_DEV_INSTAGRAM,
 	},
-	{
-		id: "facebook",
-		text: "Facebook",
-		icon: <FaFacebook />,
-		data: process.env.NEXT_PUBLIC_DEV_FACEBOOK,
-	},
+	// {
+	// 	id: "facebook",
+	// 	text: "Facebook",
+	// 	icon: <FaFacebook />,
+	// 	data: process.env.NEXT_PUBLIC_DEV_FACEBOOK,
+	// },
 	{
 		id: "github",
 		text: "GitHub",

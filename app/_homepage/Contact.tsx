@@ -102,7 +102,10 @@ const Contact: FC<ContactProps> = () => {
 				{copyAvailable ? (
 					<span className="font-normal">{devmail.join("@")}</span>
 				) : (
-					<Link href={`mailto:${devmail.join("@")}`} target="_blank" className="font-normal">
+					<Link
+						href={`mailto:${devmail.join("@")}`}
+						target="_blank"
+						className="font-normal">
 						{devmail.join("@")}
 					</Link>
 				)}
@@ -110,6 +113,7 @@ const Contact: FC<ContactProps> = () => {
 				{copyAvailable && (
 					<button
 						type="button"
+						aria-label="Copy email to clipboard"
 						className="px-1 text-sm opacity-50 hover:opacity-100"
 						onClick={handleCopy}>
 						<FaCopy className="inline-block text-sm" />{" "}
