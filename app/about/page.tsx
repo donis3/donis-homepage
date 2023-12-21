@@ -2,14 +2,19 @@ import React, { FC } from "react";
 import Section from "../_homepage/Section";
 import Timeline from "./Timeline";
 import Link from "next/link";
-import { FaEnvelope, FaFilePdf } from "react-icons/fa";
+import {  FaFilePdf } from "react-icons/fa";
 import Social from "./Social";
+import ThemeColorChanger from "@/components/ThemeColorChanger";
+import { Viewport } from "next";
 
-type pageProps = {};
-
-const page: FC<pageProps> = ({}) => {
+export const viewport: Viewport = {
+	//Default theme color
+	themeColor: "#172b46",
+};
+const page: FC = () => {
 	return (
 		<>
+			<ThemeColorChanger color="#172b46" />
 			<section className="w-full bg-gradient-to-b from-primary-400 to-primary-100  relative pt-[var(--navbar-h)] text-muted-800  to-90%">
 				<div className="grid grid-cols-1 md:grid-cols-2  container mx-auto mt-8">
 					<div className="flex justify-center items-center mt-0 md:items-start md:mt-4 lg:mt-0 lg:items-center px-4 py-8 ">

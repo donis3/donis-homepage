@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
 	//Default theme color
-	themeColor: "#060b12",
+	themeColor: "#172b46",
 };
 
 export default function RootLayout({
@@ -32,7 +32,7 @@ export default function RootLayout({
 			<ImageModalProvider>
 				<body
 					className="font-sans dark scroll-smooth"
-					style={{ backgroundColor: "#060b12" }}>
+					style={{ backgroundColor: "#172b46" }}>
 					<Navbar />
 					<ImageModal />
 					<div className="flex flex-col justify-between min-h-dscreen w-full overflow-x-hidden">

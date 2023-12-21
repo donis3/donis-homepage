@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import dynamic from "next/dynamic";
 import Section from "@/app/_homepage/Section";
 import Link from "next/link";
@@ -8,6 +8,7 @@ import Album from "./Album";
 import { cn } from "@/lib/utilities";
 import useProjects from "@/data/useProjects";
 import { notFound } from "next/navigation";
+import ThemeColorChanger from "@/components/ThemeColorChanger";
 
 /**
  * Each project must be generated
@@ -48,6 +49,11 @@ export async function generateMetadata({
 	}
 }
 
+export const viewport: Viewport = {
+	//Default theme color
+	themeColor: "#060b12",
+};
+
 type projectProps = {
 	params: { projectId: string[] };
 };
@@ -64,6 +70,7 @@ const project: FC<projectProps> = async ({ params }) => {
 
 	return (
 		<>
+			<ThemeColorChanger color="#060b12" />
 			<section
 				className={cn(
 					"w-full bg-gradient-to-b   relative pt-[var(--navbar-h)] text-muted-800  to-90%",

@@ -10,7 +10,7 @@ type FooterProps = {};
 
 const Footer: FC<FooterProps> = ({}) => {
 	return (
-		<footer className="bg-slate-700/80 p-4 text-sm font-light relative z-10">
+		<footer className="bg-primary-100 p-4 text-sm font-light relative z-10">
 			<MoveTop />
 			<div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-4">
 				<div className="">
@@ -40,16 +40,16 @@ const Footer: FC<FooterProps> = ({}) => {
 					<h4 className="text-base font-medium tracking-tight h-auto md:h-10 flex items-end  text-zinc-200 w-full md:px-1 md:justify-end">
 						Get in touch!
 					</h4>
-					<ul className=" text-zinc-300 flex flex-wrap gap-2  w-full items-center justify-start md:justify-end ">
+					<ul className=" text-zinc-300 flex flex-wrap gap-4 text-xl w-full items-center justify-between  md:justify-end ">
 						{social.map((item, i) => {
 							return (
 								<li
 									key={`footer_social_item_${i}`}
-									className="text-sm group">
+									className="group">
 									<Link
 										href={item.data ?? "/"}
 										target="_blank"
-										className=" hover:text-white text-sm inline-flex items-center gap-1  w-auto group-first:pl-0 px-2 md:group-last:pr-0 md:group-first:pl-2 ">
+										className="opacity-50 hover:opacity-100 hover:text-white  inline-flex items-center gap-1 px-2 py-2  w-auto group-first:pl-0  md:group-last:pr-0 md:group-first:pl-2 ">
 										{item.icon}
 									</Link>
 								</li>

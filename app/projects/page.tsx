@@ -3,6 +3,14 @@ import Section from "../_homepage/Section";
 import Link from "next/link";
 import Project from "./Project";
 import useProjects from "@/data/useProjects";
+import { Viewport } from "next";
+import ThemeColorChanger from "@/components/ThemeColorChanger";
+
+
+export const viewport: Viewport = {
+	//Default theme color
+	themeColor: "#172b46",
+};
 
 const ProjectsPage: FC = async () => {
 	const { getAllProjectsSorted } = useProjects();
@@ -10,6 +18,7 @@ const ProjectsPage: FC = async () => {
 	const projects = await getAllProjectsSorted();
 	return (
 		<>
+			<ThemeColorChanger color="#172b46" />
 			<section className="w-full bg-gradient-to-b from-primary-400 to-light-100  relative pt-[var(--navbar-h)] text-muted-800  to-90%">
 				<div className="container mx-auto p-4 mt-10">
 					<h1 className="text-4xl font-bold tracking-tight  ">

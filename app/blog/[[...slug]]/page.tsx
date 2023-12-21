@@ -1,14 +1,20 @@
 import Section from "@/app/_homepage/Section";
 import { getItems } from "@/lib/arrayfuncs";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import React, { FC } from "react";
 import PostItem from "./PostItem";
 import Pagination from "./Pagination";
 import usePosts from "@/data/usePosts";
 import { PostType } from "@/data/PostType";
+import ThemeColorChanger from "@/components/ThemeColorChanger";
 
 type BlogsPageProps = {
 	params: { slug?: string[] };
+};
+
+export const viewport: Viewport = {
+	//Default theme color
+	themeColor: "#99131e",
 };
 
 /**
@@ -53,6 +59,7 @@ const BlogsPage: FC<BlogsPageProps> = async ({ params }) => {
 	if (!posts) return <></>;
 	return (
 		<>
+			<ThemeColorChanger color="#99131e" />
 			<section className="w-full bg-gradient-to-b from-accent-300 to-accent-100  relative pt-[var(--navbar-h)] text-muted-800  to-90%">
 				<div className="container mx-auto p-4 mt-10">
 					<h1 className="text-4xl font-bold tracking-tight  ">

@@ -2,12 +2,18 @@ import React, { FC } from "react";
 import Contact from "../_homepage/Contact";
 import Section from "../_homepage/Section";
 import Social from "../about/Social";
+import { Viewport } from "next";
+import ThemeColorChanger from "@/components/ThemeColorChanger";
 
-type pageProps = {};
+export const viewport: Viewport = {
+	//Default theme color
+	themeColor: "#0284c7",
+};
 
-const page: FC<pageProps> = ({}) => {
+const page: FC = () => {
 	return (
 		<>
+			<ThemeColorChanger color="#0284c7" />
 			<section className="w-full bg-gradient-to-b from-sky-600 to-indigo-900 relative pt-[var(--navbar-h)] text-muted-800  to-90%">
 				<div className="grid grid-cols-1 md:grid-cols-2  container mx-auto mt-8">
 					<div className="flex justify-center items-center px-4 py-8">
