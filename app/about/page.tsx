@@ -12,7 +12,7 @@ const page: FC<pageProps> = ({}) => {
 		<>
 			<section className="w-full bg-gradient-to-b from-primary-400 to-primary-100  relative pt-[var(--navbar-h)] text-muted-800  to-90%">
 				<div className="grid grid-cols-1 md:grid-cols-2  container mx-auto mt-8">
-					<div className="flex justify-center items-center px-4 py-8 ">
+					<div className="flex justify-center items-center mt-0 md:items-start md:mt-4 lg:mt-0 lg:items-center px-4 py-8 ">
 						<img
 							src="/assets/don-hero.jpg"
 							alt="deniz image"
@@ -39,7 +39,7 @@ const page: FC<pageProps> = ({}) => {
 						</p>
 						<div className="mt-4">
 							<Link
-								href={"./documents/deniz_ozkan_resume.pdf.pdf"}
+								href={"./documents/deniz_ozkan_resume.pdf"}
 								target="_blank"
 								className="font-bold bg-zinc-50 text-primary p-3 rounded-md inline-flex items-center flex-row gap-3 hover:bg-zinc-200">
 								<FaFilePdf />
