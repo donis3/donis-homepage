@@ -38,7 +38,7 @@ const Album: FC<AlbumProps> = ({ projectId, images, caption }) => {
 								<img
 									src={`/assets/projects/${projectId}/${url}`}
 									alt={`${projectId} project image`}
-									className=" h-96 object-fill w-auto cursor-pointer hover:scale-105 transition-all duration-500"
+									className=" h-48 object-fill w-auto cursor-pointer hover:scale-105 transition-all duration-500"
 									onClick={() =>
 										onImageClick(
 											`/assets/projects/${projectId}/${url}`,

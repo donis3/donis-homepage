@@ -1,0 +1,84 @@
+export const metadata = {
+	title: "Personal Portfolio Project",
+	description:
+		"A dynamic personal portfolio using Next.js 14, Tailwind CSS, and MDX for content management by Deniz Özkan.",
+};
+
+export const data = {
+	id: "donisdev",
+	title: "Donis.dev Personal Portfolio",
+	year: 2023,
+	subtitle:
+		"My personal portfolio developed using Next.js 14, Tailwind CSS, and MDX for content management.",
+	tech: [
+		"Next.Js",
+		"App Router",
+		"Tailwind",
+		"Static Site Generation",
+		"MDX",
+	],
+	images: ["donisdev_cover.png"],
+	link: "https://www.donis.dev",
+	repo: "https://github.com/donis3/donis-homepage",
+};
+
+## Donis.Dev Project
+
+I wanted a static page with easy to add content to without a database or a backend.
+Next.js and static exports with MDX was the solution I came up with since its widely adapted within the industry.
+This project allowed me to get a deeper understanding of the App router and SSG (generateStaticParams).
+
+## Technologies
+
+-   **Next.js 14**: Newly updated powerful react framework with App router and server components.
+-   **SSG**: No need for a backend server with Next.JS static exports. Perfect for SEO and page load time optimizations.
+-   **Tailwind CSS**: Utilizing a utility-first CSS framework for streamlined styling and enhanced design.
+-   **MDX**: Easy file based content management with markdown and jsx support for my blog and project pages.
+
+## Content management
+
+The blog and projects pages will search data/posts and data/projects directories respectively.
+Each filename represents their postId or projectId.
+during the `generateStaticParams` process at build time, each file in the directory will be read and their metadata extracted using dynamic imports.
+
+here is the load data function from the useProjects.ts hook:
+
+```ts
+async function getProjectData(
+	filename: string,
+	key: "data" | "metadata",
+): Promise<ProjectType> {
+	//Lazy load the mdx file for the project
+	if (!filenames.includes(filename)) throw new Error();
+	const file = await import("@/data/projects/" + filename + ".mdx");
+	if (file[key]) return file[key];
+	else {
+		throw new Error();
+	}
+}
+```
+
+Here is an example project data that will be imported from the mdx file:
+
+```ts
+export const data = {
+	id: "donisdev",
+	title: "Donis.dev Personal Portfolio",
+	year: 2023,
+	subtitle:
+		"My personal portfolio developed using Next.js 14, Tailwind CSS, and MDX for content management.",
+	tech: ["Next.Js", "App Router"],
+	images: ["donisdev_cover.png"],
+	link: "https://www.donis.dev",
+	repo: "https://github.com/donis3/donis-homepage",
+};
+```
+
+This flexible system allows me to add a single mdx file to projects or posts folder and the rest will be taken care of at build time.
+
+## Deployment
+
+After configuring Next.js to use static exports,
+`npm run build` command will generate a static html website at /out directory.
+When deploying to Github Pages this process takes place in the gh cloud.
+Site is generated and served automatically.
