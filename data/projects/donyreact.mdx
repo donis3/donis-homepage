@@ -1,0 +1,52 @@
+export const metadata = {
+	title: "Simple React Starter Page",
+	description:
+		"This is a single page react + vite website project by deniz özkan.",
+};
+
+export const data = {
+	id: "donyreact",
+	title: "React+Vite Simple Template",
+	year: 2023,
+	subtitle:
+		"A simple single page design made with React + Vite for personal landing pages.",
+	tech: ["React 18", "vite", "Tailwind"],
+	images: [
+		"donyreact_cover.jpg",
+		"donyreact_01.jpg",
+		"donyreact_02.jpg",
+		"donyreact_03.jpg",
+		"donyreact_04.jpg",
+		"donyreact_05.jpg",
+		"donyreact_06.jpg",
+	],
+	link: "https://donis3.github.io/dony-react18-simple-starter/",
+	repo: "https://github.com/donis3/dony-react18-simple-starter",
+};
+
+## Simple Landing page Template
+
+This project is for personal landing pages. Its a single page app utilizing React+Vite and tailwind.
+
+## Features
+
+-   Fully responsive navbar
+-   Easily customizable design
+-   Scroll navigation powered by [react-scroll](https://www.npmjs.com/package/react-scroll)
+-   Text animation powered by [react-type-animation](https://www.npmjs.com/package/react-type-animation)
+-   [EmailJS](https://www.emailjs.com/) for contact form and google recaptcha to prevent spam.
+
+## Deployment
+
+Clone the project.
+Store emailJS and google recaptcha public keys in env file. 
+
+```bash title=".env"
+#These are safe to share as public keys
+VITE_EMAILJS_SERVICE_ID="service_0ymu7xf"
+VITE_EMAILJS_TEMPLATE_ID="template_w40jtpo"
+VITE_EMAILJS_PUBLIC_KEY="E4VhGCQod9t2k5o2M"
+VITE_RECAPTCHA_PUBLIC_KEY="6Lc1VgYpAAAAACu1Ns3qy1vjFOW4BBvby2VQs2KO"
+```
+
+Project hosted by github pages and can be visited [here](https://donis3.github.io/dony-react18-simple-starter/)

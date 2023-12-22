@@ -1,0 +1,63 @@
+export const metadata = {
+	title: "FeelyMessage / messages for all occasions",
+	description:
+		"Message browsing and sharing for special occasions platform built with Next.js and firebase. ",
+};
+
+export const data = {
+	id: "feelymessage",
+	title: "Feely Message - Share and Browse special occasion messages",
+	year: 2023,
+	subtitle:
+		"Message browsing and sharing for special occasions. Fullstack app built with Next.js and firebase.",
+	tech: ["Next.Js", "App Router", "Tailwind", "Firebase", "shadcn"],
+	images: [
+		"feelymessage_cover.jpg",
+		"feelymessage_01.jpg",
+		"feelymessage_02.jpg",
+		"feelymessage_03.jpg",
+		"feelymessage_04.jpg",
+		"feelymessage_05.jpg",
+		"feelymessage_06.jpg",
+	],
+	link: "https://feely-message.donis3.com/",
+	repo: "https://github.com/donis3/feely-message",
+};
+
+## Feely Message - Special Occasion Message Sharing Platform
+
+**Feely Message** is a Fullstack web app developed using Next.js 13.4, Tailwind CSS, and Firebase integration. 
+The app revolves around sharing and browsing special occasion messages, 
+allowing users to contribute their own messages for various occasions.
+
+## Motivation
+
+This app was created to learn and practice [Next.JS](https://github.com/vercel/next.js) 
+App Router and [Server Components.](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
+
+## Features
+
+- Next auth and firebase adapter for session management. 
+- Login using a google account. 
+- Profile page and ability to delete account if user wants to remove all personal data from app's firestore database.
+- Ability to post and edit messages.
+- Adding hashtags will serve as a category. Each category can be individually browsed.
+- Admin user privileges for one admin (Defined as an env variable ADMIN_UID) who can delete posts from any user.
+
+
+## Tech Stack
+
+-   [**Next.JS 13.4.2**](https://github.com/vercel/next.js) : The core of the application. Handles both frontend and backend requests. I've used both server components to fetch db data and api routes to learn about both.
+-   [**NextAuth**](https://github.com/nextauthjs/next-auth) : Handles the app authentication along with google auth provider. Stores users & sessions in firestore db.
+-   [**FireBase**](https://github.com/firebase/): Firestore database for my data storage with a generous free tier
+-   [**Tailwind Css**](https://github.com/tailwindlabs/tailwindcss): My component styles are done inline using tailwind
+-   [**Shadcn/UI**](https://github.com/shadcn/ui): Cards, buttons, dialog components etc... Great resource with built in accessibility. These components are built on top of [RadixUi](https://github.com/radix-ui) primitives with minimal styling
+
+## Deployment
+
+Application is deployed to [Vercel](https://vercel.com/) free tier.
+
+## Credit
+
+This app was inspired by [this](https://www.youtube.com/watch?v=wm5gMKuwSYk) great youtube tutorial which helped me get started.
+

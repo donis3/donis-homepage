@@ -16,7 +16,7 @@ const Project: FC<ProjectProps> = ({ data }) => {
 
 	return (
 		<div className="bg-slate-100 w-full rounded-md shadow-md flex flex-col gap-4 group md:flex-row group border border-slate-200">
-			<div className="overflow-hidden w-full h-48 rounded-t-md md:w-1/3 lg:w-1/4 md:h-full md:rounded-none md:rounded-l-md relative">
+			<div className="overflow-hidden w-full h-48 rounded-t-md md:flex-1  md:w-1/3 lg:w-1/4 md:h-full md:rounded-none md:rounded-l-md relative">
 				<Link href={`/projects/${data.id}`} className="">
 					<div
 						className="w-full h-full bg-cover bg-center group-hover:scale-105 transition-all duration-700"
@@ -31,7 +31,7 @@ const Project: FC<ProjectProps> = ({ data }) => {
 						}}></div>
 				</Link>
 			</div>
-			<div className="flex-1 p4 flex flex-col justify-center  gap-2 p-4 md:w-2/3 lg:w-3/4">
+			<div className=" p4 flex flex-col justify-center  gap-2 p-4  md:w-2/3 lg:w-3/4">
 				<h3 className="font-semibold text-xl flex flex-row items-center justify-between w-full overflow-hidden">
 					<span className="w-3/4 text-ellipsis whitespace-nowrap overflow-hidden">
 						{data.title}

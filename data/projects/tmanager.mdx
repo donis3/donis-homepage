@@ -1,0 +1,74 @@
+export const metadata = {
+	title: "Translation Manager Project",
+	description:
+		"Edit json translation files easily. A simple app built with React 18 and Tailwind.",
+};
+
+export const data = {
+	id: "tmanager",
+	title: "Translation Manager - Json Editor",
+	year: 2022,
+	subtitle:
+		"An editor for json translation files. Makes life easy when creating a translation file for an app.",
+	tech: ["React 18", "Tailwind", "Daisy Ui"],
+	images: [
+		"tm_cover.jpg",
+		"tm_01.jpg",
+		"tm_02.jpg",
+		"tm_03.jpg",
+		"tm_04.jpg",
+		"tm_05.jpg",
+	],
+	link: "https://donis3.github.io/translation-manager/",
+	repo: "https://github.com/donis3/translation-manager",
+};
+
+## Translation Manager
+
+This react application is developed for editing json translation files.
+This is purely a frontend application and saves all data in the users browser.
+Easily manage multiple translation files make sure all json keys are synced and present using a reference to sync to.
+
+
+## What it does
+
+Translation Manager is basically a json editor.
+You can load a reference json and a target json.
+All translation keys will be based on the reference file.
+Then the target file will be scanned for matching keys.
+Each matching key will get its value from target file.
+Un-matching target file keys will be disregarded.
+This way, you get a synced version of the target file with the reference file.
+
+Target file is optional and you can start editing with only a reference file.
+All translation values will be blank.
+
+## How to use
+
+Lets say this is an english.json file in your app and you need another language version.
+
+Go to translation manager and press start. Press load reference file and load your reference file.
+
+```json
+{
+	...
+	"messages": {
+		"welcome": "Welcome to my app",
+		"signout": "You've successfully signed out.",
+	},
+	"labels": {
+		"yes" : "Yes",
+		"no": "No"
+	}
+	...
+}
+```
+
+Now when you press continue, you can start translating each field and your progress will be tracked and saved automatically.
+You can then download your json file whenever you want. You can reload your json file to continue on another computer or browser.
+All data is saved in the browser storage. No network or backend needed.
+
+
+## Deployment
+
+Application is deployed to Github Pages and can be accessed [here](https://donis3.github.io/translation-manager/)
