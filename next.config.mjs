@@ -16,6 +16,7 @@ const nextConfig = {
 				: "production",
 	},
 	output: "export",
+	
 };
 
 /** @type {import('rehype-pretty-code').Options} */
