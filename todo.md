@@ -1,23 +1,37 @@
-TODO: Remove localhost from google captcha allowed domains.
-
 # Todo List
+
+Donis.dev todo list
+
+## Urgent
 
 [x] First: create CV
 
 ## Tweaks
 
-- Adda Meta theme color system for mobile browsers. When they pull the page down, bg color doesn't match
+-   [x] Adda Meta theme color system for mobile browsers. When they pull the page down, bg color doesn't match
 
-- Create custom favicon
+-   [x] Create custom favicon
 
-- Write text for homepage, about page, blogs page
+-   [x] Write text for homepage, about page, blogs page, contact page
 
-- [x]  About page timeline
+-   [x] About page timeline
+
+## Projects
+
+-   [x] donis.dev
+-   [x] next-admin-dashboard-template
+-   [x] react-vite-tailwind-template
+-   [x] feely-message
+-   [x] costotus
+-   [x] translation-manager
+-   [x] unikim
+-   [x] unity-fishmania
+-   [x] unity-dondefender
 
 ## Blog Posts
 
-- Next.js 14 and MDX
+-   Next.js 14 and MDX
 
-- Hosting Next.js on Github Pages
+-   Hosting Next.js on Github Pages
 
-- ?
+-   GH pages and custom domains.

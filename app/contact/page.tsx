@@ -28,11 +28,9 @@ const page: FC = () => {
 							Get in touch!
 						</h1>
 						<p className="py-2 leading-relaxed font-normal">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Odit, odio ducimus pariatur deserunt dolor
-							ullam tenetur facere aperiam nemo voluptatem et
-							voluptatum. Impedit est labore obcaecati eius
-							molestiae fuga. Sit?
+							Got any questions for me? Contact me through my
+							social media or email. I look forward to hearing
+							from you.
 						</p>
 						<div className="border-t border-primary-500/50 mt-10 py-4">
 							<Social />

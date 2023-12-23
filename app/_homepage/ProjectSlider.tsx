@@ -27,9 +27,18 @@ const ProjectSlider: FC<ProjectSliderProps> = async () => {
 	return (
 		<div>
 			<Fade cascade damping={0.3} triggerOnce>
-				<h2 className="font-medium text-3xl mb-2">Projects</h2>
-				<p className="font-normal text-base leading-tight opacity-70">
-					Some of the projects I've been working on.
+				<Link href={"/projects"}>
+					<h2 className="font-medium text-3xl mb-4">Projects</h2>
+				</Link>
+				<p className="font-normal text-base leading-tight opacity-70 pb-4">
+					Some of the projects I've worked on. Visit to my{" "}
+					<Link
+						href={process.env.NEXT_PUBLIC_DEV_GITHUB ?? ""}
+						className="underline"
+						target="_blank">
+						github profile
+					</Link>{" "}
+					to view more.
 				</p>
 
 				<Carousel buttonTheme="dark" fadeClass="text-primary-200">
@@ -63,11 +72,13 @@ const ProjectItem: FC<ProjectItemProps> = ({ data }) => {
 				"bg-gradient-to-br from-zinc-100 to-slate-300 rounded-lg shadow-md w-[300px] md:w-[450px] text-primary-100",
 			)}>
 			<div className=" w-full h-full flex flex-col justify-between">
-				<div
-					className=" overflow-hidden rounded-t-lg h-32 w-full bg-cover bg-center "
-					style={{
-						backgroundImage: `url('${coverImageUrl}')`,
-					}}></div>
+				<Link href={`/projects/${data.id}`}>
+					<div
+						className=" overflow-hidden rounded-t-lg h-32 w-full bg-cover bg-center "
+						style={{
+							backgroundImage: `url('${coverImageUrl}')`,
+						}}></div>
+				</Link>
 				<div className="p-4 overflow-hidden no-scrollbar h-full w-full flex-1  flex flex-col justify-between">
 					<div className="flex-1 ">
 						<div className="flex flex-row gap-2 items-center justify-between">
