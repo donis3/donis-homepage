@@ -32,6 +32,7 @@ type PostPageProps = {
 };
 
 const PostPage: FC<PostPageProps> = async ({ params }) => {
+	if (!params.postId) return notFound();
 	const { getPostData } = usePosts();
 	const data = await getPostData(params.postId, "data");
 	if (!data) return notFound();
@@ -78,7 +79,7 @@ const PostPage: FC<PostPageProps> = async ({ params }) => {
 					</h1>
 				</div>
 			</section>
-			<section className="w-full bg-primary-400">
+			<section className="w-full bg-primary-400 flex-1">
 				<div className="container mx-auto text-zinc-800 bg-zinc-100 rounded-none md:rounded-b-md py-8 ">
 					<article className="prose p-4 w-full h-full">
 						<BlogMdx />
