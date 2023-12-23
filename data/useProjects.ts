@@ -2,7 +2,7 @@ import getDirFilenames from "@/lib/getDirFilenames";
 import { ProjectType } from "./ProjectType";
 
 export default function useProjects() {
-	const filenames = getDirFilenames("./data/projects/", false, ["readme"]);
+	const filenames = getDirFilenames("./data/projects/", false, ["readme", "_example"]);
 
 	async function getProjectData(
 		filename: string,

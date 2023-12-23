@@ -2,7 +2,7 @@ import getDirFilenames from "@/lib/getDirFilenames";
 import { PostType } from "@/data/PostType";
 
 export default function usePosts() {
-	const filenames = getDirFilenames("./data/posts/", false, ["readme"]);
+	const filenames = getDirFilenames("./data/posts/", false, ["readme", "_example"]);
 
 	//Settings
 	const postCount = filenames.length;

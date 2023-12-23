@@ -56,7 +56,6 @@ const BlogsPage: FC<BlogsPageProps> = async ({ params }) => {
 		pageNumber < stats.pageCount ? `/blog/${pageNumber + 1}` : null;
 	const previousUrl = pageNumber > 1 ? `/blog/${pageNumber - 1}` : null;
 
-	if (!posts) return <></>;
 	return (
 		<>
 			<ThemeColorChanger color="#99131e" />
@@ -78,10 +77,15 @@ const BlogsPage: FC<BlogsPageProps> = async ({ params }) => {
 				className="bg-zinc-200 pb-20"
 				dividerFlip={true}>
 				<div className="grid grid-cols-1 gap-x-4 gap-y-16">
-					{/* Blog Posts Grid */}
-					{posts.map((postItem) => {
-						return <PostItem data={postItem} key={postItem.id} />;
-					})}
+					{posts.length > 0 ? (
+						posts.map((postItem) => {
+							return (
+								<PostItem data={postItem} key={postItem.id} />
+							);
+						})
+					) : (
+						<p>There are no posts yet! Check back soon</p>
+					)}
 				</div>
 				<div className="w-full  p-2 flex justify-center mt-10">
 					<div className="flex items-center gap-2">

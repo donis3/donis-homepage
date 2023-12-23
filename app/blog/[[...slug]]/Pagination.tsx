@@ -15,6 +15,9 @@ const Pagination: FC<PaginationProps> = ({
 	previousUrl,
 	nextUrl,
 }) => {
+	if (pageMax === 0) {
+		return <></>;
+	}
 	return (
 		<>
 			{previousUrl ? (

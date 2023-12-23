@@ -1,0 +1,50 @@
+export const metadata = {
+	title: "Fishmania Unity Game",
+	description:
+		"A mobile casual game made in unity 2019 by deniz özkan. Eat smaller fish but avoid the bigger ones!",
+};
+
+export const data = {
+	id: "fishmania",
+	title: "Fishmania - Mobile Unity Game",
+	year: 2019,
+	subtitle:
+		"A mobile game made in unity as a practice project. Eat smaller fish and avoid bigger ones!",
+	tech: ["Unity", ".Net", "C#"],
+	images: ["fishmania_cover.jpg", "fishmania_01.jpg"],
+	link: "https://donis3.github.io/unity-fishmania-build/",
+	repo: "https://github.com/donis3/unity-fishmania-build",
+};
+
+# Fishmania Project
+
+This is an old unity project that I developed while learning unity and .net. 
+It's a mobile game originally and works with a hidden joystick that is created after a touch event.
+WebGL version has mobile inputs disabled. Play with keyboard only. 
+
+![Gameplay of fishmania](/assets/projects/fishmania/fish_gameplay.gif)
+
+## Game Details
+
+-   Endless eat smaller fish and avoid big fish game.
+-   XP bar at the top. Fish gets bigger as it levels up and can eat bigger and bigger fish.
+-   Fish can move to any direction indefinitely. Grid system will adapt
+
+## Technical Details
+
+-	Endless grid system.
+-   Custom parallax system.
+-	Minimal UI
+-   Needs optimization.
+
+## Grid System
+
+- Custom grid system. A 9x9 grid is created as needed around the player.
+- Grid boxes away from the player are disabled until player comes close
+
+
+![Grid of fishmania](/assets/projects/fishmania/fish_grid.gif)
+
+## Demo
+
+Game can be played on a computer using the keyboard [here.](https://donis3.github.io/unity-fishmania-build/)
