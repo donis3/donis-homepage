@@ -8,15 +8,7 @@ import rehypePrettyCode from "rehype-pretty-code";
 const nextConfig = {
 	// Configure `pageExtensions` to include MDX files
 	pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
-	// Optionally, add any other Next.js config below
-	env: {
-		build_mode:
-			process.env.NODE_ENV === "development"
-				? "development"
-				: "production",
-	},
 	output: "export",
-	
 };
 
 /** @type {import('rehype-pretty-code').Options} */
