@@ -56,6 +56,7 @@ const BlogsPage: FC<BlogsPageProps> = async ({ params }) => {
 		pageNumber < stats.pageCount ? `/blog/${pageNumber + 1}` : null;
 	const previousUrl = pageNumber > 1 ? `/blog/${pageNumber - 1}` : null;
 
+	
 	return (
 		<>
 			<ThemeColorChanger color="#99131e" />

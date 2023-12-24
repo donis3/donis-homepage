@@ -41,6 +41,10 @@
 		background-color: hsla(59, 100%, 60%, 0.2);
 		background-blend-mode: hue;
 	}
+
+	.balance {
+		white-space: collapse balance;
+	}
 }
 
 :root {

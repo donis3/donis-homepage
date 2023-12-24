@@ -72,9 +72,9 @@ const PostPage: FC<PostPageProps> = async ({ params }) => {
 
 					<h1
 						className={cn(
-							"text-4xl font-bold tracking-tight text-center md:text-start text-white w-full mt-2",
+							"text-4xl font-bold tracking-tight text-center md:text-start text-white w-full mt-2 balance",
 							styles.blogTitle,
-						)}>
+						)} >
 						{data.title}
 					</h1>
 				</div>
