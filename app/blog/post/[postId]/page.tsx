@@ -101,7 +101,7 @@ const PostPage: FC<PostPageProps> = async ({ params }) => {
 			</section>
 			<section className="w-full bg-primary-400 flex-1">
 				<div className="container mx-auto text-zinc-800 bg-zinc-100 rounded-none md:rounded-b-md py-8 ">
-					<article className="prose py-4 px-4 md:px-8 lg:px-16 w-full h-full max-w-full">
+					<article className="prose py-4 px-4 md:px-8 lg:px-16 w-full h-full mx-auto max-w-[80ch]">
 						<BlogMdx />
 					</article>
 				</div>
