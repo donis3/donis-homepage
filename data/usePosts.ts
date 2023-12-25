@@ -71,12 +71,17 @@ export default function usePosts() {
 		);
 	}
 
-	async function getAllPostsSorted() {
+	async function getAllPostsSorted(limit?: number) {
 		const posts = await getAllData();
 
-		return posts.sort((a, b) => {
-			return a.date.getTime() - b.date.getTime();
+		const sorted = posts.sort((a, b) => {
+			// return a.date.getTime() - b.date.getTime();
+			return b.date.getTime() - a.date.getTime();
 		});
+
+		if (!limit) return sorted;
+
+		return sorted.slice(0, limit);
 	}
 
 	return {

@@ -2,12 +2,13 @@ import { cn } from "@/lib/utilities";
 import Blob from "./Blob";
 import Fade from "@/components/awesome-reveal/Fade";
 import Link, { LinkProps } from "next/link";
+import Blogs from "./Blogs";
 
 export default function Hero() {
 	return (
-		<section className="w-full bg-gradient-to-b from-primary-400 to-primary-100  relative pt-[var(--navbar-h)] text-muted-800 pb-20 to-90%">
-			<div className="grid gap-2 md:gap-10  grid-flow-row md:grid-cols-12 py-4 px-4 md:py-20 md:px-10 container mx-auto ">
-				<div className="min-h-[30px] md:col-span-7 lg:col-span-5 lg:col-start-3 flex flex-col justify-center items-center md:items-start">
+		<section className="w-full bg-gradient-to-b from-zinc-900 to-secondary-300  relative pt-[var(--navbar-h)] text-muted-800 pb-10 to-90%">
+			<div className="grid gap-2 md:gap-10  grid-flow-row md:grid-cols-12 py-4 px-4 md:py-20 md:px-10 container mx-auto">
+				<div className="min-h-[30px] md:col-span-7 lg:col-span-5 lg:col-start-3 flex flex-col justify-center items-center md:items-start whitespace-break-spaces overflow-hidden">
 					<Fade delay={400} duration={1000} triggerOnce>
 						<h1 className="text-4xl font-bold mb-2">Deniz Özkan</h1>
 					</Fade>
@@ -41,8 +42,14 @@ export default function Hero() {
 							</HeroLink>
 						</div>
 					</Fade>
+					{/* Latest Blog Posts section */}
+					<Fade delay={1500} duration={2000} triggerOnce>
+						<div className="mt-8 opacity-75 max-w-sm  rounded-md bg-black/20 p-2">
+							<Blogs />
+						</div>
+					</Fade>
 				</div>
-				<div className="  min-h-[30px] order-first md:order-last flex justify-center items-start  md:col-span-5 ">
+				<div className=" min-h-[30px] order-first md:order-last flex justify-center items-start  md:col-span-5 ">
 					<Blob duration={10000} />
 				</div>
 			</div>
