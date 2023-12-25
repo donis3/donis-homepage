@@ -1,7 +1,9 @@
 import createMDX from "@next/mdx";
-import remarkReadingTime from "remark-reading-time";
 import remarkGfm from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
+
+import remarkReadingTime from "remark-reading-time";
+import readingMdxTime from "remark-reading-time/mdx.js";
 
 /** @type {import('next').NextConfig} */
 
@@ -19,7 +21,7 @@ const prettyCodeOptions = {
 const withMDX = createMDX({
 	// Add markdown plugins here, as desired
 	options: {
-		remarkPlugins: [remarkGfm, remarkReadingTime],
+		remarkPlugins: [remarkGfm, remarkReadingTime, readingMdxTime],
 		rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
 	},
 });

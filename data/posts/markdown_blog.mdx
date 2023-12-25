@@ -1,0 +1,574 @@
+export const metadata = {
+	title: "Next.js 14 Markdown blog",
+	description:
+		"Learn how to create a static markdown blog with Next.js 14 and MDX.",
+	author: "Deniz Özkan",
+};
+
+export const details = {
+	id: "markdown_blog", //Must be the same as filename!
+	title: "Adventure: Creating a Next.js 14 Markdown Blog.",
+	date: new Date("2023-12-24"),
+	description:
+		"Lets dive into static markdown blog creating using Next.js 14 and MDX.",
+	cover: "markdown_blog_cover.jpg",
+	link: {
+		href: "https://dev.to/donis3/creating-a-static-nextjs-14-markdown-blog-an-adventure-199a",
+		text: "Read at Dev.to",
+	},
+};
+
+If you wanted to host a personal website with a blog but didn't want to utilize a backend to fetch the blog posts from a database,
+you probably explored the markdown option before.
+In this guide, I'll share my experience creating a content management system using Next.js 14 and MDX.
+
+## Github Repo
+
+If you want to visit the final product and explore the code yourself or just clone the project and make your own blog, go to the github repo [**here.**](https://github.com/donis3/next-mdx-static-blog)
+
+## Overview
+
+-   In this development guide we will create a Next.js 14 app router project with static exports
+-   We will utilize the MDX library to render Markdown blog posts.
+-   We will create our first Markdown blog post.
+
+## What is Static Site Generation (SSG)
+
+To summarize; Next.js can generate an individual html file for each route in the application.
+If a route is a dynamic route like `/blog/[...blogId]` then you need to generate each possible blogId for that path.
+This approach enables us to run the next build command and get the generated full website in the `/out` folder.
+You can just copy the contents of that folder and host it on any webserver as a static site.
+
+Learn more here at the official [Next.js documentation](https://nextjs.org/docs/app/building-your-application/deploying/static-exports)
+
+## What is Markdown and MDX
+
+[Markdown](https://daringfireball.net/projects/markdown/) is a text markup language. It's widely adapted. For example, github repo's will detect the `readme.md` file in the current directory and display it below.
+
+[MDX](https://mdxjs.com/) is a js library that allows us to import a markdown file as a react component and use it anywhere.
+
+We will write our blog posts using markdown syntax and save them as an mdx file.
+We can then import the post and use it anywhere in our app thanks to these tools.
+
+## Getting Started
+
+Lets create a new next.js app using the terminal and choose the default options including tailwind and app router.
+
+`npx create-next-app@latest`
+
+We can now remove default content from `layout.tsx, page.tsx and globals.css`. and create a basic root layout
+
+```ts title="layout.tsx"
+//Layout.tsx
+import type { Metadata } from "next";
+import "./globals.css";
+import Link from "next/link";
+
+export const metadata: Metadata = {
+	title: "Next.js Mdx Static Blog",
+	description: "A Next.js 14 & MDX blog starter project.",
+};
+
+export default function RootLayout({
+	children,
+}: {
+	children: React.ReactNode;
+}) {
+	return (
+		<html lang="en">
+			<body className="bg-white dark:bg-zinc-800 text-black dark:text-white">
+				{/* Navbar */}
+				<header className="h-16 flex flex-row gap-4 justify-between border-b shadow-sm fixed top-0 left-0 w-full bg-slate-200 dark:bg-zinc-900 dark:border-black">
+					<Link href={"/"}>
+						<h1 className="p-4 text-2xl font-bold">NextBlog</h1>
+					</Link>
+					<nav className="flex-1 flex flex-wrap p-4 items-end justify-end gap-4 text-lg font-semibold ">
+						<Link href={"/"} className="underline">
+							Home
+						</Link>
+						<Link href={"/blog"} className="underline">
+							Blog
+						</Link>
+					</nav>
+				</header>
+				{/* Main Content */}
+				<main className="mt-16">{children}</main>
+			</body>
+		</html>
+	);
+}
+```
+
+Remove styles
+
+```css title="globals.css"
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Page.tsx is the home `/` directory of the page.
+
+```TSX title="page.tsx"
+export default function Home() {
+	return (
+		<div className="container mx-auto p-4">
+			<h2 className="text-xl font-medium">Welcome to my Next.js Blog</h2>
+			<p className="mt-2 tracking-wide leading-relaxed">
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
+				enim debitis, repellendus ipsum iusto tempora, commodi inventore
+				sed, eius exercitationem laudantium nihil. Maxime exercitationem
+				sit dolores dolorum quis, similique id.
+			</p>
+		</div>
+	);
+}
+
+
+```
+
+## Creating the file structure
+
+Lets create our file structure for our rotes and the folder where our markdown blog posts will live.
+The `blog/[blogId]/page.tsx` file will be called when we are viewing a blog post and the `blog/page.tsx` will be the page to display all blog post links. `/blogs` folder will keep our MDX files.
+
+```
+/app
+└──  blog
+    ├── [blogId]
+    │   └── page.tsx
+    └── page.tsx
+/blogs
+└──  first_blog.mdx
+```
+
+## Installing MDX and Tailwind Typography
+
+To enable viewing MDX files in our app, lets install MDX.
+We should also install our other helper which is [tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin) as a dev dependency.
+This'll be useful later for auto styling the blog post.
+
+```bash
+npm install @next/mdx @mdx-js/loader @mdx-js/react @types/mdx
+npm install -D @tailwindcss/typography
+```
+
+Lets now create a sample MDX file at `/blogs/<post_name>.mdx`.
+
+```md title="blogs/first_blog.mdx"
+# My first Blog Post
+
+Duis adipisicing ad pariatur cupidatat consequat pariatur reprehenderit proident culpa. Est aliqua consectetur velit Lorem minim dolore ipsum id sunt. Velit nisi irure mollit officia pariatur excepteur occaecat duis aliqua id minim duis. Officia eu fugiat irure laborum dolore. Veniam ipsum labore nisi aliquip officia do sunt.
+```
+
+Before we start using the mdx content, we must configure Next.js
+
+## MDX Component file
+
+Lets create the necessary `mdx-components.tsx` file at the root directory next to `/app` etc.
+This will be auto imported by MDX and the components in this will be used to wrap each markdown element
+when rendering the mdx content in jsx. If you want to customize a specific element like an h1, this is the place to do it. For further information, visit [next.js docs](https://nextjs.org/docs/app/building-your-application/configuring/mdx#custom-elements).
+
+```ts title="/mdx-components.tsx"
+import type { MDXComponents } from "mdx/types";
+
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+	return {
+		...components,
+	};
+}
+```
+
+## Next Config for MDX and Static Exports
+
+We need to configure next.config.js but if we want markdown plugins like remark-gfm which allows Github flavoured markdown to be rendered, we need to rename the next.config.js file to next.config.mjs
+
+Lets first install remark-gfm `npm i remark-gfm` so we can use enhanced markdown features of Github flavoured markdown.
+
+Lets also configure next.js to use static exports by adding `output: "export"` to the config object.
+
+```js title="next.config.mjs"
+import remarkGfm from "remark-gfm";
+import createMDX from "@next/mdx";
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+	// Configure `pageExtensions`` to include MDX files
+	pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
+	// Optionally, add any other Next.js config below
+	output: "export", // Will export all routes as static html
+};
+
+const withMDX = createMDX({
+	// Add markdown plugins here, as desired
+	options: {
+		remarkPlugins: [remarkGfm],
+		rehypePlugins: [],
+	},
+});
+
+// Merge MDX config with Next.js config
+export default withMDX(nextConfig);
+```
+
+## Generating static pages
+
+Before we can continue, if we now visit `/blog/first_blog` our app will throw an error because we are now using static site generation. We must provide the route with all possible blogId's in a function called
+`generateStaticParams`.
+
+Lets go to `blog/[blogId]/page.tsx` and manually create one. we will later come back to this.
+
+```ts title="blog/[blogId]/page.tsx"
+import React from "react";
+
+/**
+ * return all possible blogId values in an array like [{blogId: 'first_blog'}, {blogId: 'second_blog'}]
+ */
+export async function generateStaticParams() {
+	const blogPosts = ["first_blog"];
+	return blogPosts.map((post) => ({
+		blogId: post,
+	}));
+}
+
+type BlogPageProps = {
+	params: { blogId: string };
+};
+
+export default function BlogPage({ params }: BlogPageProps) {
+	return (
+		<div className="container mx-auto p-4">
+			<h2 className="text-xl font-medium">BlogId: {params.blogId}</h2>
+			<p>...</p>
+		</div>
+	);
+}
+```
+
+Now we can visit `blog/first_blog`. Please note that visiting any other blogId will result in an error in dev server but it will just show a 404 error page in production (after build).
+
+## Rendering our first blog
+
+We are now ready to import our markdown file and render it! Reminder: make sure you've created the `mdx-components.tsx` at the root directory.
+
+We need to use next/dynamic to import our markdown as a component in `blog/[blogId]/page.tsx`
+
+```ts title="blog/[blogId]/page.tsx"
+import dynamic from "next/dynamic";
+import React from "react";
+
+/**
+ * return all possible blogId values in an array like [{blogId: 'first_blog'}, {blogId: 'second_blog'}]
+ */
+export async function generateStaticParams() {
+	const blogPosts = ["first_blog"];
+	return blogPosts.map((post) => ({
+		blogId: post,
+	}));
+}
+
+type BlogPageProps = {
+	params: { blogId: string };
+};
+
+export default async function BlogPage({ params }: BlogPageProps) {
+	const BlogPost = dynamic(() => import("@/blog/" + params.blogId + ".mdx"));
+
+	return (
+		<div className="container mx-auto p-4">
+			<article>
+				<BlogPost />
+			</article>
+		</div>
+	);
+}
+```
+
+When we now visit `blog/first_blog` we should see our blog post rendered in the layout.
+
+## Adding Meta Data to blog posts
+
+Since we are using mdx, we can export anything from a mdx file like a normal js file.
+Lets export a const called metadata and define some metadata for each blog post there.
+
+```js title="first_blog.mdx"
+export const metadata = {
+	title: "My first blog post",
+	description: "An awesome blog post about important stuff",
+	date: new Date('2023-12-24'),
+	author: 'donis.dev'
+};
+
+### My first Blog Post
+
+Duis adipisicing ad pariatur cupidatat consequat pariatur reprehenderit proident culpa.
+Est aliqua consectetur velit Lorem minim dolore ipsum id sunt.
+Velit nisi irure mollit officia pariatur excepteur occaecat duis aliqua id minim duis.
+Officia eu fugiat irure laborum dolore. Veniam ipsum labore nisi aliquip officia do sunt.
+
+
+```
+
+## Blog Helper Functions
+
+Now that we have exports from a mdx file, we need a way to import that file and access its exports.
+We need to do this on both blogs page and individual blog post pages so we can create a few helper functions to streamline this process.
+
+lets create a `/lib` folder and our helper functions file `/lib/blog_functions.ts`
+
+```js title="/lib/blog_functions.ts"
+/**
+ * Import an mdx blog post file and return the metadata.
+ * @param blogId
+ * @returns
+ */
+export async function getPostData(blogId: string): Promise<{
+	id: string;
+	title: string;
+	description: string;
+	date: Date;
+	author: string;
+}> {
+	//Lazy load the mdx file for the project
+	try {
+		const file = await import("@/blog/" + blogId + ".mdx");
+
+		if (file?.metadata) return file.metadata;
+		else {
+			throw new Error(`Unable to find metadata in file ${blogId}.mdx`);
+		}
+	} catch (error: any) {
+		console.log(error?.message);
+		//Return empty metadata on failure
+		return {
+			id: "",
+			title: "",
+			description: "",
+			date: new Date(),
+			author: "",
+		};
+	}
+}
+```
+
+we may now use this hook to easily load metadata for any blogId. Lets use this data to display the correct title and description for the blog page.
+
+```ts title="blog/[blogId]/page.tsx"
+
+...
+export async function generateMetadata({
+	params,
+}: BlogPageProps): Promise<Metadata> {
+	//Load the blog post metadata using blog_functions.ts
+	const metadata = await getPostData(params.blogId);
+	if (metadata) {
+		return {
+			title: metadata.title,
+			description: metadata.description,
+		};
+	}
+	return {}; //Default return.
+}
+...
+
+```
+
+You will now notice that your page title is loaded from first_blog.mdx metadata.
+
+## Styling the post: Tailwind Typography
+
+We had installed the tailwind typography plugin before. Now we can use it to easily style our blog post.
+In the `<article>` tag wrapping the blog post, lets add the following classes:
+
+```ts title="blog/[blogId]/page.tsx"
+...
+<article className="prose w-full mt-10 dark:prose-invert">
+	<BlogMarkdown />
+</article>
+...
+```
+
+now for this to work, me must configure tailwind config. Go to your project root and open `tailwind.config.ts` and add the typography plugin to plugins array.
+
+```ts title="tailwind.config.ts"
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+	content: [
+		"./pages/**/*.{js,ts,jsx,tsx,mdx}",
+		"./components/**/*.{js,ts,jsx,tsx,mdx}",
+		"./app/**/*.{js,ts,jsx,tsx,mdx}",
+	],
+
+	plugins: [require("@tailwindcss/typography")],
+};
+export default config;
+```
+
+after reloading the dev server, when we visit `blog/first_blog` we should now see a styled blog page.
+
+## Generating the blog list
+
+Now that we are able to view each blog post, lets figure out a way to generate a list of blog posts to show at `/blog` page.
+
+lets go to `/lib/blog_functions.ts` and create a function that uses the node filesystem `fs` to search entire `/blog` directory and return an array of blogId's available for us.
+
+```ts title="lib/blog_functions.ts"
+...
+/**
+ * import each post in blog directory and return their metadata in an array
+ * @returns
+ */
+export async function getPostsData(): Promise<
+	{
+		id: string;
+		title: string;
+		description: string;
+		date: Date;
+		author: string;
+	}[]
+> {
+	try {
+		//Read the /blog folder at root dir
+		const fileList: string[] = readdirSync("./blog/");
+
+		//Load each file
+		if (fileList.length > 0) {
+			const result = fileList.map(async (file) => {
+				//Remove extension to get blogId
+				const filename =
+					file.substring(0, file.lastIndexOf(".")) || file;
+				//Tro to get metadata
+				return { ...(await getPostData(filename)), id: filename };
+			});
+
+			return Promise.all(result);
+		}
+	} catch (error) {}
+	return [];
+}
+...
+```
+
+Now we can import the function in the blogs page and list all blog posts
+
+```ts title="app/blog/page.tsx"
+import { getPostsData } from "@/lib/blog_functions";
+import Link from "next/link";
+import React from "react";
+
+export default async function Blogs() {
+	const blogs = await getPostsData();
+
+	//Case: no posts
+	if (blogs.length === 0) {
+		return (
+			<div className="container mx-auto p-4">
+				There are no posts yet...
+			</div>
+		);
+	}
+	//Display all posts
+	return (
+		<div className="container mx-auto p-4">
+			<p>Here are my latest blog posts. Enjoy</p>
+
+			<ul className="border-t border-dotted mt-4 py-4 flex flex-col gap-4">
+				{blogs.map((blog) => {
+					return (
+						<li key={blog.id}>
+							<Link href={`/blog/${blog.id}`}>
+								{blog.title}
+								<span className="ml-2 text-xs opacity-50">
+									{blog.date.toLocaleDateString()}
+								</span>
+							</Link>
+						</li>
+					);
+				})}
+			</ul>
+		</div>
+	);
+}
+```
+
+## generateStaticParams for all blog posts
+
+Now only thing left is generating static params for all routes. We need to read all filenames `/blog` directory and create a static route for each of them in `app/blog/[blogId]/page.tsx`
+
+Lets first create another helper function to get all filenames from the blog directory
+
+```ts title="lib/useBlog.ts"
+...
+/**
+ * Scan the blog directory and return an array of file names
+ * @returns
+ */
+export function getPostNames(): string[] {
+	try {
+		//Read the /blog folder at root dir
+		const fileList: string[] = readdirSync("./blog/");
+		//Return an array of filenames at this dir
+		if (fileList.length > 0) {
+			return fileList.map((file) => {
+				//Remove extension
+				return file.substring(0, file.lastIndexOf(".")) || file;
+			});
+		}
+	} catch (error) {}
+	return [];
+}
+...
+```
+
+Now we can go to our blog page and generate static params
+
+```ts title="app/blog/[blogId]/page.tsx"
+...
+/**
+ * return all possible blogId values in an array like [{blogId: 'first_blog'}, {blogId: 'second_blog'}]
+ */
+export async function generateStaticParams() {
+	const blogPosts = getPostNames();
+	return blogPosts.map((post) => ({
+		blogId: post,
+	}));
+}
+...
+```
+
+## Conclusion
+
+We now have a working blog. All we need to do to create more posts is to create a new .mdx file at `/blog` directory. We need to export `export const metadata` in each post or the app will throw error.
+
+Final blog post example:
+
+```js title="second_blog.mdx"
+export const metadata = {
+	title: "My second blog post",
+	description: "An awesome blog post about important stuff",
+	date: new Date("2023-12-25"),
+	author: "donis",
+};
+
+### My Second Blog Post
+
+Cillum nostrud veniam enim id enim dolor magna.
+Magna occaecat proident ea non Lorem pariatur qui voluptate minim qui dolor Lorem aliquip excepteur.
+Consectetur ex aute qui duis velit id velit in eu velit. Laboris voluptate consectetur non deserunt cillum tempor id aliquip officia.
+
+> To be or not to be.
+
+```
+
+Here is a screenshot of the /blog page
+
+![Blog Screenshot](/assets/posts/markdown_blog/next_blog_image.jpg)
+
+## Further reading
+
+You can now run `next build` command and copy the `/out` folder to any web server. This process needs to be repeated after each new blog post.
+
+In our next adventure, we we will learn how to deploy our blog to Github Pages and automate this process.
+
+Thanks for reading, happy coding!

@@ -33,7 +33,9 @@ const PostItem: FC<PostItemProps> = ({ data }) => {
 				<div className="flex flex-row justify-between font-light text-zinc-800 text-xs mt-1">
 					<span className="inline-flex items-center gap-1">
 						<FaHourglassEnd className="text-zinc-500" />{" "}
-						{data.readDuration} minutes
+						{data.readingTime
+							? data.readingTime.text
+							: "Unknown read duration."}
 					</span>
 					<span>
 						<DateString date={data.date} initEmpty />

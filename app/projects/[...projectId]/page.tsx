@@ -133,7 +133,7 @@ const project: FC<projectProps> = async ({ params }) => {
 						/>
 					</div>
 				)}
-				<article className="prose w-full mt-10 ">
+				<article className="prose w-full mt-10 mx-auto">
 					<ProjectMarkdown />
 				</article>
 				<div className="mt-20 flex justify-center">
