@@ -16,7 +16,7 @@ export const viewport: Viewport = {
 export default function Home() {
 	return (
 		<>
-			<ThemeColorChanger color="#172b46" />
+			<ThemeColorChanger color="#18181b" />
 			{/* Section 1 */}
 			<Hero />
 

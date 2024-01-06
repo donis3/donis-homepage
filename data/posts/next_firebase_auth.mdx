@@ -1,0 +1,516 @@
+export const metadata = {
+	title: "Next.js server side firebase authentication",
+	description:
+		"Learn how Next.js 14 server side authentication using firebase admin sdk may be implemented.",
+};
+
+export const details = {
+	id: "next_firebase_auth", //Must be the same as filename!
+	title: "Next.js server side firebase authentication",
+	date: new Date("2024-01-06"),
+	link: {
+		href: "https://dev.to/donis3/nextjs-and-server-side-firebase-authentication-jorney-46n9?preview=3b08976753c4e5cb4dccbc1e3a15105347176e535516731f114fa051eb617ad4c8f6d0b3677e5be80cddba79f4383549b85e9d6e002d64f6cb95347b",
+		text: "Read at Dev.to",
+	},
+	cover: "next_firebase_auth_cover.jpg",
+	description: "Next.js server side authentication using firebase admin sdk.",
+};
+
+# Coding Adventure: Firebase Auth and Next.js
+
+In this journey, we're diving into setting up session-based authentication using Firebase Auth and Next.js 14.
+Instead of checking a user's auth state on the client side like Firebase intended, we're taking it up a notch by doing it on the server.
+We can check the auth state directly in the server before sending our response to the client. No more useEffect calls and re-rendering components to reflect the auth state of the user.
+
+## Server Environment and Firebase
+
+Firebase is a client side package and not suitable for our needs. It provides a safe way to handle auth in the client for those applications without a backend. In this tutorial though, we have a backend and want to use serverActions and server side logic to determine auth state of the user. We rely on firebase/auth for user credential management instead of rolling our own auth service which is quite risky and complicated.
+
+To run firebase operations in the server, we must use `firebase-admin` library provided by firebase. It targets a node.js environment which is the environment of next.js server actions and components unless we specify `runtime="edge"`.
+
+### middleware auth?
+
+I know some of you may want to authenticate a request using the middleware.ts but beware that the firebase-admin package only runs in nodejs environment and wont work in the middleware which only supports runtime="edge".
+
+## Project Outline
+
+In this basic auth demonstration, we will implement these:
+
+-   Sign in using firebase/auth client side library and providers (google, github etc)
+-   Ability to Sign out / delete account using server actions
+-   Ability to read user information and auth state in the server before rendering.
+
+Here are the routes used in the project. I've omitted the components etc. You may view them in the repo.
+
+```
+app
+ ├─> _components/
+ ├─> _hooks/
+ ├─> user/
+ |   ├─> login/
+ |   |   └── page.tsx
+ |   ├─> logout/
+ |   |   └── page.tsx
+ |   ├── actions.tsx
+ |   ├── page.tsx
+ ├── global.css
+ ├── layout.tsx
+ └── page.tsx
+```
+
+## Getting Started
+
+Im skipping the part where we initialize a new next.js project with typescript and tailwind and delete the pre-generated content.
+We just need the firebase packages to get started: `npm i firebase firebase-admin`.
+Now we need 2 firebase app instances. One for the client side and one for the server side.
+
+### Initialize firebase client app
+
+Lets create a `/lib` folder in our root directory and make a new file for the client side firebaseApp instance.
+We will initialize a firebase app and create an auth object as well.
+
+To get these values, first create a new firebase app using the firebase console then select the web application to generate these.
+I've stored the values in my `.env` file for ease of use.
+
+```ts
+// Import the functions you need from the SDKs you need
+import { FirebaseOptions, getApp, getApps, initializeApp } from "firebase/app";
+import { getAuth, inMemoryPersistence } from "firebase/auth";
+
+// Firebase configuration
+const firebaseConfig: FirebaseOptions = {
+	apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+	authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+	projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+	storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+	appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+	//If google analytics is enabled, provide this in the .env
+	measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+};
+
+// Initialize Firebase or get the already available instance (singleton pattern)
+const app = getApps().length >= 1 ? getApp() : initializeApp(firebaseConfig);
+
+export default app;
+
+// Initialize Firebase Authentication and get a reference to the service
+const auth = getAuth(app);
+
+//Do not persist. We'll use server side sessions to verify auth
+auth.setPersistence(inMemoryPersistence);
+
+export { auth };
+```
+
+We are now ready to sign in using firebase. Before continuing go to firebase console, enable authentication and add google as a provider so we can login using google accounts.
+
+## Login using firebase and google provider
+
+To get a users credential, we must initiate a sign in flow using one of the firebase providers. Assuming we have enabled google as an auth provider in the firebase console, lets create a basic login page at `user/login/page.tsx`
+
+```tsx
+export default async function LoginPage() {
+	return (
+		<section className="p-2 md:p-4 max-w-[60ch] mx-auto mt-10 ">
+			<h2 className="font-medium py-2 text-xl tracking-tighter text-center">
+				Login to continue
+			</h2>
+			<p className="py-2 leading-relaxed text-center">
+				Please sign in to the app using one of the providers. You will
+				have the option to delete your account anytime you want.
+			</p>
+			<div className="grid grid-flow-row max-w-sm gap-2 mt-10 mx-auto">
+				{/* Providers */}
+				<GoogleSignIn />
+			</div>
+		</section>
+	);
+}
+```
+
+As you can see this is a server component. We need a client component for the firebase sign in flow. Lets create the `<GoogleSignIn />` button as a client component to handle sign in using a popup as explained in [firebase/auth documentation.](https://firebase.google.com/docs/auth/web/google-signin)
+
+Note that the actual component has some additional features like loading state and error handling. Please view the repo for details
+
+```tsx
+"use client";
+//... import required functions
+
+export default function GoogleSignIn() {
+	/**
+	 * Handle google sign in flow.
+	 */
+	async function signInWithGoogle() {
+		try {
+			//Initialize the login flow using popup window
+			const provider = new GoogleAuthProvider();
+			const credentials = await signInWithPopup(auth, provider);
+
+			//If login success, we can extract the JWT token from the credentials object
+			const token = await credentials.user.getIdToken();
+
+			//We now send the jwt token to the server to create a session cookie
+			const result = await loginAction({ idToken: token });
+
+			//If success, redirect to user profile (This can be done via the server action as well)
+			if (result) {
+				redirect("/user");
+			}
+		} catch (error: any) {
+			//Display desired errors if needed and reset loading states
+		}
+	}
+
+	return (
+		<div className="flex flex-col w-auto gap-1">
+			<button type="button" className="..." onClick={signInWithGoogle}>
+				Sign in with Google
+			</button>
+		</div>
+	);
+}
+```
+
+As you may have noticed, this client button will call a server action `loginAction` if firebase auth succeeds.
+We need to implement the server side of things for this to work but you can just comment that line out and `console.log(token)` to verify login was successful.
+
+## Firebase-Admin SDK
+
+To access the server side methods of firebase, lets create a `lib/firebase-admin.ts` file and initialize a firebaseApp which we can use in the server environment.
+
+```ts
+import "server-only"; // Ensures this file cant be imported in the client
+import { initializeApp, getApps, cert } from "firebase-admin/app";
+import { getAuth } from "firebase-admin/auth";
+import { getFirestore } from "firebase-admin/firestore";
+
+let serviceAccountDetails = {};
+try {
+	//Decode the base64 encoded json
+	const decodedJson = atob(process.env.FIREBASE_CERT_JSON);
+	//parse the json
+	serviceAccountDetails = JSON.parse(decodedJson);
+} catch (error) {
+	console.log("Unable to parse the json data for FIREBASE_CERT_JSON");
+	throw new Error("Failed to init");
+}
+const firebaseAdminConfig = {
+	credential: cert(serviceAccountDetails),
+};
+
+const firebaseAdminApp =
+	getApps().find((app) => app.name === "fb-admin") ||
+	initializeApp(firebaseAdminConfig, "fb-admin");
+
+const db = getFirestore(firebaseAdminApp);
+const auth = getAuth(firebaseAdminApp);
+
+/* --------------------------------- exports -------------------------------- */
+export { firebaseAdminApp, auth as adminAuth, db };
+```
+
+To connect to firebase using the admin sdk, go to project settings > service accounts and generate a private key.
+We need to read this json file to connect to firebase-admin but this is a problem when deploying the app. We somehow need to store this json data in the .env so we can easily access it.
+
+### How to save service account json as environment variable
+
+The solution implemented in this example expects a base64 encoded string from the .env named `process.env.FIREBASE_CERT_JSON`.
+It'll first decode the string and then it'll run JSON.parse and get the original json. But for this to work we need to convert our service account json to a string and encode it in base64. In the repo you'll see a credential.js file to see how its can be achieved. After placing your json file in the /private directory and pasting its name in the credential.js, run `node credential.js` to generate the base64 encoded string in the /private folder. You may now copy and paste this string to your .env file and access it using `process.env.FIREBASE_CERT_JSON`
+
+## Server Actions
+
+Now that we have our admin app ready, we can create the login action to call when signing in. Lets create `user/actions.ts` and mark it as `"use server"` so next.js knows these are server actions.
+
+```ts
+/**
+ * Get the token from the client and save it as a firebase cookie. If login succeeds, revalidate the whole router
+ */
+export async function loginAction({ idToken }: { idToken: string }) {
+	try {
+		if (!idToken) return;
+		const result = await login(idToken);
+		if (result) {
+			revalidatePath("/");
+			return result;
+		}
+	} catch (error: any) {
+		console.log("loginAction Error: ", error?.message);
+		return undefined;
+	}
+}
+```
+
+Notice how we call `revalidatePath("/")` so the router and server cache is revoked. Without this, our auth state would not be reflected in the server components without a hard refresh.
+
+In this server action we call the `login` function. Lets create this function in `lib/firebase-auth-api.ts`. We can use this file to store all firebase-admin/auth related functions like login, logout etc...
+
+```ts
+import "server-only";
+import { adminAuth } from "./firebase-admin";
+import { cookies } from "next/headers";
+
+/**
+ * Sign a user in
+ * @param token jwt token string from client side.
+ * @returns
+ */
+export async function login(token: string) {
+	try {
+		//Verify the token and get user data
+		const decodedIdToken = await adminAuth.verifyIdToken(token);
+		if (!decodedIdToken) return;
+
+		//Create the cookie token string to save.
+		const sessionCookie = await adminAuth.createSessionCookie(token, {
+			expiresIn: 60 * 60 * 24 * 7 * 1000,
+		});
+
+		//Create the cookie
+		cookies().set("__session", sessionCookie, {
+			maxAge: 60 * 60 * 24 * 7, // 1 week in seconds (Im not sure but this must be in seconds instead of ms)
+			httpOnly: true,
+			secure: true,
+		});
+
+		//User logged in
+		return true;
+	} catch (error: any) {
+		console.log("Error logging in", error?.message);
+		return false;
+	}
+}
+```
+
+With this last part implemented, our sign in page should now work.
+
+### Request flow
+
+-   When we successfully sign in at the client side, we extract the token and send it to loginAction server action.
+-   Server action then uses the login() function to verify the token using admin sdk.
+-   If all succeeds, a cookie is created and sent back to the user.
+-   Further requests will now include the cookie in the headers and we can write another server action to verify user auth state using this cookie we receive in the request.
+
+## Verify auth state and get user data
+
+Now that we are logged in, how do we protect routes / get the user data if exists in server components?
+Lets create isLoggedIn and getCurrentUser helper functions in our firebase-auth-api
+
+```ts
+/**
+ * Load the token from the session cookie and verify token is valid.
+ * @param checkForRevocation Perform a backend query to see if token is revoked?
+ * This is a costly operation. It'll connect to firebase backend to validate the account status.
+ * You may use this in highly sensitive routes for extra protection.
+ * @returns A decoded id token or undefined
+ */
+export async function isLoggedIn(checkForRevocation = true) {
+	try {
+		//Get current session cookie if available
+		const sessionCookieValue = await getSessionCookie();
+		if (!sessionCookieValue) return;
+
+		//Verify cookie token and return Decoded ID Token
+		return await adminAuth.verifySessionCookie(
+			sessionCookieValue,
+			checkForRevocation,
+		);
+	} catch (error: any) {
+		//If there is a problem with the user auth, handle here
+		//console.log(error.code) //example: auth/user-disabled
+		//delete the cookie and revoke the session
+		await logout();
+		return undefined;
+	}
+}
+
+/**
+ * Get current user record if found
+ * @returns
+ */
+export async function getCurrentUser(): Promise<UserRecord | undefined> {
+	try {
+		//load decoded id token without revocation verification call
+		const decodedIdToken = await isLoggedIn(false);
+		if (!decodedIdToken) return;
+
+		//Load user record using uid from the token
+		return await adminAuth.getUser(decodedIdToken.uid);
+	} catch (error: any) {
+		console.error("Error getCurrentUser", error?.message);
+	}
+	return undefined;
+}
+```
+
+With these functions, we may now verify our session before rendering a component. Note that isLoggedIn will only validate the cookie if `checkForRevocation` param is false. Is is [recommended by firebase](https://firebase.google.com/docs/auth/admin/manage-cookies#verify_session_cookie_and_check_permissions) that we shouldn't invoke revalidate in every request because it'll hit the backend each time. Only do this when needed in sensitive areas or before sensitive operations.
+
+## Protected Routes
+
+We need a new server action to get our auth state in actions.ts
+
+```ts
+/**
+ * Get a UserRecord as JSON object or undefined
+ * @param validate query the backend to check if the token is valid? It's a costly operation and must not be called in every page
+ * @returns
+ */
+export async function getAuthAction(validate = false) {
+	try {
+		if (validate) {
+			const decodedIdToken = await isLoggedIn(true);
+			if (!decodedIdToken) return undefined;
+		}
+		const user = await getCurrentUser();
+		if (user) return user.toJSON();
+	} catch (error: any) {
+		console.log("getAuthAction Error: ", error?.message);
+		return;
+	}
+}
+```
+
+Lets create our `/user/page.tsx` which will show our user profile data using the getAuthAction.
+Lets make it so that if we are not logged in, we are redirected to login page.
+
+```tsx
+import { getAuthAction } from "./actions";
+import { redirect } from "next/navigation";
+import { UserRecord } from "firebase-admin/auth";
+
+export default async function UserPage() {
+	const user = (await getAuthAction()) as UserRecord | undefined;
+	if (!user) {
+		return redirect("/user/login");
+	}
+
+	return (
+		<section className="mt-10 p-2">
+			{/* Card Wrapper */}
+			<div className="border rounded-md bg-slate-50 overflow-hidden max-w-2xl mx-auto">
+				{/* Card Header */}
+				<div className="flex flex-row gap-2 items-center bg-zinc-200 justify-between p-2">
+					<h3 className="font-bold flex-1 ">
+						&#128100; Profile Details
+					</h3>
+					{/* Additional Action buttons can be inserted here later */}
+				</div>
+
+				{/* Card Body */}
+				<div className="flex flex-col items-center md:flex-row w-full p-2 text-sm gap-10">
+					{/* User Profile Image */}
+					{user.photoURL && (
+						<div className="w-1/4 flex flex-col items-center justify-center gap-1">
+							<img
+								src={user.photoURL}
+								alt="User image"
+								className="rounded-full w-auto"
+								referrerPolicy="no-referrer"
+							/>
+							<span className="font-medium">
+								{user.displayName}
+							</span>
+						</div>
+					)}
+
+					{/* User Details */}
+					<div
+						className="grid gap-y-2 gap-x-4 flex-1 overflow-hidden text-ellipsis"
+						style={{ gridTemplateColumns: "auto 1fr" }}>
+						{/* Row */}
+						<span className="font-medium">Name</span>
+						<span>{user.displayName}</span>
+						{/* Row */}
+						<span className="font-medium">Email</span>
+						<span>{user.email}</span>
+						{/* Row */}
+						<span className="font-medium">Registration Date</span>
+						<span>{user.metadata.creationTime}</span>
+						{/* Row */}
+						<span className="font-medium">Auth Provider</span>
+						<span>
+							{user.providerData[0]?.providerId ?? "Unknown"}
+						</span>
+					</div>
+				</div>
+			</div>
+		</section>
+	);
+}
+```
+
+As you can see we can check for a user in 1 line and redirect if not found! Note that this must be done using a serverAction like we did here using `getAuthAction` or calling `revalidatePath` when we say logout may not refresh data in this route.
+
+## Logging Out
+
+Now that we have a way of verifying auth, lets create a server action and a logout function
+
+actions.tsx
+
+```tsx
+/**
+ * Initiate logout sequence and redirect to home page if succeeds.
+ * @returns
+ */
+export async function logoutAction(): Promise<undefined> {
+	let result: true | undefined = undefined;
+	//Call logout and revoke user
+	try {
+		result = await logout();
+	} catch (error: any) {
+		console.log("logoutAction Error: ", error?.message);
+	}
+	//If logout succeeds, redirect
+	if (result) {
+		revalidatePath("/");
+		//Server action is capable of redirecting the client to another route
+		//It must not be wrapped in try catch block.
+		return redirect("/?notify=logout_success");
+	}
+	return undefined;
+}
+```
+
+As you can see, we can directly initiate a redirect through a server action. Make sure not to wrap it in try-catch block because server action redirects work using throwing NEXT_REDIRECT error object.
+
+Lets also create the logout logic in the firebase-auth-api.ts
+
+```ts
+/**
+ * Log the user out, delete the session cookie, revoke the token
+ * @returns
+ */
+export async function logout() {
+	try {
+		//Get current session cookie if available
+		const sessionCookieValue = await getSessionCookie();
+		if (!sessionCookieValue) return;
+
+		//Decode cookie to verify
+		const decodedIdToken = await adminAuth.verifySessionCookie(
+			sessionCookieValue,
+		);
+
+		//Revoke the token
+		await adminAuth.revokeRefreshTokens(decodedIdToken.sub);
+
+		//Delete the cookie
+		cookies().delete("__session");
+
+		return true;
+	} catch (error: any) {
+		console.error("Error logOut", error?.message);
+	}
+}
+```
+
+## Avoiding Stale Cache
+
+As mentioned before, when our auth state changes, for the server components to re-render, we must call the `revalidatePath` function in a server action when necessary. If we don't clear the cache, when we visit /user after logging out, we may still see our user data as stil authenticated. `revalidatePath('/user')` will remove the cache and re-render this page so we will not be able to see our profile.
+
+Note that there is still some problems with this granular revalidating approach. It's said to be working in the server side cache but when we call revalidatePath, the whole client router cache will be revoked. [See this github comment ](https://github.com/vercel/next.js/issues/57914#issuecomment-1803819065)
+
+
+## Conclusion
+
+Many more features can be implemented and more firebase features can be used in the application. Visit the completed [project repo](https://github.com/donis3/next-firebase-starter) or [working example](https://next-firebase-auth.donis.dev/) for details. Note that, you can delete your account after logging in.
