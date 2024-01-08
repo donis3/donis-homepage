@@ -29,12 +29,12 @@ const social = [
 		icon: <FaTwitter />,
 		data: process.env.NEXT_PUBLIC_DEV_x,
 	},
-	// {
-	// 	id: "linkedin",
-	// 	text: "LinkedIn",
-	// 	icon: <FaLinkedin />,
-	// 	data: process.env.NEXT_PUBLIC_DEV_LINKEDIN,
-	// },
+	{
+		id: "linkedin",
+		text: "LinkedIn",
+		icon: <FaLinkedin />,
+		data: process.env.NEXT_PUBLIC_DEV_LINKEDIN,
+	},
 	{
 		id: "instagram",
 		text: "Instagram",

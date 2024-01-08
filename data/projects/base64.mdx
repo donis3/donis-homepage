@@ -1,0 +1,56 @@
+export const metadata = {
+	title: "Base64 Converter",
+	description:
+		"A tool to convert your data and json objects to base64 strings and vice versa. Easily store json in environment variables. ",
+};
+
+export const data = {
+	id: "base64",
+	title: "Base64 Converter - A tool to convert your data and json objects to base64 strings and vice versa",
+	year: 2024,
+	subtitle:
+		"A simple tool that runs on the browser for easy data/json object to and from base64 string conversion. Allows for saving complex json data in environment variables",
+	tech: ["Next.Js", "App Router", "Tailwind", "shadcn", "SSG"],
+	images: [
+		"base64_cover.jpg",
+		"base64_01.png",
+		"base64_02.png",
+		"base64_03.png",
+		"base64_04.png",
+		"base64_05.png",
+	],
+	link: "https://base64.donis.dev/",
+	repo: "https://github.com/donis3/json-base64-converter",
+};
+
+# JSON/String to Base64 Conversion Tool
+
+This is a simple client side tool for base64 conversion needs.
+Easily convert json objects or other data to base64 strings.
+Can convert them back to their original form as well.
+
+## Features
+
+-   Encode JSON data or plain text strings to Base64.
+-   Decode Base64 back to the original string or JSON data.
+-   Works in the browser. Your data is safe
+-   Informs user if the data is valid JSON while converting
+-       Dark/Light/System theme switch (persists through local storage)
+
+## Tech Stack
+
+-   [**Next.JS 14.0.3**](https://github.com/vercel/next.js) : Using next.js and static exports
+-   [**Tailwind Css**](https://github.com/tailwindlabs/tailwindcss): Styling
+-   [**Shadcn/UI**](https://github.com/shadcn/ui): For accessible buttons/dialogs/tabs
+-   [**react-syntax-highlighter**](https://github.com/react-syntax-highlighter/react-syntax-highlighter): Syntax highlighting in documentation page
+-   [**@uiw/react-textarea-code-editor**](https://github.com/uiwjs/react-textarea-code-editor): Light code editor for JSON syntax highlighting
+
+## Usage
+
+**Conversion to base64:** Type or paste your data in the "JSON to BASE64" tab to encode it. Click the copy button to copy the generated string.
+
+**Conversion from base64:** Paste any base64 encoded string in the "Base64 to JSON" tab to decode it. Click the copy button to copy the generated output.
+
+## Deployment
+
+This app is deployed to github pages free of charge. Visit the repo [here](https://github.com/donis3/json-base64-converter) or the deployed app [here](https://base64.donis.dev/)
