@@ -10,14 +10,13 @@ import { BsFillTriangleFill } from "react-icons/bs";
 import { SiDatabricks } from "react-icons/si";
 
 const timeline = [
-	,
 	{
 		date: new Date("2023-09-01"),
 		dateText: "2023-2025",
 		event: "Computer Programming",
 		details: "Associate Degree - Anadolu University",
 		icon: <SiDatabricks />,
-		color: '#2D3250',
+		color: "#2D3250",
 	},
 	{
 		date: new Date("2007-09-01"),

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 		default: "Deniz Özkan | Donis.dev",
 	},
 	description:
-		"Personal page for Deniz Ozkan, an aspiring fullstack web developer.",
+		"Blog and Portfolio for Deniz Özkan, an aspiring fullstack web developer.",
 	...defaultMetaData,
 };
 
