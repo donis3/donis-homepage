@@ -44,5 +44,36 @@ export const defaultMetaData: Metadata = {
 
 	applicationName: "donis.dev",
 	referrer: "origin-when-cross-origin",
-	keywords: ["Developer", "Donis", "Deniz", "React", "Nextjs", "Typescript", "Javascript", "Fullstack", "Deniz Özkan", "donisdev", "firebase", "web dev"],
+	keywords: [
+		"Developer",
+		"Donis",
+		"Deniz",
+		"React",
+		"Nextjs",
+		"Typescript",
+		"Javascript",
+		"Fullstack",
+		"Deniz Özkan",
+		"donisdev",
+		"firebase",
+		"web dev",
+	],
+
+	// OG Section
+	openGraph: {
+		title: "Deniz Özkan Fullstack Developer - Donis.Dev",
+		description:
+			"Blog and Portfolio for Deniz Özkan, an aspiring fullstack web developer. ",
+		url: process.env.NEXT_PUBLIC_SITE_URL,
+		siteName: "donis.dev",
+		locale: "en_US",
+		type: "website",
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Deniz Özkan Fullstack Developer - Donis.Dev",
+		description:
+			"Blog and Portfolio for Deniz Özkan, an aspiring fullstack web developer.",
+		creator: "@DonisDev",
+	},
 };

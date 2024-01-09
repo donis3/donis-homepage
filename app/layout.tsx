@@ -8,6 +8,7 @@ import ImageModalProvider from "@/components/img-modal/ImageContext";
 import { defaultMetaData } from "./config";
 
 export const metadata: Metadata = {
+	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL),
 	title: {
 		template: "%s | Donis.dev",
 		default: "Deniz Özkan Fullstack Developer | Donis.dev",
