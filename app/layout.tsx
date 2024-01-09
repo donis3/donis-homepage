@@ -10,10 +10,10 @@ import { defaultMetaData } from "./config";
 export const metadata: Metadata = {
 	title: {
 		template: "%s | Donis.dev",
-		default: "Deniz Özkan | Donis.dev",
+		default: "Deniz Özkan Fullstack Developer | Donis.dev",
 	},
 	description:
-		"Blog and Portfolio for Deniz Özkan, an aspiring fullstack web developer.",
+		"Blog and Portfolio for Deniz Özkan, an aspiring fullstack web developer. ",
 	...defaultMetaData,
 };
 

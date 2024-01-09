@@ -44,18 +44,5 @@ export const defaultMetaData: Metadata = {
 
 	applicationName: "donis.dev",
 	referrer: "origin-when-cross-origin",
-	keywords: ["Developer", "Donis", "Deniz"],
-	robots: {
-		index: false,
-		follow: true,
-		nocache: true,
-		googleBot: {
-			index: true,
-			follow: false,
-			noimageindex: true,
-			"max-video-preview": -1,
-			"max-image-preview": "large",
-			"max-snippet": -1,
-		},
-	},
+	keywords: ["Developer", "Donis", "Deniz", "React", "Nextjs", "Typescript", "Javascript", "Fullstack", "Deniz Özkan", "donisdev", "firebase", "web dev"],
 };
