@@ -18,7 +18,7 @@ export async function generateStaticParams() {
 	const { filenames } = useProjects();
 
 	return filenames.map((filename) => {
-		return { projectId: [filename] };
+		return { projectId: filename };
 	});
 }
 
@@ -31,14 +31,22 @@ export async function generateMetadata({
 	params,
 }: projectProps): Promise<Metadata> {
 	const { getProjectData } = useProjects();
-	const projectId = params.projectId[0];
+	const projectId = params.projectId;
 
 	//Lazy load the mdx file for the project
 	try {
 		const metadata = await getProjectData(projectId, "metadata");
 		if (!metadata) throw new Error();
 
-		return metadata;
+		return {
+			...metadata,
+			openGraph: {
+				images: `/projects/${projectId}/open-graph.png`,
+			},
+			twitter: {
+				images: `/projects/${projectId}/twitter-image.png`,
+			},
+		};
 	} catch (error) {
 		//Err
 		console.log("Unable to fetch metadata for " + projectId);
@@ -55,12 +63,12 @@ export const viewport: Viewport = {
 };
 
 type projectProps = {
-	params: { projectId: string[] };
+	params: { projectId: string };
 };
 
 const project: FC<projectProps> = async ({ params }) => {
 	const { getProjectData } = useProjects();
-	const projectId = params.projectId[0];
+	const projectId = params.projectId;
 	const data = await getProjectData(projectId, "data");
 
 	if (!data) return notFound();

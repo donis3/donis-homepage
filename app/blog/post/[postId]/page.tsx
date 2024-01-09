@@ -132,7 +132,16 @@ export async function generateMetadata({
 	//Lazy load the mdx file for the project
 	try {
 		const metadata = await getPostData(postId, "metadata");
-		return metadata;
+
+		return {
+			...metadata,
+			openGraph: {
+				images: `/blog/post/${postId}/open-graph.png`,
+			},
+			twitter: {
+				images: `/blog/post/${postId}/twitter-image.png`,
+			},
+		};
 	} catch (error) {
 		//Err
 		console.log("Unable to fetch metadata for blog: " + postId);
