@@ -4,12 +4,13 @@ import {
 	getProjectMetadata,
 } from "@/core/project-helpers";
 
-import { notFound } from "next/navigation";
+import { getProjectImageUrls } from "@/core/project-helpers/image-fns";
 import type { Metadata } from "next";
-import { MDXRemote } from "next-mdx-remote-client/rsc";
 import type { MDXRemoteOptions } from "next-mdx-remote-client/rsc";
-import { Suspense } from "react";
-import Link from "next/link";
+import { MDXRemote } from "next-mdx-remote-client/rsc";
+import { notFound } from "next/navigation";
+import ProjectGallery from "./_components/project-gallery";
+import ProjectHeader from "./_components/project-header";
 
 type ProjectPageProps = PageProps<"/projects/[slug]">;
 
@@ -21,27 +22,34 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 		return notFound();
 	}
 
-	const options: MDXRemoteOptions = {
-		parseFrontmatter: true,
-	};
-
 	// load project content here
 	const { content: projectContent } =
 		await getProjectMdxContent(projectFolder);
 
+	const projectMetadata = await getProjectMetadata(projectFolder);
+
+	const options: MDXRemoteOptions = {
+		parseFrontmatter: true,
+	};
+
+	// Read available images
+	const imageUrls = await getProjectImageUrls(projectFolder);
+
 	return (
-		<div className="mx-auto max-w-2xl p-4">
-			<Link
-				href="/projects"
-				className="mb-8 inline-block text-blue-500 hover:underline"
-			>
-				Back to Projects
-			</Link>
-			<Suspense fallback={<div>Loading content...</div>}>
-				<article className="prose dark:prose-invert mx-auto max-w-full">
+		<div className="w-full">
+			<ProjectHeader
+				slug={projectFolder}
+				title={projectMetadata.title || projectFolder}
+				tags={projectMetadata.tags}
+			/>
+			<div className="max-w-2xl mx-auto px-4">
+				<article className="prose dark:prose-invert mx-auto max-w-full my-8">
 					<MDXRemote source={projectContent} options={options} />
 				</article>
-			</Suspense>
+				{imageUrls.length > 0 && (
+					<ProjectGallery images={imageUrls} className="my-8" />
+				)}
+			</div>
 		</div>
 	);
 }

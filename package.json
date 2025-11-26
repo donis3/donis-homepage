@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "trap 'rm -rf public/assets/projects/*' INT; next dev",
+    "predev": "rm -rf public/assets/projects/* && mkdir -p public/assets/projects && for dir in projects/*/; do folder=$(basename \"$dir\"); mkdir -p \"public/assets/projects/$folder\"; find \"$dir\" -maxdepth 1 \\( -name '*.jpg' -o -name '*.png' -o -name '*.gif' -o -name '*.webp' \\) -exec cp {} \"public/assets/projects/$folder/\" \\;; done",
     "build": "next build",
+    "postbuild": "rm -rf out/assets/projects/* && mkdir -p out/assets/projects && for dir in projects/*/; do folder=$(basename \"$dir\"); mkdir -p \"out/assets/projects/$folder\"; find \"$dir\" -maxdepth 1 \\( -name '*.jpg' -o -name '*.png' -o -name '*.gif' -o -name '*.webp' \\) -exec cp {} \"out/assets/projects/$folder/\" \\;; done",
     "start": "next start",
     "lint": "eslint"
   },

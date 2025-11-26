@@ -21,7 +21,9 @@ export async function getProjectMdxContent(projectFolder: string) {
 	const mdxFilePath = path.join(projectDir, "content.mdx");
 	const content = await fs.readFile(mdxFilePath, "utf-8");
 	const { content: mdxContent, data: frontmatter } = matter(content);
-	return { content: mdxContent, frontmatter };
+
+	const relativePath = path.relative(process.cwd(), mdxFilePath);
+	return { content: mdxContent, frontmatter, relativePath };
 }
 
 export async function getProjectMetadata(

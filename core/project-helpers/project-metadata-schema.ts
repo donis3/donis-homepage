@@ -6,6 +6,7 @@ description: A comprehensive company website showcasing VibeVenue's web-based ki
 keywords: event kiosk, venue software, web kiosk, AI photobooth, interactive games, Next.js, Tailwind CSS, Drizzle ORM, SQLite, Auth.js, Google OAuth, AWS SES
 author: Deniz
 date: 2025-11-26
+tags: [Next.js, SPA, Zustand, Dart, Mobile App]
 */
 
 export const projectMetadataSchema = z.object({
@@ -17,6 +18,7 @@ export const projectMetadataSchema = z.object({
 		.optional(),
 	author: z.string().default("Deniz Özkan"),
 	date: z.coerce.date().default(new Date()),
+	tags: z.array(z.string()).default([]),
 });
 
 
