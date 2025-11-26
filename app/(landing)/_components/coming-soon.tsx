@@ -1,6 +1,6 @@
-import Image from 'next/image';
+import Image from "next/image";
 
-export default function ComingSoonPage() {
+export default function ComingSoon() {
 	return (
 		<div className="flex min-h-screen items-center justify-center bg-gray-100">
 			<div className="text-center">

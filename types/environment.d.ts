@@ -5,5 +5,6 @@ namespace NodeJS {
 		NEXT_PUBLIC_SITE_URL: string;
 		NEXT_PUBLIC_APP_VERSION: string;
 		NEXT_PUBLIC_CONTACT_EMAIL: string;
+		NEXT_PUBLIC_ENABLE_SITE: string;
 	}
 }
