@@ -27,7 +27,7 @@ export default function ProjectsClient({
 	}
 
 	return (
-		<>
+		<div className="mx-auto max-w-2xl">
 			<div className="mb-4 md:mb-8 ">
 				<div className="mb-4 flex items-center justify-between gap-x-2">
 					<h1 className="flex-1 text-3xl leading-0 font-bold tracking-tight text-foreground/70">Projects</h1>
@@ -48,6 +48,6 @@ export default function ProjectsClient({
 			<section>
 				<ProjectGrid allProjects={projects} />
 			</section>
-		</>
+		</div>
 	);
 }

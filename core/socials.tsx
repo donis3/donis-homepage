@@ -22,7 +22,7 @@ export const socials: SocialItem[] = [
 		description: "Send me an email",
 		email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || "",
 		icon: LuMail,
-		isActive: false,
+		isActive: true,
 	},
 	{
 		type: "link",
