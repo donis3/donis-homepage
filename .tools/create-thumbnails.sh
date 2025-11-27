@@ -5,6 +5,8 @@ PROJECTS_DIR="./projects"
 
 for dir in "$PROJECTS_DIR"/*/; do
     if [ -d "$dir" ]; then
+        # Delete existing thumbnails
+        rm -f "$dir"*-thumbnail.jpg
         for img in "$dir"/*-cover.jpg "$dir"/*-cover.jpeg; do
             if [ -f "$img" ]; then
                 # Get the base name without -cover.jpg or -cover.jpeg

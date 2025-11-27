@@ -66,7 +66,7 @@ for dir in "$PROJECTS_DIR"/*/; do
     if [ -d "$dir" ]; then
         for jpg_file in "$dir"*.jpg; do
             if [ -f "$jpg_file" ]; then
-                convert "$jpg_file" -resize ${TARGET_WIDTH}x${TARGET_HEIGHT} "$jpg_file"
+                convert "$jpg_file" -resize ${TARGET_WIDTH}x${TARGET_HEIGHT} -strip "$jpg_file"
             fi
         done
     fi
