@@ -1,26 +1,19 @@
-import Image from "next/image";
-import Link from "next/link";
+import About from "./_components/about";
+import CallToAction from "./_components/call-to-action";
+import Hero from "./_components/hero";
+import Projects from "./_components/projects";
+import Skills from "./_components/skills";
 
-export default function ComingSoonPage() {
+export default function LandingPage() {
 	return (
-		<div className="flex flex-col gap-4 min-h-screen items-center justify-center bg-gray-100">
-			<div className="text-center">
-				<Image
-					src="/assets/common/logo-light.png"
-					alt="App Logo"
-					width={300}
-					height={150}
-					className="mx-auto mb-8"
-				/>
-			</div>
-			<nav className="text-center">
-				<Link
-					href={"/projects"}
-					className="text-xl font-semibold text-blue-600 hover:underline"
-				>
-					Go to Projects Page
-				</Link>
-			</nav>
-		</div>
+		<>
+			<main className="relative z-0 flex flex-1 flex-col">
+				<Hero />
+				<About />
+				<Skills />
+				<Projects />
+				<CallToAction />
+			</main>
+		</>
 	);
 }
