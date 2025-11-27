@@ -1,8 +1,7 @@
-import { getProjectsMetadata } from "@/core/project-helpers";
+import { getProjectsMetadata, getProjectTags } from "@/core/project-helpers";
 
 import type { Metadata } from "next";
-import Link from "next/link";
-import NoProjects from "./_components/no-projects";
+import ProjectsClient from "./_components/projects-client";
 
 export const metadata: Metadata = {
 	title: "Projects | Deniz's Homepage",
@@ -13,28 +12,12 @@ export const metadata: Metadata = {
 
 export default async function ProjectsPage() {
 	const projects = await getProjectsMetadata();
-	if (projects.length === 0) {
-		return <NoProjects />;
-	}
+	const tags = await getProjectTags();
 
 	return (
-		<div>
-			<h1 className="mb-6 text-3xl font-bold">Projects</h1>
-			<ul className="space-y-4">
-				{projects.map((project) => (
-					<li key={project.slug} className="">
-						<Link
-							href={`/projects/${project.slug}`}
-							className="block rounded p-2 hover:bg-gray-50"
-						>
-							<h2 className="text-xl font-semibold">
-								{project.shortTitle}
-							</h2>
-							<p className="text-gray-600">{project.shortDescription}</p>
-						</Link>
-					</li>
-				))}
-			</ul>
+		<div className="bg-background text-foreground flex-1 p-4 py-[calc(var(--navbar-height)+1rem)]">
+			
+			<ProjectsClient projects={projects} tags={tags} />
 		</div>
 	);
 }

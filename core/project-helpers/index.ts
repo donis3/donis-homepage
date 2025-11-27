@@ -6,6 +6,7 @@ import {
 	ProjectMetadata,
 	projectMetadataSchema,
 } from "./project-metadata-schema";
+import { getProjectCoverUrl, getProjectThumbnailUrl } from "./image-fns";
 
 export async function getProjectFolderList() {
 	const projectsDir = config.projectsDirectory;
@@ -43,9 +44,13 @@ export async function getProjectMetadata(
 	return { slug: projectFolder, ...valid.data };
 }
 
-export async function getProjectsMetadata(): Promise<
-	(ProjectMetadata & { slug: string })[]
-> {
+export type ProjectDetails = ProjectMetadata & {
+	slug: string;
+	thumbnailUrl: string;
+	coverUrl: string;
+};
+
+export async function getProjectsMetadata(): Promise<ProjectDetails[]> {
 	const projectFolders = await getProjectFolderList();
 	const projectsMetadata = await Promise.all(
 		projectFolders.map(async (folder) => {
@@ -53,8 +58,44 @@ export async function getProjectsMetadata(): Promise<
 		}),
 	);
 
-	return projectsMetadata.filter(
-		(project): project is ProjectMetadata & { slug: string } =>
-			project !== null,
-	);
+	const projectsDetails: ProjectDetails[] = [];
+	for (const metadata of projectsMetadata) {
+		const thumbnailUrl = await getProjectThumbnailUrl(metadata.slug);
+		const coverUrl = await getProjectCoverUrl(metadata.slug);
+		projectsDetails.push({
+			...metadata,
+			thumbnailUrl,
+			coverUrl,
+		});
+	}
+	return projectsDetails;
+}
+
+export type ProjectTagWithCount = {
+	label: string;
+	count: number;
+};
+
+export async function getProjectTags(): Promise<ProjectTagWithCount[]> {
+	const projects = await getProjectsMetadata();
+	const collection: { label: string; count: number }[] = [];
+	const tagCountMap: Record<string, number> = {};
+
+	projects.forEach((project) => {
+		project.tags.forEach((tag) => {
+			if (tag in tagCountMap) {
+				tagCountMap[tag] += 1;
+			} else {
+				tagCountMap[tag] = 1;
+			}
+		});
+	});
+
+	for (const [label, count] of Object.entries(tagCountMap)) {
+		collection.push({ label, count });
+	}
+
+	collection.sort((a, b) => b.count - a.count);
+
+	return collection;
 }
