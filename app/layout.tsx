@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 		template: "%s | Donis.Dev Fullstack Developer",
 	},
 	metadataBase: new URL(
-		process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000",
+		process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
 	),
 };
 
