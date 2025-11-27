@@ -72,9 +72,11 @@ export async function getProjectsMetadata(
 	}
 
 	if (onlyFeatured) {
-		return projectsDetails.filter((project) => project.isFeatured);
+		return projectsDetails
+			.filter((project) => project.isFeatured)
+			.sort((a, b) => b.date.getTime() - a.date.getTime());
 	}
-	return projectsDetails;
+	return projectsDetails.sort((a, b) => b.date.getTime() - a.date.getTime());
 }
 
 export type ProjectTagWithCount = {

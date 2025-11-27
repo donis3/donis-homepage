@@ -15,6 +15,7 @@ import { notFound } from "next/navigation";
 import ProjectGallery from "./_components/project-gallery";
 import ProjectHeader from "./_components/project-header";
 import ProjectMetadata from "./_components/project-metadata";
+import ProjectStack from "./_components/project-stack";
 
 type ProjectPageProps = PageProps<"/projects/[slug]">;
 
@@ -41,7 +42,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 	const coverImageUrl = await getProjectCoverUrl(projectFolder);
 
 	return (
-		<div className="w-full">
+		<div className="w-full mb-12">
 			<ProjectHeader
 				title={projectMetadata.title || projectFolder}
 				tags={projectMetadata.tags}
@@ -49,6 +50,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 			/>
 			<div className="mx-auto max-w-2xl px-4 py-4">
 				<ProjectMetadata metadata={projectMetadata} />
+				
 			</div>
 			<div className="mx-auto max-w-2xl px-4">
 				<article className="prose dark:prose-invert mx-auto my-8 max-w-full">
@@ -63,6 +65,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 					/>
 				</section>
 			)}
+			<ProjectStack stack={projectMetadata.techStack} />
 		</div>
 	);
 }

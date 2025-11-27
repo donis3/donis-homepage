@@ -44,7 +44,7 @@ export default async function Projects() {
 				<div className="mt-12 text-center">
 					<Link
 						href="/projects"
-						className="text-primary-foreground inline-flex items-center gap-2 rounded-lg bg-transparent px-6 py-3 font-medium transition-all hover:bg-amber-700"
+						className="text-foreground hover:text-white  inline-flex items-center gap-2 rounded-lg bg-transparent px-6 py-3 font-medium transition-all hover:bg-amber-700"
 					>
 						View All Projects
 						<LuArrowRight className="h-4 w-4" />
