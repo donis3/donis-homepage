@@ -44,7 +44,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 	return (
 		<div className="w-full mb-12">
 			<ProjectHeader
-				title={projectMetadata.title || projectFolder}
+				title={projectMetadata.shortTitle || projectFolder}
 				tags={projectMetadata.tags}
 				imageUrl={coverImageUrl}
 			/>

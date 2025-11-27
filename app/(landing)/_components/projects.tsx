@@ -29,10 +29,7 @@ export default async function Projects() {
 				<Carousel>
 					<CarouselContent>
 						{featuredProjects.map((project) => (
-							<CarouselItem
-								key={`featured-${project.slug}`}
-								className=""
-							>
+							<CarouselItem key={`featured-${project.slug}`}>
 								<FeaturedProjectItem project={project} />
 							</CarouselItem>
 						))}
@@ -44,7 +41,7 @@ export default async function Projects() {
 				<div className="mt-12 text-center">
 					<Link
 						href="/projects"
-						className="text-foreground hover:text-white  inline-flex items-center gap-2 rounded-lg bg-transparent px-6 py-3 font-medium transition-all hover:bg-amber-700"
+						className="text-foreground inline-flex items-center gap-2 rounded-lg bg-transparent px-6 py-3 font-medium transition-all hover:bg-amber-700 hover:text-white"
 					>
 						View All Projects
 						<LuArrowRight className="h-4 w-4" />

@@ -17,7 +17,7 @@ export default function FeaturedProjectItem({
 	project,
 }: FeaturedProjectItemProps) {
 	return (
-		<section className="p-4">
+		<section className="p-4 grid h-full">
 			<motion.div
 				initial={{ opacity: 0, x: -20 }}
 				whileInView={{ opacity: 1, x: 0 }}
@@ -25,12 +25,12 @@ export default function FeaturedProjectItem({
 				viewport={{ once: true }}
 				className={cn(
 					"group border-border overflow-hidden rounded-xl border bg-white transition-all select-none dark:bg-slate-900",
-					"shadow-primary/10 hover:shadow-primary/20 shadow-md",
+					"shadow-primary/10 hover:shadow-primary/20 shadow-md h-full  ",
 				)}
 			>
-				<div className="flex flex-col md:flex-row">
-					<Link href={`/projects/${project.slug}`} className="md:w-1/2">
-						<div className="relative h-36 w-full overflow-hidden md:h-full">
+				<div className="flex flex-col md:flex-row  h-full ">
+					<Link href={`/projects/${project.slug}`} className="md:w-1/2 ">
+						<div className="relative h-36 w-full overflow-hidden md:h-full ">
 							<Image
 								src={project.thumbnailUrl}
 								alt={project.shortTitle}
@@ -41,7 +41,7 @@ export default function FeaturedProjectItem({
 							<div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 						</div>
 					</Link>
-					<div className="flex flex-col justify-between p-6 md:w-1/2">
+					<div className="flex flex-col justify-between p-6 md:w-1/2 flex-1 ">
 						<div>
 							<h3 className="mb-2 text-2xl leading-tight font-bold tracking-tight">
 								{project.shortTitle}

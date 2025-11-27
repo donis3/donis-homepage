@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-PROJECTS_DIR="../projects"
+PROJECTS_DIR="./projects"
 
 for dir in "$PROJECTS_DIR"/*/; do
     if [ -d "$dir" ]; then

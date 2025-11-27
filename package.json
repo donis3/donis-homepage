@@ -9,7 +9,8 @@
     "postbuild": "rm -rf out/assets/projects/* && mkdir -p out/assets/projects && for dir in projects/*/; do folder=$(basename \"$dir\"); mkdir -p \"out/assets/projects/$folder\"; find \"$dir\" -maxdepth 1 \\( -name '*.jpg' -o -name '*.png' -o -name '*.gif' -o -name '*.webp' \\) -exec cp {} \"out/assets/projects/$folder/\" \\;; done",
     "start": "next start",
     "lint": "eslint",
-    "create-thumbnails": "bash .tools/create-thumbnails.sh"
+    "thumb": "bash .tools/create-thumbnails.sh",
+    "image-prep": "bash .tools/prep-images.sh && bash .tools/create-thumbnails.sh"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
