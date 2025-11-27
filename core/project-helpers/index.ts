@@ -50,7 +50,9 @@ export type ProjectDetails = ProjectMetadata & {
 	coverUrl: string;
 };
 
-export async function getProjectsMetadata(): Promise<ProjectDetails[]> {
+export async function getProjectsMetadata(
+	onlyFeatured: boolean = false,
+): Promise<ProjectDetails[]> {
 	const projectFolders = await getProjectFolderList();
 	const projectsMetadata = await Promise.all(
 		projectFolders.map(async (folder) => {
@@ -67,6 +69,10 @@ export async function getProjectsMetadata(): Promise<ProjectDetails[]> {
 			thumbnailUrl,
 			coverUrl,
 		});
+	}
+
+	if (onlyFeatured) {
+		return projectsDetails.filter((project) => project.isFeatured);
 	}
 	return projectsDetails;
 }

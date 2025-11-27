@@ -31,7 +31,7 @@ export default function ProjectGallery({
 			)}
 		>
 			<h3 className="text-center text-2xl font-bold text-foreground/75">
-				Galeri
+				Project Gallery
 			</h3>
 			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
 				{images.map((image, idx) => (

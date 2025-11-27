@@ -1,24 +1,11 @@
+import { getProjectsMetadata } from "@/core/project-helpers";
 import Link from "next/link";
-import { LuArrowRight, LuExternalLink } from "react-icons/lu";
+import { LuArrowRight } from "react-icons/lu";
+import FeaturedProjectItem from "./featured-project-item";
 
-const featuredProjects = [
-	{
-		name: "Dartofon",
-		description:
-			"A modern web application for audio processing and visualization.",
-		href: "/projects/dartofon",
-		tech: ["React", "TypeScript", "Web Audio API"],
-	},
-	{
-		name: "VibeVenue",
-		description:
-			"Social platform for music discovery and community engagement.",
-		href: "/projects/vibevenue",
-		tech: ["Next.js", "Prisma", "PostgreSQL"],
-	},
-];
+export default async function Projects() {
+	const featuredProjects = await getProjectsMetadata(true);
 
-export default function Projects() {
 	return (
 		<section className="bg-muted/50 px-4 py-16">
 			<div className="container mx-auto">
@@ -32,36 +19,12 @@ export default function Projects() {
 					</p>
 				</div>
 
-				<div className="grid gap-8 md:grid-cols-2">
+				<div className="space-y-3">
 					{featuredProjects.map((project) => (
-						<div
-							key={project.name}
-							className="border-border bg-card hover:bg-accent/50 rounded-lg border p-6 transition-colors"
-						>
-							<h3 className="text-foreground mb-2 text-xl font-semibold">
-								{project.name}
-							</h3>
-							<p className="text-muted-foreground mb-4">
-								{project.description}
-							</p>
-							<div className="mb-4 flex flex-wrap gap-2">
-								{project.tech.map((tech) => (
-									<span
-										key={tech}
-										className="bg-primary/10 text-primary rounded-full px-2 py-1 text-xs font-medium"
-									>
-										{tech}
-									</span>
-								))}
-							</div>
-							<Link
-								href={project.href}
-								className="text-primary hover:text-primary/80 inline-flex items-center gap-2"
-							>
-								View Project
-								<LuExternalLink className="h-4 w-4" />
-							</Link>
-						</div>
+						<FeaturedProjectItem
+							project={project}
+							key={`featured-${project.slug}`}
+						/>
 					))}
 				</div>
 

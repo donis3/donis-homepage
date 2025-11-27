@@ -2,7 +2,7 @@
 
 import { ProjectDetails } from "@/core/project-helpers";
 import ProjectItem from "./project-item";
-import { motion } from "motion/react";
+import { motion, Variants } from "motion/react";
 import useProjectsFilter from "./use-projects-filter";
 
 type ProjectGridProps = {
@@ -22,7 +22,7 @@ export default function ProjectGrid({ allProjects }: ProjectGridProps) {
 		},
 	};
 
-	const itemVariants = {
+	const itemVariants: Variants = {
 		hidden: {
 			opacity: 0,
 			x: -20,
@@ -35,7 +35,7 @@ export default function ProjectGrid({ allProjects }: ProjectGridProps) {
 
 	return (
 		<motion.div
-			className="grid gap-6 grid-cols-1 md:grid-cols-2"
+			className="grid grid-cols-1 gap-6 md:grid-cols-2"
 			variants={containerVariants}
 			initial="hidden"
 			animate="visible"
@@ -45,6 +45,7 @@ export default function ProjectGrid({ allProjects }: ProjectGridProps) {
 				<motion.div
 					key={`project-item-${project.slug}`}
 					variants={itemVariants}
+					transition={{ ease: "easeInOut" }}
 				>
 					<ProjectItem project={project} />
 				</motion.div>
