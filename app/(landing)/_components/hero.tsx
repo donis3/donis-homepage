@@ -1,10 +1,16 @@
 "use client";
 import { getSocialByLabel } from "@/core/socials";
-import { FoldersIcon, MouseIcon } from "lucide-react";
+import {
+	DownloadIcon,
+	FoldersIcon,
+	MouseIcon
+} from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { LuMail } from "react-icons/lu";
+import {
+	LuArrowRight
+} from "react-icons/lu";
 
 export default function Hero() {
 	const githubSocial = getSocialByLabel("GitHub");
@@ -16,7 +22,7 @@ export default function Hero() {
 	return (
 		<section className="relative z-0 flex min-h-dvh items-center justify-center px-4 py-16">
 			<div className="relative z-10 container mx-auto mt-(--navbar-height) max-w-3xl text-center">
-				<div className="mb-8">
+				<div className="mb-2 md:mb-8">
 					<motion.div
 						className="mb-4 flex justify-center"
 						initial="hidden"
@@ -33,7 +39,7 @@ export default function Hero() {
 							alt="Deniz's avatar"
 							width={96}
 							height={96}
-							className="h-24 w-24 rounded-full border-2 border-white/20 object-cover shadow-lg"
+							className="size-20 md:size-28 rounded-full border-2 border-white/20 object-cover shadow-lg"
 						/>
 					</motion.div>
 					<h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">
@@ -42,42 +48,52 @@ export default function Hero() {
 							Deniz
 						</span>
 					</h1>
-					<p className="mx-auto mb-6 max-w-2xl text-lg text-gray-300 md:text-xl">
+					<p className="mx-auto mb-6 max-w-2xl text-base text-gray-300 md:text-xl">
 						Fullstack Developer crafting modern web applications with
 						passion and precision. Specializing in React, Next.js, and
 						scalable backend solutions.
 					</p>
 				</div>
 
-				<div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 max-w-md mx-auto justify-center mb-6 items-center">
 					<Link
 						href="/projects"
-						className="inline-flex items-center gap-2 rounded-lg bg-linear-to-r from-yellow-400 to-orange-500 px-6 py-3 font-medium text-black shadow-lg shadow-yellow-400/25 transition-all duration-300 hover:from-yellow-500 hover:to-orange-600 hover:shadow-xl hover:shadow-yellow-400/40"
+						className="inline-flex justify-between items-center gap-2 rounded-lg bg-linear-to-r from-yellow-400 to-orange-500 px-6 py-3 font-medium text-black shadow-lg shadow-yellow-400/25 transition-all duration-300 hover:from-yellow-500 hover:to-orange-600 hover:shadow-xl hover:shadow-yellow-400/40"
 					>
 						View My Work
 						<FoldersIcon className="h-4 w-4" />
 					</Link>
 					<Link
-						href={"/contact"}
-						className="inline-flex items-center gap-2 rounded-lg border border-white/20 bg-white/10 px-6 py-3 font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+						href={"/about"}
+						className="inline-flex items-center justify-between gap-2 rounded-lg border border-white/20 bg-white/10 px-6 py-3 font-medium text-white backdrop-blur-sm transition-colors hover:bg-white/20"
 					>
-						Get In Touch
-						<LuMail className="h-4 w-4" />
+						About Me
+						<LuArrowRight className="size-4" />
 					</Link>
 				</div>
-				{githubSocial && githubSocial.type === "link" && (
-					<div className="mt-6">
+				<div className="mt-6 flex justify-center gap-4 items-center">
+					{githubSocial && githubSocial.type === "link" && (
 						<a
 							href={githubSocial.href}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="inline-flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white tracking-tight"
+							className="inline-flex items-center gap-1 text-sm tracking-tight text-white/70 transition-colors hover:text-white"
 						>
-							<githubSocial.icon className="h-4 w-4" />
+							<githubSocial.icon className="size-4" />
 							{githubSocial.label}
 						</a>
-					</div>
-				)}
+					)}
+					<a
+						href={"/documents/deniz_ozkan_resume.pdf"}
+						target="_blank"
+						rel="noopener noreferrer"
+						download={true}
+						className="inline-flex items-center gap-1 text-sm tracking-tight text-white/70 transition-colors hover:text-white"
+					>
+						<DownloadIcon className="size-4" />
+						Resume
+					</a>
+				</div>
 			</div>
 			<div className="pointer-events-none absolute inset-0 z-0 h-full w-full bg-linear-to-b from-cyan-800 via-cyan-950 to-black/90 dark:from-cyan-700/70 dark:via-black/60 dark:to-black/90">
 				<div className="pointer-events-none absolute top-0 right-0 bottom-0 left-0 z-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] bg-size-[14px_24px]" />

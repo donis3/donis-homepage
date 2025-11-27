@@ -23,6 +23,7 @@ export const projectMetadataSchema = z.object({
 	date: z.coerce.date().default(new Date()),
 	tags: z.array(z.string()).default([]),
 	isFeatured: z.coerce.boolean().default(false),
+	featureOrder: z.coerce.number().default(100),
 	/* A short description used in project listings */
 	shortTitle: z.string().min(1, { error: "Short title cannot be empty" }),
 	shortDescription: z

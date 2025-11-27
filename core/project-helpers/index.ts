@@ -70,7 +70,7 @@ export async function getProjectsMetadata(
 	if (onlyFeatured) {
 		return projectsMetadata
 			.filter((project) => project.isFeatured)
-			.sort((a, b) => b.date.getTime() - a.date.getTime());
+			.sort((a, b) => a.featureOrder - b.featureOrder);
 	}
 	return projectsMetadata.sort((a, b) => b.date.getTime() - a.date.getTime());
 }

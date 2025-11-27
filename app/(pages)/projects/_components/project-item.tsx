@@ -4,6 +4,8 @@ import { ProjectMetadata } from "@/core/project-helpers/project-metadata-schema"
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import Link from "next/link";
+import { format } from "date-fns";
+import { enUS } from "date-fns/locale";
 
 type ProjectItemProps = {
 	project: ProjectMetadata & { slug: string; thumbnailUrl: string };
@@ -15,15 +17,20 @@ export default function ProjectItem({ project }: ProjectItemProps) {
 			href={`/projects/${project.slug}`}
 			className="group border-border bg-card block overflow-hidden rounded-lg border transition-all hover:-translate-y-1 hover:shadow-lg"
 		>
-			<div className="aspect-video overflow-hidden">
+			<div className="aspect-video overflow-hidden relative">
 				<Image
 					src={project.thumbnailUrl}
 					alt={project.shortTitle}
 					width={400}
 					height={225}
-					className="w-full h-auto object-cover transition-transform group-hover:scale-105"
+					className="h-auto w-full object-cover transition-transform group-hover:scale-105"
 					loading="eager"
 				/>
+				<div className="absolute top-2 left-2">
+					<Badge variant="secondary" className="text-xs bg-black/70 text-white">
+						{format(project.date, 'MMM, yyyy', {locale: enUS})}
+					</Badge>
+				</div>
 			</div>
 			<div className="p-4">
 				<h2 className="mb-2 text-lg leading-tight font-semibold">

@@ -43,6 +43,7 @@ export default function ProjectGallery({
 							onClick={() => setIndex(idx)}
 							width={400}
 							height={300}
+							loading="lazy"
 						/>
 					</div>
 				))}
