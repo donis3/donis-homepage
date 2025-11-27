@@ -35,7 +35,7 @@ export default function ProjectGallery({
 			</h3>
 			<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
 				{images.map((image, idx) => (
-					<div key={idx} className="overflow-hidden rounded-lg">
+					<div key={idx} className="overflow-hidden rounded-lg border-2 border-cyan-950 dark:border-cyan-300">
 						<Image
 							src={image.src}
 							alt={image.alt}

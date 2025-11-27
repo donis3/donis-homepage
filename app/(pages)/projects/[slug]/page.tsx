@@ -4,13 +4,17 @@ import {
 	getProjectMetadata,
 } from "@/core/project-helpers";
 
-import { getProjectImageUrls } from "@/core/project-helpers/image-fns";
+import {
+	getProjectCoverUrl,
+	getProjectImageUrls,
+} from "@/core/project-helpers/image-fns";
 import type { Metadata } from "next";
 import type { MDXRemoteOptions } from "next-mdx-remote-client/rsc";
 import { MDXRemote } from "next-mdx-remote-client/rsc";
 import { notFound } from "next/navigation";
 import ProjectGallery from "./_components/project-gallery";
 import ProjectHeader from "./_components/project-header";
+import ProjectMetadata from "./_components/project-metadata";
 
 type ProjectPageProps = PageProps<"/projects/[slug]">;
 
@@ -34,22 +38,31 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
 	// Read available images
 	const imageUrls = await getProjectImageUrls(projectFolder);
+	const coverImageUrl = await getProjectCoverUrl(projectFolder);
 
 	return (
 		<div className="w-full">
 			<ProjectHeader
-				slug={projectFolder}
 				title={projectMetadata.title || projectFolder}
 				tags={projectMetadata.tags}
+				imageUrl={coverImageUrl}
 			/>
-			<div className="max-w-2xl mx-auto px-4">
-				<article className="prose dark:prose-invert mx-auto max-w-full my-8">
+			<div className="mx-auto max-w-2xl px-4 py-4">
+				<ProjectMetadata metadata={projectMetadata} />
+			</div>
+			<div className="mx-auto max-w-2xl px-4">
+				<article className="prose dark:prose-invert mx-auto my-8 max-w-full">
 					<MDXRemote source={projectContent} options={options} />
 				</article>
-				{imageUrls.length > 0 && (
-					<ProjectGallery images={imageUrls} className="my-8" />
-				)}
 			</div>
+			{imageUrls.length > 0 && (
+				<section className="from-muted/50 bg-linear-to-b to-transparent px-4 pt-6 pb-12">
+					<ProjectGallery
+						images={imageUrls}
+						className="mx-auto max-w-2xl"
+					/>
+				</section>
+			)}
 		</div>
 	);
 }

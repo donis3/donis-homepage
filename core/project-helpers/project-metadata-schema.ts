@@ -11,7 +11,10 @@ tags: [Next.js, SPA, Zustand, Dart, Mobile App]
 
 export const projectMetadataSchema = z.object({
 	title: z.string().optional(),
-	description: z.string().default(""),
+	description: z
+		.string()
+		.min(70, { error: "Description must be at least 70 characters" })
+		.max(155, { error: "Description cannot exceed 155 characters" }),
 	keywords: z
 		.string()
 		.transform((str) => str.split(",").map((kw) => kw.trim()))
@@ -19,7 +22,15 @@ export const projectMetadataSchema = z.object({
 	author: z.string().default("Deniz Özkan"),
 	date: z.coerce.date().default(new Date()),
 	tags: z.array(z.string()).default([]),
+	isFeatured: z.coerce.boolean().default(false),
+	/* A short description used in project listings */
+	shortTitle: z.string().min(1, { error: "Short title cannot be empty" }),
+	shortDescription: z
+		.string()
+		.min(1, { error: "Short description cannot be empty" }),
+	techStack: z.array(z.string().trim().min(1)).default([]),
+	githubUrl: z.url().optional(),
+	projectUrl: z.url().optional(),
 });
-
 
 export type ProjectMetadata = z.infer<typeof projectMetadataSchema>;

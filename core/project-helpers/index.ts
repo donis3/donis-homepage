@@ -33,9 +33,28 @@ export async function getProjectMetadata(
 
 	const valid = projectMetadataSchema.safeParse(frontmatter);
 	if (!valid.success) {
+		const fieldErrors = valid.error.issues
+			.map((issue) => `- ${issue.path.join(".")}: ${issue.message}`)
+			.join("\n");
 		throw new Error(
-			`Invalid frontmatter in project ${projectFolder}: ${valid.error.message}`,
+			`Invalid frontmatter in project ${projectFolder}:\n${fieldErrors}`,
 		);
 	}
 	return { slug: projectFolder, ...valid.data };
+}
+
+export async function getProjectsMetadata(): Promise<
+	(ProjectMetadata & { slug: string })[]
+> {
+	const projectFolders = await getProjectFolderList();
+	const projectsMetadata = await Promise.all(
+		projectFolders.map(async (folder) => {
+			return await getProjectMetadata(folder);
+		}),
+	);
+
+	return projectsMetadata.filter(
+		(project): project is ProjectMetadata & { slug: string } =>
+			project !== null,
+	);
 }

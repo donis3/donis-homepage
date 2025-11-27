@@ -2,8 +2,28 @@ import path from "path";
 import { config } from "../config";
 import fs from "fs/promises";
 
-export function getCoverImageUrl(projectFolder: string) {
-	return `/assets/projects/${projectFolder}/${projectFolder}-cover.jpg`;
+export async function getProjectCoverUrl(projectFolder: string) {
+	const projectDir = path.join(config.projectsDirectory, projectFolder);
+	const files = await fs.readdir(projectDir);
+
+	for (const file of files) {
+		if (file.toLowerCase().includes("cover")) {
+			return `/assets/projects/${projectFolder}/${file}`;
+		}
+	}
+	return `/assets/common/project-placeholder.jpg`;
+}
+
+export async function getProjectThumbnailUrl(projectFolder: string) {
+	const projectDir = path.join(config.projectsDirectory, projectFolder);
+	const files = await fs.readdir(projectDir);
+
+	for (const file of files) {
+		if (file.toLowerCase().includes("thumbnail")) {
+			return `/assets/projects/${projectFolder}/${file}`;
+		}
+	}
+	return `/assets/common/project-placeholder.jpg`;
 }
 
 export async function getProjectImageUrls(projectFolder: string) {
@@ -20,7 +40,8 @@ export async function getProjectImageUrls(projectFolder: string) {
 				ext,
 			);
 			const isCover = file.toLowerCase().includes("cover");
-			return isImage && !isCover;
+			const isThumbnail = file.toLowerCase().includes("thumbnail");
+			return isImage && !isCover && !isThumbnail;
 		})
 		.sort();
 
