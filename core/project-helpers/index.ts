@@ -11,10 +11,14 @@ import { getProjectCoverUrl, getProjectThumbnailUrl } from "./image-fns";
 export async function getProjectFolderList() {
 	const projectsDir = config.projectsDirectory;
 	const files = await fs.readdir(projectsDir);
-	return files.filter(async (file) => {
+	const projectFolders: string[] = [];
+	for (const file of files) {
 		const filePath = path.join(projectsDir, file);
-		return (await fs.stat(filePath)).isDirectory();
-	});
+		if ((await fs.stat(filePath)).isDirectory()) {
+			projectFolders.push(file);
+		}
+	}
+	return projectFolders;
 }
 
 export async function getProjectMdxContent(projectFolder: string) {
@@ -27,9 +31,15 @@ export async function getProjectMdxContent(projectFolder: string) {
 	return { content: mdxContent, frontmatter, relativePath };
 }
 
+export type ProjectDetails = ProjectMetadata & {
+	slug: string;
+	thumbnailUrl: string;
+	coverUrl: string;
+};
+
 export async function getProjectMetadata(
 	projectFolder: string,
-): Promise<ProjectMetadata & { slug: string }> {
+): Promise<ProjectDetails> {
 	const { frontmatter } = await getProjectMdxContent(projectFolder);
 
 	const valid = projectMetadataSchema.safeParse(frontmatter);
@@ -41,42 +51,28 @@ export async function getProjectMetadata(
 			`Invalid frontmatter in project ${projectFolder}:\n${fieldErrors}`,
 		);
 	}
-	return { slug: projectFolder, ...valid.data };
-}
 
-export type ProjectDetails = ProjectMetadata & {
-	slug: string;
-	thumbnailUrl: string;
-	coverUrl: string;
-};
+	const thumbnailUrl = await getProjectThumbnailUrl(projectFolder);
+	const coverUrl = await getProjectCoverUrl(projectFolder);
+	return { slug: projectFolder, ...valid.data, thumbnailUrl, coverUrl };
+}
 
 export async function getProjectsMetadata(
 	onlyFeatured: boolean = false,
 ): Promise<ProjectDetails[]> {
 	const projectFolders = await getProjectFolderList();
-	const projectsMetadata = await Promise.all(
+	const projectsMetadata: ProjectDetails[] = await Promise.all(
 		projectFolders.map(async (folder) => {
 			return await getProjectMetadata(folder);
 		}),
 	);
 
-	const projectsDetails: ProjectDetails[] = [];
-	for (const metadata of projectsMetadata) {
-		const thumbnailUrl = await getProjectThumbnailUrl(metadata.slug);
-		const coverUrl = await getProjectCoverUrl(metadata.slug);
-		projectsDetails.push({
-			...metadata,
-			thumbnailUrl,
-			coverUrl,
-		});
-	}
-
 	if (onlyFeatured) {
-		return projectsDetails
+		return projectsMetadata
 			.filter((project) => project.isFeatured)
 			.sort((a, b) => b.date.getTime() - a.date.getTime());
 	}
-	return projectsDetails.sort((a, b) => b.date.getTime() - a.date.getTime());
+	return projectsMetadata.sort((a, b) => b.date.getTime() - a.date.getTime());
 }
 
 export type ProjectTagWithCount = {

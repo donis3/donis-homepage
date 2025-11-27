@@ -6,10 +6,9 @@ import ProjectsClientSkeleton from "./_components/projects-client-skeleton";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-	title: "Projects | Deniz's Homepage",
-	description:
-		"Explore my portfolio of projects, including web applications, mobile apps, and more.",
-	keywords: "projects, portfolio, web development, mobile apps, software",
+	title: "Projects",
+	description: "View Deniz Özkan's portfolio of full-stack development projects, from web apps to innovative software solutions.",
+	keywords: "portfolio, projects, full stack development, web applications, software projects, developer showcase",
 };
 
 export default async function ProjectsPage() {

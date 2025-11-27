@@ -14,6 +14,18 @@ export async function getProjectCoverUrl(projectFolder: string) {
 	return `/assets/common/project-placeholder.jpg`;
 }
 
+export async function getProjectCoverPath(projectFolder: string) {
+	const projectDir = path.join(config.projectsDirectory, projectFolder);
+	const files = await fs.readdir(projectDir);
+
+	for (const file of files) {
+		if (file.toLowerCase().includes("cover")) {
+			return path.join(projectDir, file);
+		}
+	}
+	return `/assets/common/project-placeholder.jpg`;
+}
+
 export async function getProjectThumbnailUrl(projectFolder: string) {
 	const projectDir = path.join(config.projectsDirectory, projectFolder);
 	const files = await fs.readdir(projectDir);

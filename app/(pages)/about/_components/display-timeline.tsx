@@ -8,7 +8,7 @@ export default function DisplayTimeline() {
 	const sorted = timeline.sort((a, b) => b.date.getTime() - a.date.getTime());
 
 	return (
-		<ol className="border-accent relative mx-auto flex w-full max-w-sm md:dark:bg-muted/20 md:bg-muted/40 rounded-lg rounded-l-none list-none flex-col gap-4 border-s-4 border-dotted">
+		<ol className="border-primary/50 relative mx-auto flex w-full max-w-sm md:dark:bg-muted/20 md:bg-muted/40 rounded-lg rounded-l-none list-none flex-col gap-4 border-s-4 border-dotted ">
 			{/* Display timeline events */}
 			{sorted.map((item, index) => {
 				return <TimelineItem key={`timeline_${index}`} data={item} />;

@@ -3,6 +3,14 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import DisplayTimeline from "./_components/display-timeline";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "About Deniz",
+	description: "Learn about Deniz Özkan's background in computer programming and web development. Passionate about creating innovative solutions.",
+	keywords: "about, full stack developer, programmer, web development, background, experience",
+};
+
 export default function AboutPage() {
 	return (
 		<div className="bg-background text-foreground flex min-h-screen flex-1 flex-col items-center p-4 pt-(--navbar-height) pb-12">
