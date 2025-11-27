@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { ProjectTagWithCount } from "@/core/project-helpers";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+
 import { useCallback, useMemo } from "react";
 
 type ProjectsTagsProps = {
@@ -14,6 +15,7 @@ type ProjectsTagsProps = {
 
 export default function ProjectsTags({ tags, open }: ProjectsTagsProps) {
 	const searchParams = useSearchParams();
+	const router = useRouter();
 
 	const selectedTag = useMemo(() => {
 		return searchParams.get("tag");
@@ -31,9 +33,9 @@ export default function ProjectsTags({ tags, open }: ProjectsTagsProps) {
 			}
 			const newSearch = params.toString();
 			const newUrl = newSearch ? `?${newSearch}` : window.location.pathname;
-			window.history.replaceState(null, "", newUrl);
+			router.replace(newUrl, { scroll: false });
 		},
-		[searchParams],
+		[router, searchParams],
 	);
 
 	const containerVariants = {
@@ -76,7 +78,9 @@ export default function ProjectsTags({ tags, open }: ProjectsTagsProps) {
 					<motion.div key={tag.label} variants={itemVariants}>
 						<Button
 							size={"xs"}
-							variant={selectedTag === tag.label ? "default" : "secondary"}
+							variant={
+								selectedTag === tag.label ? "default" : "secondary"
+							}
 							className={cn(
 								"h-auto max-w-sm flex-1 cursor-pointer px-2 py-1.5 font-mono text-xs leading-0 transition-colors",
 								selectedTag === tag.label &&

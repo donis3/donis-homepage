@@ -10,7 +10,7 @@ import { FolderGitIcon } from "lucide-react";
 
 export default function NoProjects() {
 	return (
-		<Empty>
+		<Empty className="">
 			<EmptyHeader>
 				<EmptyMedia variant="icon">
 					<FolderGitIcon />

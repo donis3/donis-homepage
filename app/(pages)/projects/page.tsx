@@ -2,6 +2,8 @@ import { getProjectsMetadata, getProjectTags } from "@/core/project-helpers";
 
 import type { Metadata } from "next";
 import ProjectsClient from "./_components/projects-client";
+import ProjectsClientSkeleton from "./_components/projects-client-skeleton";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
 	title: "Projects | Deniz's Homepage",
@@ -16,8 +18,9 @@ export default async function ProjectsPage() {
 
 	return (
 		<div className="bg-background text-foreground flex-1 p-4 py-[calc(var(--navbar-height)+1rem)]">
-			
-			<ProjectsClient projects={projects} tags={tags} />
+			<Suspense fallback={<ProjectsClientSkeleton />}>
+				<ProjectsClient projects={projects} tags={tags} />
+			</Suspense>
 		</div>
 	);
 }

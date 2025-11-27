@@ -28,9 +28,9 @@ export default function ProjectsClient({
 
 	return (
 		<>
-			<div>
+			<div className="mb-4 md:mb-8 ">
 				<div className="mb-4 flex items-center justify-between gap-x-2">
-					<h1 className="flex-1 text-3xl leading-0 font-bold">Projects</h1>
+					<h1 className="flex-1 text-3xl leading-0 font-bold tracking-tight text-foreground/70">Projects</h1>
 					<Button
 						disabled={tags.length === 0}
 						onClick={() => tags.length > 0 && setOpen(!open)}
