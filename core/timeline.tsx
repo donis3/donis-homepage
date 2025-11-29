@@ -6,13 +6,12 @@ import {
 	FaVial,
 } from "react-icons/fa";
 
-import { BsFillTriangleFill } from "react-icons/bs";
-import { SiDatabricks } from "react-icons/si";
+import { BsCpu, BsFillTriangleFill } from "react-icons/bs";
 import { FaMobileScreenButton } from "react-icons/fa6";
 
 const timeline = [
     {
-		date: new Date("2023-06-01"),
+		date: new Date("2025-11-01"),
 		dateText: "2023 - Now",
 		event: "VibeVenue - Co-Founder & CTO",
 		details: "Developing kiosk games and Ai experiences for social events!",
@@ -22,15 +21,15 @@ const timeline = [
 	{
 		date: new Date("2023-09-01"),
 		dateText: "2023-2025",
-		event: "Computer Programming",
+		event: "Computer Programming 🎓",
 		details: "Associate Degree - Anadolu University",
-		icon: <SiDatabricks />,
+		icon: <BsCpu />,
 		color: "#2D3250",
 	},
 	{
 		date: new Date("2007-09-01"),
 		dateText: "2007-2013",
-		event: "Business Administration",
+		event: "Business Administration 🎓",
 		details: "Bachelor's Degree - Anadolu University",
 		icon: <FaMoneyBillAlt />,
 		color: "#6A9C89",
@@ -55,13 +54,13 @@ const timeline = [
 	{
 		date: new Date("2017-09-01"),
 		dateText: "2017-2023",
-		event: "Web Design and Development",
+		event: "Web Design and Development 🎓",
 		details: "Associate Degree - Anadolu University",
 		icon: <FaCode />,
 		color: undefined,
 	},
 	{
-		date: new Date("2023-10-01"),
+		date: new Date("2008-10-01"),
 		dateText: "2008 - Now",
 		event: "IT Specialist and Web Developer",
 		details: "Unikim Fertilizers",

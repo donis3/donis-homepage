@@ -30,7 +30,7 @@ const TimelineItem: FC<TimelineItemProps> = ({ className, data }) => {
 	if (!data) return <></>;
 
 	return (
-		<li className="ms-4">
+		<li className="ms-4 ">
 			<div
 				className={cn(
 					"absolute -start-3.5 h-6 w-6 rounded-full p-1 text-white/75",
