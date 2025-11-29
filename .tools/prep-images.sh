@@ -31,7 +31,7 @@ for dir in "$PROJECTS_DIR"/*/; do
         project_name=$(basename "$dir")
         # Collect list of jpg files not containing 'cover' or 'thumbnail', sorted
         files=()
-        mapfile -d '' all_files < <(find "$dir" -maxdepth 1 -name "*.jpg" -print0 | sort -z)
+        mapfile -d '' all_files < <(find "$dir" -maxdepth 1 -name "*.jpg" -print0 | sort -zV)
         for jpg_file in "${all_files[@]}"; do
             base=$(basename "$jpg_file")
             if [[ "$base" != *cover* && "$base" != *thumbnail* ]]; then
@@ -39,12 +39,18 @@ for dir in "$PROJECTS_DIR"/*/; do
             fi
         done
         # Rename them sequentially
-        index=1
+        # First rename to temp files to avoid collisions
+        temp_files=()
         for file in "${files[@]}"; do
+            temp_file="${file}.tmp"
+            mv "$file" "$temp_file"
+            temp_files+=("$temp_file")
+        done
+
+        index=1
+        for file in "${temp_files[@]}"; do
             target="$dir${project_name}-${index}.jpg"
-            if [ "$file" != "$target" ]; then
-                mv "$file" "$target"
-            fi
+            mv "$file" "$target"
             ((index++))
         done
     fi
