@@ -1,14 +1,7 @@
 import { getProjectsMetadata } from "@/core/project-helpers";
 import Link from "next/link";
 import { LuArrowRight } from "react-icons/lu";
-import FeaturedProjectItem from "./featured-project-item";
-import {
-	Carousel,
-	CarouselContent,
-	CarouselItem,
-	CarouselNext,
-	CarouselPrevious,
-} from "@/components/ui/carousel";
+import { ProjectsCarousel } from "./projects-carousel";
 
 export default async function Projects() {
 	const featuredProjects = await getProjectsMetadata(true);
@@ -25,19 +18,14 @@ export default async function Projects() {
 						development techniques.
 					</p>
 				</div>
-
-				<Carousel>
-					<CarouselContent>
-						{featuredProjects.map((project) => (
-							<CarouselItem key={`featured-${project.slug}`}>
-								<FeaturedProjectItem project={project} />
-							</CarouselItem>
-						))}
-					</CarouselContent>
-					<CarouselPrevious />
-					<CarouselNext />
-				</Carousel>
-
+				{featuredProjects.length > 0 ? (
+					<ProjectsCarousel projects={featuredProjects} />
+				) : (
+					<div className="text-muted-foreground bg-muted/50 px-4 py-8 text-center">
+						No featured projects available at the moment. Please check
+						back later.
+					</div>
+				)}
 				<div className="mt-12 text-center">
 					<Link
 						href="/projects"
