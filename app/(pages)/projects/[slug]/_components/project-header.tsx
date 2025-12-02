@@ -33,9 +33,9 @@ export default function ProjectHeader({
 				animate={{ opacity: 1 }}
 				transition={{ delay: 0.3, duration: 0.5 }}
 			>
-				<div className="container mx-auto h-full max-w-2xl px-4 py-4">
+				<div className="container mx-auto h-full max-w-2xl px-4 py-4 relative">
 					<div className="flex h-full flex-col justify-end">
-						<div className="absolute top-[calc(var(--navbar-height)+0.5rem)] left-4">
+						<div className="absolute top-[calc(var(--navbar-height)+0.5rem)] left-0">
 							<Button
 								variant="ghost-light"
 								size="xs"
