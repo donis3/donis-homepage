@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Lightbox from "yet-another-react-lightbox";
+import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import "yet-another-react-lightbox/styles.css";
 import Counter from "yet-another-react-lightbox/plugins/counter";
 import "yet-another-react-lightbox/plugins/counter.css";
@@ -56,7 +57,7 @@ export default function ProjectGallery({
 					src: image.src,
 					alt: image.alt,
 				}))}
-				plugins={[Counter]}
+				plugins={[Counter, Zoom]}
 				counter={{ container: { style: { top: 0, bottom: "unset" } } }}
 			/>
 		</div>
