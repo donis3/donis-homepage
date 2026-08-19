@@ -4,9 +4,8 @@ import { usePathname } from "next/navigation";
 import {
 	createContext,
 	PropsWithChildren,
+	useCallback,
 	useContext,
-	useEffect,
-	useEffectEvent,
 	useState,
 } from "react";
 
@@ -21,19 +20,21 @@ const navbarContext = createContext<NavbarCtx>({
 });
 
 export default function NavbarProvider({ children }: PropsWithChildren) {
-	const [open, setOpen] = useState(false);
 	const pathname = usePathname();
-
-	const closeNavbar = useEffectEvent(() => {
-		setOpen(false);
-	});
-
-	useEffect(() => {
-		closeNavbar();
-	}, [pathname]);
+	const [nav, setNav] = useState({ pathname, open: false });
+	const open = nav.pathname === pathname ? nav.open : false;
+	const setIsOpen = useCallback(
+		(isOpen: boolean) => setNav({ pathname, open: isOpen }),
+		[pathname],
+	);
 
 	return (
-		<navbarContext.Provider value={{ isOpen: open, setIsOpen: setOpen }}>
+		<navbarContext.Provider
+			value={{
+				isOpen: open,
+				setIsOpen,
+			}}
+		>
 			{children}
 		</navbarContext.Provider>
 	);

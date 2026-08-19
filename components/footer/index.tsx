@@ -19,22 +19,20 @@ export default function Footer() {
 	const socialLinks = getSocials("link");
 	const socialEmail = getSocialByLabel("Email");
 
-	const initEmail = useEffectEvent(async () => {
+	const initEmail = useEffectEvent(() => {
 		if (!socialEmail || socialEmail.type !== "email") {
-			return setEmail("not-found");
+			const timeout = setTimeout(() => setEmail("not-found"), 0);
+			return () => clearTimeout(timeout);
 		}
 
-		return new Promise<void>((resolve) => {
-			const parts = [socialEmail.email, "donis.dev"];
-			setTimeout(() => {
-				resolve(setEmail(`mailto:${parts.join("@")}`));
-			}, 1000);
-		});
+		const parts = [socialEmail.email, "donis.dev"];
+		const timeout = setTimeout(() => {
+			setEmail(`mailto:${parts.join("@")}`);
+		}, 1000);
+		return () => clearTimeout(timeout);
 	});
 
-	useEffect(() => {
-		initEmail();
-	}, []);
+	useEffect(() => initEmail(), []);
 	return (
 		<footer className="bg-muted text-muted-foreground border-border border-t">
 			<div className="container mx-auto max-w-3xl px-4 py-8">

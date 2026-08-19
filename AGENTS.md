@@ -1,3 +1,13 @@
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
+
 # AGENTS.md
 
 Personal static portfolio for **Deniz Özkan** (donis.dev). Agents should treat this as a small, opinionated Next.js site: keep changes local, match existing style, and do not invent a second architecture.
@@ -6,7 +16,7 @@ Personal static portfolio for **Deniz Özkan** (donis.dev). Agents should treat 
 
 - **Package manager:** pnpm only. Do not add `package-lock.json` or Yarn files.
 - **Runtime:** Node 24+ (CI uses Node 24).
-- **App:** Next.js App Router, React 19, TypeScript (`strict: true`).
+- **App:** Next.js App Router, React 19, TypeScript 6 (`strict: true`).
 - **Output:** `output: "export"` in `next.config.ts`. No Route Handlers, no server-only APIs at runtime, no `next/image` optimization (`images.unoptimized: true`).
 - **UI:** Tailwind CSS v4 (`app/globals.css` + `@theme`), shadcn/ui **New York**, `cn()` from `@/lib/utils`.
 - **Content:** MDX in `projects/{slug}/content.mdx`, parsed with `gray-matter` + Zod, rendered with `next-mdx-remote-client/rsc`.
@@ -109,6 +119,6 @@ GitHub Actions `.github/workflows/deploy-gh.yml`: **manual** `workflow_dispatch`
 
 - Introduce a backend, database, or non-static Next features.
 - Switch package managers or add a test framework unless asked.
-- Bump major versions (`motion` 13, `lucide-react` 1, `eslint` 10, `typescript` 6+) without an explicit request and a working `pnpm build`.
+- Bump major versions (`motion` 13, `lucide-react` 1, `typescript` 7) without an explicit request and a working `pnpm build`.
 - Rewrite MDX project copy or timeline history unless asked.
 - Store project images only under `public/`; source of truth is `projects/`.

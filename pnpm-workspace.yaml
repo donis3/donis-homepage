@@ -4,3 +4,12 @@ allowBuilds:
 onlyBuiltDependencies:
   - sharp
   - unrs-resolver
+overrides:
+  postcss: 8.5.23
+  serialize-javascript: ^7.0.3
+  "picomatch@4": 4.0.4
+  fast-uri: ^3.1.5
+  webpack: 5.104.1
+peerDependencyRules:
+  allowedVersions:
+    eslint: ">=9"
