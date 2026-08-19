@@ -1,3 +1,4 @@
+import { getSiteUrl } from "@/core/config";
 import { getProjectsMetadata } from "@/core/project-helpers";
 import { MetadataRoute } from "next";
 
@@ -5,7 +6,7 @@ export const dynamic = "force-static";
 
 export default async function sitemap() {
 	const staticRoutes = getStaticRoutes();
-    const dynamicRoutes = await generateDynamicRoutes();
+	const dynamicRoutes = await generateDynamicRoutes();
 
 	return [...staticRoutes, ...dynamicRoutes];
 }
@@ -16,10 +17,11 @@ export default async function sitemap() {
 function getStaticRoutes(): MetadataRoute.Sitemap {
 	const storage: MetadataRoute.Sitemap = [];
 	const routes = ["/", "/about", "/projects", "/contact"];
+	const siteUrl = getSiteUrl();
 
 	for (let j = 0; j < routes.length; j++) {
 		const path = routes[j];
-		const url = new URL(path, process.env.NEXT_PUBLIC_SITE_URL);
+		const url = new URL(path, siteUrl);
 
 		storage.push({
 			url: url.toString(),
@@ -41,10 +43,11 @@ async function generateDynamicRoutes(): Promise<MetadataRoute.Sitemap> {
 	}
 
 	const storage: MetadataRoute.Sitemap = [];
+	const siteUrl = getSiteUrl();
 	for (let i = 0; i < projects.length; i++) {
 		const project = projects[i];
 		const path = `/projects/${project.slug}`;
-		const url = new URL(path, process.env.NEXT_PUBLIC_SITE_URL);
+		const url = new URL(path, siteUrl);
 
 		storage.push({
 			url: url.toString(),

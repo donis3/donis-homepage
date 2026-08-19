@@ -94,14 +94,12 @@ Alias: `@/*` → repo root.
 
 ## Environment
 
-Typed in `types/environment.d.ts`. Local `.env` is gitignored. Typical keys:
+Typed in `types/environment.d.ts`. Public values live in committed `.env` (used by local `next` and GitHub Actions). Keep secrets and machine-only overrides in `.env.local` (gitignored).
 
 - `NEXT_PUBLIC_SITE_URL` — canonical origin (sitemap, metadataBase)
 - `NEXT_PUBLIC_CONTACT_EMAIL` — local-part only (domain is hardcoded as `donis.dev`)
 - `NEXT_PUBLIC_ENABLE_SITE` — `"1"` to show the real landing page
 - `NEXT_PUBLIC_APP_VERSION` — injected from `package.json` in `next.config.ts`
-
-Never commit `.env` or secrets.
 
 ## Deploy
 

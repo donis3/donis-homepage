@@ -1,5 +1,5 @@
 # Build and deploy the static Next.js export to GitHub Pages.
-# Repo Actions variables (vars.*) are mapped into the build so Next can inline NEXT_PUBLIC_*.
+# Public NEXT_PUBLIC_* values come from the committed .env (loaded by next build).
 # Do not set static_site_generator: next — this is a custom-domain site (donis.dev)
 # and next.config.ts already sets output: "export" and images.unoptimized.
 name: Deploy Next.js site to Pages
@@ -50,13 +50,6 @@ jobs:
            run: pnpm install --frozen-lockfile
 
          - name: Build with Next.js
-           env:
-              NEXT_TELEMETRY_DISABLED: "1"
-              TZ: Europe/Istanbul
-              NEXT_PUBLIC_APP_NAME: ${{ vars.NEXT_PUBLIC_APP_NAME }}
-              NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
-              NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.NEXT_PUBLIC_CONTACT_EMAIL }}
-              NEXT_PUBLIC_ENABLE_SITE: ${{ vars.NEXT_PUBLIC_ENABLE_SITE }}
            run: pnpm run build
 
          - name: Upload artifact

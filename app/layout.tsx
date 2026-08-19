@@ -1,6 +1,7 @@
 import Navbar from "@/components/navbar";
 import NavbarProvider from "@/components/navbar/navbar-provider";
 import { ThemeProvider } from "@/components/theme-provider";
+import { getSiteUrl } from "@/core/config";
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans_Mono, Poppins } from "next/font/google";
 import "./globals.css";
@@ -24,9 +25,7 @@ export const metadata: Metadata = {
 		default: "Donis.Dev Fullstack Developer",
 		template: "%s | Donis.Dev Fullstack Developer",
 	},
-	metadataBase: new URL(
-		process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
-	),
+	metadataBase: new URL(getSiteUrl()),
 };
 
 export const viewport: Viewport = {
