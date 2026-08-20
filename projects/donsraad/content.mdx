@@ -1,49 +1,103 @@
 ---
-title: Donsraad - Landsraad mission picker for Dune Awakening
-description: Donsraad rolls Dune Awakening Landsraad offers, abandons the rest, then accepts your targets. Rerun the rotation with a hotkey.
-keywords: Donsraad, Dune Awakening, Landsraad, mission picker, AutoHotkey, companion app, desktop app, gaming utility
+title: Donsraad - Easy Mission Picker for Dune Awakening
+description: Automate Landsraad mission picking with ease. Donsraad claims, re-rolls, and re-accepts your Dune Awakening targets with no extra clicks.
+keywords: Donsraad, Dune Awakening, Landsraad, mission picker, AutoHotkey, Windows OCR, image matching, companion app, Easy Mission Picker
 author: Deniz Özkan
 date: 2026-08-20
 tags: [Desktop App, Hobby Project, Gaming]
-shortDescription: Automates Landsraad rolling in Dune Awakening until your target missions are accepted. Rerun each batch with a hotkey.
+shortDescription: Automate Landsraad mission picking with ease. Auto mode claims, re-rolls, and re-accepts your targets unattended.
 shortTitle: Donsraad
-techStack: [AutoHotkey v2]
+techStack:
+   - AutoHotkey v2
+   - Windows OCR
 isFeatured: false
 featureOrder: 6
 downloads:
    - title: Portable (x64)
-     description: Unzip and run on Windows. No install required.
-     href: /download/donsraad_1.0_x64_portable.zip
+     description: Windows 10 or 11. Unzip and run Donsraad.exe. AutoHotkey is not required.
+     href: /download/donsraad_v0.1.4_x64_portable.zip
    - title: AutoHotkey v2 source
-     description: Source scripts for inspection or modification.
-     href: /download/donsraad_1.0_ahkv2_source.zip
+     description: Source scripts. Install AutoHotkey v2 and run main.ahk.
+     href: /download/donsraad_v0.1.4_ahkv2_source.zip
+changelog:
+   - version: "0.1.4"
+     date: 2026-08-20
+     items:
+        - title: Overlay position
+          body: Move the on-screen HUD to any corner or the top middle. Bottom placements sit above the taskbar.
+        - title: AutoRun
+          body: Leave the Travel confirmation open at the ornithopter and Donsraad starts the next picker loop for you. The overlay AUTO icon is green when this is on.
+        - title: Mnemonic devices
+          body: The overlay shows remaining tokens after you initialize. Stats tracks how many you actually spent.
+        - title: Travel window
+          body: Later Start runs close the Travel popup if it is blocking the menu.
+        - title: Fixes
+          body: Renaming a profile no longer crashes if you switch tabs too quickly. Mnemonic remaining no longer shows 0 before the first real read.
+   - version: "0.1.3"
+     date: 2026-08-20
+     items:
+        - title: Stats
+          body: Completes and best times per mission, plus session abandons and targeted accepts. Reset stats without wiping your settings.
+        - title: Run timers
+          body: Timing starts once all targets are accepted. Claiming them saves last and best times.
+        - title: Overlay
+          body: Optional notices when you are ready to run and when you set a new best time.
+        - title: Dashboard
+          body: Wider mission grid, clearer hotkey labels, and profile names that no longer clip.
+   - version: "0.1.2"
+     date: 2026-08-20
+     items:
+        - title: Action delay
+          body: Speed up or slow down the picker in Settings to match your client.
+        - title: Auto claim
+          body: Completed missions are claimed on initialize and again when you press Start after a run.
+        - title: Cancel
+          body: Press Start while a loop is running to stop it. The overlay shows the cancel hint.
+        - title: Reliability
+          body: Clearer overlay hints, snappier waiting, and a more reliable guild refresh.
+   - version: "0.1.1"
+     date: 2026-08-20
+     items:
+        - body: First release. Pick targets on the house grid, initialize, re-roll the board, and accept the missions you want.
 ---
 
-Donsraad is a Windows companion for Dune: Awakening, written in AutoHotkey v2. It automates the Landsraad board: choose up to three repeatable target missions, and the app rolls current offers, abandons everything else, and continues until every target is offered, then accepts them. Press the hotkey again when you want the next batch.
+Automate Landsraad mission picking with ease.
 
-Abandoning normally applies a cooldown. Donsraad uses the guild-disband trick to refresh the offer pool and skip that wait.
+Donsraad is an Easy Mission Picker for [Dune: Awakening](https://duneawakening.com/). Choose up to three target missions. In auto mode it completes the loop for you: claims rewards, re-rolls the board, accepts the same targets again, and notifies you — no further input.
 
-A portable x64 build is available, along with the AutoHotkey v2 source.
+Windows 10 or 11. Keep the game focused when a pass is running. Download the portable build, unzip, and run `Donsraad.exe`.
 
-## Key Features
+## How to use
 
-- **Target missions**: Up to three repeatable Landsraad missions. Non-targets are abandoned until the full set is offered, then accepted.
-- **Hotkey batches**: Each key press runs the rotation until all targets are accepted and ready. Press again for the next batch.
-- **Guild-disband roll**: Refreshes mission offers and bypasses the abandon cooldown.
-- **Multiple profiles**: Separate profile name, faction, and mission picks per character.
-- **Persistent settings**: Changes are saved automatically and restored on the next launch.
-- **Session stats**: Counts target missions accepted and missions abandoned while the picker is running.
+1. **Settings.** Set guild name, faction, action delay, and any other options you want. Guild name is required to refresh the board. Add profiles if you play more than one character.
+2. **Targets.** On Mission Picker, choose up to three missions. One specialization per house cell, matching what that house actually offers.
+3. **Initialize.** Focus Dune: Awakening, then press **Initialize** or the Start hotkey (<kbd>Home</kbd> by default). Landsraad does not need to be open.
+4. **Auto mode.** Enable AutoRun in Settings. When you reach the ornithopter and the overland Travel confirmation appears, leave that window open. Donsraad detects it, runs the loop again, and stops when the same target missions are accepted.
+5. **Manual mode.** Press the Start hotkey and wait for the loop to finish. Press it again when you want the next batch.
 
-## Usage
+Hide the dashboard with the window **X** or <kbd>Delete</kbd>. Toggle the overlay with <kbd>Insert</kbd>. <kbd>Pause</kbd> exits. All four keys are rebindable.
 
-1. **Settings.** Set the current profile name, faction (Atreides or Harkonnen), and guild name. Faction is required so the app can align the guild to the targeted faction. The same guild name is used on every re-roll; it must not already exist and must be at least three characters. Settings are saved automatically.
+## Features
 
-2. **House positions.** The Landsraad board changes weekly on every server, so the app does not display house names. Select the **position** of each house you want to run, then pick up to three target missions. Targets may come from the same house or from three different houses.
+- **Target picker** — Up to three repeatable Landsraad missions on the house grid. Green cells are your targets. A wrong specialization on a cell stops the run so it cannot loop forever.
+- **AutoRun** — After targets are accepted, Donsraad claims completed missions, re-rolls until those targets are back, and notifies you. Overlay **AUTO** is green when this is on, gray when it is off.
+- **Manual runs** — One hotkey starts a pass. Press Start again while a loop is running to cancel and return to Ready.
+- **Guild refresh** — Re-rolls offers by disbanding and recreating the guild, then aligning it to your faction.
+- **Profiles** — Separate character name, guild, faction, and mission picks per alt. Settings save automatically.
+- **Action delay** — Slow down or speed up automation to match the client.
+- **Overlay** — Always-on HUD for status, current run, targets, mnemonic devices, and profile. Target count turns green when all targets are active. Pin it to top left, bottom left, top middle, top right, or bottom right. Toggle it with <kbd>Insert</kbd>, or hide individual blocks in Settings. Optional notifications for “Ready to run missions!” and a new best time.
+- **Mnemonic devices** — Overlay shows remaining tokens after initialize (for example `7/35`). Each claim subtracts one. Stats tracks tokens spent.
+- **Stats** — Per-mission completes and best times by specialization, plus session abandons and targeted accepts. Reset stats independently of Settings.
+- **Keybinds** — Rebind Start (<kbd>Home</kbd>), dashboard (<kbd>Delete</kbd>), overlay (<kbd>Insert</kbd>), and exit (<kbd>Pause</kbd>). Click a bind, press a key, <kbd>Esc</kbd> cancels.
+- **Resolution** — Built for 3440×1440. Other sizes are scaled in software; see Beta below.
 
-3. **Initialize.** After targets are set, click **Initialize** or press the hotkey.
+## Beta
 
-4. **First run.** The first start of a session opens the Landsraad tab and checks active missions. If they do not match the target list completely, Donsraad abandons them. Rotations can then begin.
+Donsraad is a beta. It was built on an ultrawide **3440×1440** display. Other resolutions are scaled, but they have not been tested yet.
 
-5. **Rotations.** After initialization, each hotkey press runs until every target mission is accepted and ready. Press the hotkey again for the next batch.
+If something does not work, turn on **debug** in Settings, reproduce the problem, then send a short description and the logs to <ContactEmail />.
 
-6. **Logs.** Use the **Logs** tab to diagnose failures. Enable **debug** in Settings for more detail.
+## Disclaimer
+
+Unofficial personal tool. Not affiliated with Funcom or Dune: Awakening. Automating a live game can conflict with that game’s terms of use — run it only on your own account and at your own risk.
+

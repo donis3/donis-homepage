@@ -8,6 +8,9 @@ import {
 	getProjectCoverUrl,
 	getProjectImageUrls,
 } from "@/core/project-helpers/image-fns";
+import Changelog from "@/components/changelog";
+import ContactEmail from "@/components/contact-email";
+import Kbd from "@/components/kbd";
 import type { Metadata } from "next";
 import type { MDXRemoteOptions } from "next-mdx-remote-client/rsc";
 import { MDXRemote } from "next-mdx-remote-client/rsc";
@@ -54,10 +57,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 			</div>
 			<div className="mx-auto max-w-2xl px-4">
 				<article className="prose dark:prose-invert mx-auto my-8 max-w-full">
-					<MDXRemote source={projectContent} options={options} />
+					<MDXRemote
+						source={projectContent}
+						options={options}
+						components={{ kbd: Kbd, ContactEmail }}
+					/>
 				</article>
 			</div>
-			<ProjectDownloads downloads={projectMetadata.downloads} />
+			<Changelog entries={projectMetadata.changelog} className="mb-12" />
 			{imageUrls.length > 0 && (
 				<section className="from-muted/50 bg-linear-to-b to-transparent px-4 pt-6 pb-12">
 					<ProjectGallery
@@ -67,6 +74,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 				</section>
 			)}
 			<ProjectStack stack={projectMetadata.techStack} />
+			<ProjectDownloads downloads={projectMetadata.downloads} />
 		</div>
 	);
 }

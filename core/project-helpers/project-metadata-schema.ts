@@ -55,6 +55,24 @@ export const projectMetadataSchema = z.object({
 			}),
 		)
 		.default([]),
+	changelog: z
+		.array(
+			z.object({
+				version: z.string().min(1, { error: "Version cannot be empty" }),
+				date: z.coerce.date().optional(),
+				items: z
+					.array(
+						z.object({
+							title: z.string().optional(),
+							body: z.string().min(1, {
+								error: "Changelog item cannot be empty",
+							}),
+						}),
+					)
+					.min(1),
+			}),
+		)
+		.default([]),
 });
 
 export type ProjectMetadata = z.infer<typeof projectMetadataSchema>;

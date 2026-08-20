@@ -74,7 +74,7 @@ export default async function ProjectDownloads({
 	return (
 		<section
 			className={cn(
-				"md:bg-accent mx-auto max-w-2xl p-4 md:rounded-lg",
+				"md:bg-accent mx-auto mt-8 mb-16 max-w-2xl p-4 md:rounded-lg",
 				className,
 			)}
 		>

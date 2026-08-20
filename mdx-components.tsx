@@ -1,10 +1,12 @@
 import type { MDXComponents } from "mdx/types";
+import Kbd from "@/components/kbd";
 import Link from "next/link";
 import { ComponentPropsWithoutRef } from "react";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
 	return {
 		...components,
+		kbd: Kbd,
 		a: ({ href, children, ...props }: ComponentPropsWithoutRef<"a">) => {
 			const className = "text-blue-500 hover:text-blue-700";
 			if (href?.startsWith("/")) {
