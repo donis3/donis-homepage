@@ -1,18 +1,46 @@
 "use client";
 import { getSocialByLabel } from "@/core/socials";
-import {
-	DownloadIcon,
-	FoldersIcon,
-	MouseIcon
-} from "lucide-react";
+import { subMonths } from "date-fns";
+import { DownloadIcon, FoldersIcon, MouseIcon } from "lucide-react";
 import { motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-	LuArrowRight
-} from "react-icons/lu";
+import { useSyncExternalStore } from "react";
+import { LuArrowRight } from "react-icons/lu";
 
-export default function Hero() {
+const NEW_PROJECT_MAX_AGE_MONTHS = 2;
+
+type HeroProps = {
+	latestProject?: {
+		slug: string;
+		shortTitle: string;
+		publishedAt: string;
+	};
+};
+
+function useIsClient() {
+	return useSyncExternalStore(
+		() => () => {},
+		() => true,
+		() => false,
+	);
+}
+
+function isWithinLastMonths(isoDate: string, months: number) {
+	const publishedAt = new Date(isoDate);
+	if (Number.isNaN(publishedAt.getTime())) {
+		return false;
+	}
+
+	return publishedAt.getTime() >= subMonths(new Date(), months).getTime();
+}
+
+export default function Hero({ latestProject }: HeroProps) {
+	const isClient = useIsClient();
+	const showNewBadge =
+		isClient &&
+		latestProject != null &&
+		isWithinLastMonths(latestProject.publishedAt, NEW_PROJECT_MAX_AGE_MONTHS);
 	const githubSocial = getSocialByLabel("GitHub");
 	const avatarVariants = {
 		hidden: { opacity: 0, scale: 0.8 },
@@ -39,7 +67,7 @@ export default function Hero() {
 							alt="Deniz's avatar"
 							width={96}
 							height={96}
-							className="size-20 md:size-28 rounded-full border-2 border-white/20 object-cover shadow-lg"
+							className="size-20 rounded-full border-2 border-white/20 object-cover shadow-lg md:size-28"
 						/>
 					</motion.div>
 					<h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">
@@ -53,12 +81,33 @@ export default function Hero() {
 						passion and precision. Specializing in React, Next.js, and
 						scalable backend solutions.
 					</p>
+					{showNewBadge && latestProject && (
+						<motion.div
+							className="flex justify-center"
+							initial={{ opacity: 0, y: 8 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ delay: 0.35, duration: 0.4 }}
+						>
+							<Link
+								href={`/projects/${latestProject.slug}`}
+								className="group inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-sm text-white/90 backdrop-blur-sm transition-colors hover:border-yellow-400/50 hover:bg-white/15"
+							>
+								<span className="rounded-full bg-linear-to-r from-yellow-400 to-orange-500 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-black uppercase">
+									New
+								</span>
+								<span className="truncate font-medium">
+									{latestProject.shortTitle}
+								</span>
+								<LuArrowRight className="size-3.5 shrink-0 text-white/60 transition-transform group-hover:translate-x-0.5 group-hover:text-white" />
+							</Link>
+						</motion.div>
+					)}
 				</div>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2 max-w-md mx-auto justify-center mb-6 items-center">
+				<div className="mx-auto mb-6 grid max-w-md grid-cols-1 items-center justify-center gap-x-4 gap-y-2 md:grid-cols-2">
 					<Link
 						href="/projects"
-						className="inline-flex justify-between items-center gap-2 rounded-lg bg-linear-to-r from-yellow-400 to-orange-500 px-6 py-3 font-medium text-black shadow-lg shadow-yellow-400/25 transition-all duration-300 hover:from-yellow-500 hover:to-orange-600 hover:shadow-xl hover:shadow-yellow-400/40"
+						className="inline-flex items-center justify-between gap-2 rounded-lg bg-linear-to-r from-yellow-400 to-orange-500 px-6 py-3 font-medium text-black shadow-lg shadow-yellow-400/25 transition-all duration-300 hover:from-yellow-500 hover:to-orange-600 hover:shadow-xl hover:shadow-yellow-400/40"
 					>
 						View My Work
 						<FoldersIcon className="h-4 w-4" />
@@ -71,7 +120,7 @@ export default function Hero() {
 						<LuArrowRight className="size-4" />
 					</Link>
 				</div>
-				<div className="mt-6 flex justify-center gap-4 items-center">
+				<div className="mt-6 flex items-center justify-center gap-4">
 					{githubSocial && githubSocial.type === "link" && (
 						<a
 							href={githubSocial.href}

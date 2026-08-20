@@ -12,6 +12,7 @@ import type { Metadata } from "next";
 import type { MDXRemoteOptions } from "next-mdx-remote-client/rsc";
 import { MDXRemote } from "next-mdx-remote-client/rsc";
 import { notFound } from "next/navigation";
+import ProjectDownloads from "./_components/project-downloads";
 import ProjectGallery from "./_components/project-gallery";
 import ProjectHeader from "./_components/project-header";
 import ProjectMetadata from "./_components/project-metadata";
@@ -42,7 +43,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 	const coverImageUrl = await getProjectCoverUrl(projectFolder);
 
 	return (
-		<div className="w-full mb-12">
+		<div className="mb-12 w-full">
 			<ProjectHeader
 				title={projectMetadata.shortTitle || projectFolder}
 				tags={projectMetadata.tags}
@@ -50,13 +51,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 			/>
 			<div className="mx-auto max-w-2xl px-4 py-4">
 				<ProjectMetadata metadata={projectMetadata} />
-				
 			</div>
 			<div className="mx-auto max-w-2xl px-4">
 				<article className="prose dark:prose-invert mx-auto my-8 max-w-full">
 					<MDXRemote source={projectContent} options={options} />
 				</article>
 			</div>
+			<ProjectDownloads downloads={projectMetadata.downloads} />
 			{imageUrls.length > 0 && (
 				<section className="from-muted/50 bg-linear-to-b to-transparent px-4 pt-6 pb-12">
 					<ProjectGallery

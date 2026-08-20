@@ -42,6 +42,19 @@ export const projectMetadataSchema = z.object({
 	/* URLs */
 	githubUrl: z.url().optional(),
 	projectUrl: z.url().optional(),
+	/* Files served from public/ (e.g. /download/app.zip) */
+	downloads: z
+		.array(
+			z.object({
+				title: z
+					.string()
+					.min(1, { error: "Download title cannot be empty" }),
+				description: z.string().optional(),
+				href: z.string().min(1, { error: "Download href cannot be empty" }),
+				filename: z.string().optional(),
+			}),
+		)
+		.default([]),
 });
 
 export type ProjectMetadata = z.infer<typeof projectMetadataSchema>;

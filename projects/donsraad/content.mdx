@@ -1,0 +1,49 @@
+---
+title: Donsraad - Landsraad mission picker for Dune Awakening
+description: Donsraad rolls Dune Awakening Landsraad offers, abandons the rest, then accepts your targets. Rerun the rotation with a hotkey.
+keywords: Donsraad, Dune Awakening, Landsraad, mission picker, AutoHotkey, companion app, desktop app, gaming utility
+author: Deniz Özkan
+date: 2026-08-20
+tags: [Desktop App, Hobby Project, Gaming]
+shortDescription: Automates Landsraad rolling in Dune Awakening until your target missions are accepted. Rerun each batch with a hotkey.
+shortTitle: Donsraad
+techStack: [AutoHotkey v2]
+isFeatured: false
+featureOrder: 6
+downloads:
+   - title: Portable (x64)
+     description: Unzip and run on Windows. No install required.
+     href: /download/donsraad_1.0_x64_portable.zip
+   - title: AutoHotkey v2 source
+     description: Source scripts for inspection or modification.
+     href: /download/donsraad_1.0_ahkv2_source.zip
+---
+
+Donsraad is a Windows companion for Dune: Awakening, written in AutoHotkey v2. It automates the Landsraad board: choose up to three repeatable target missions, and the app rolls current offers, abandons everything else, and continues until every target is offered, then accepts them. Press the hotkey again when you want the next batch.
+
+Abandoning normally applies a cooldown. Donsraad uses the guild-disband trick to refresh the offer pool and skip that wait.
+
+A portable x64 build is available, along with the AutoHotkey v2 source.
+
+## Key Features
+
+- **Target missions**: Up to three repeatable Landsraad missions. Non-targets are abandoned until the full set is offered, then accepted.
+- **Hotkey batches**: Each key press runs the rotation until all targets are accepted and ready. Press again for the next batch.
+- **Guild-disband roll**: Refreshes mission offers and bypasses the abandon cooldown.
+- **Multiple profiles**: Separate profile name, faction, and mission picks per character.
+- **Persistent settings**: Changes are saved automatically and restored on the next launch.
+- **Session stats**: Counts target missions accepted and missions abandoned while the picker is running.
+
+## Usage
+
+1. **Settings.** Set the current profile name, faction (Atreides or Harkonnen), and guild name. Faction is required so the app can align the guild to the targeted faction. The same guild name is used on every re-roll; it must not already exist and must be at least three characters. Settings are saved automatically.
+
+2. **House positions.** The Landsraad board changes weekly on every server, so the app does not display house names. Select the **position** of each house you want to run, then pick up to three target missions. Targets may come from the same house or from three different houses.
+
+3. **Initialize.** After targets are set, click **Initialize** or press the hotkey.
+
+4. **First run.** The first start of a session opens the Landsraad tab and checks active missions. If they do not match the target list completely, Donsraad abandons them. Rotations can then begin.
+
+5. **Rotations.** After initialization, each hotkey press runs until every target mission is accepted and ready. Press the hotkey again for the next batch.
+
+6. **Logs.** Use the **Logs** tab to diagnose failures. Enable **debug** in Settings for more detail.
