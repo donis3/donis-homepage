@@ -23,7 +23,7 @@ export default function TermsOfService({
 		<div className={cn("not-prose my-4", className)}>
 			<Dialog.Root>
 				<Dialog.Trigger asChild>
-					<Button variant="outline" size="sm">
+					<Button type="button" variant="outline" size="sm">
 						<ScrollText />
 						{triggerLabel}
 					</Button>

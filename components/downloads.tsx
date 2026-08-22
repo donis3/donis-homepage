@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import TermsOfService from "@/components/terms-of-service";
 import { cn } from "@/lib/utils";
 import { Download, FileArchive, FileCode2, Lock } from "lucide-react";
@@ -123,22 +123,32 @@ export default function Downloads({
 								</div>
 							</div>
 							{unlocked ? (
-								<Button asChild size="sm" className="w-full sm:w-auto">
+								<Button
+									key={`${item.href}-download`}
+									asChild
+									size="sm"
+									className="w-full sm:w-auto"
+								>
 									<a href={item.href} download={item.filename}>
 										<Download />
 										Download
 									</a>
 								</Button>
 							) : (
-								<Button
-									size="sm"
-									variant="outline"
-									disabled
-									className="w-full sm:w-auto"
+								<div
+									key={`${item.href}-locked`}
+									className={cn(
+										buttonVariants({
+											variant: "outline",
+											size: "sm",
+										}),
+										"pointer-events-none w-full cursor-not-allowed opacity-50 sm:w-auto",
+									)}
+									aria-disabled="true"
 								>
 									<Lock />
 									Locked
-								</Button>
+								</div>
 							)}
 						</li>
 					);
