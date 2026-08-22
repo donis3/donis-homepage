@@ -10,7 +10,9 @@ import {
 } from "@/core/project-helpers/image-fns";
 import Changelog from "@/components/changelog";
 import ContactEmail from "@/components/contact-email";
+import Disclaimer from "@/components/disclaimer";
 import Kbd from "@/components/kbd";
+import TermsOfService from "@/components/terms-of-service";
 import type { Metadata } from "next";
 import type { MDXRemoteOptions } from "next-mdx-remote-client/rsc";
 import { MDXRemote } from "next-mdx-remote-client/rsc";
@@ -20,6 +22,7 @@ import ProjectGallery from "./_components/project-gallery";
 import ProjectHeader from "./_components/project-header";
 import ProjectMetadata from "./_components/project-metadata";
 import ProjectStack from "./_components/project-stack";
+import DonsraadTerms from "@/projects/donsraad/terms";
 
 type ProjectPageProps = PageProps<"/projects/[slug]">;
 
@@ -60,7 +63,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 					<MDXRemote
 						source={projectContent}
 						options={options}
-						components={{ kbd: Kbd, ContactEmail }}
+						components={{
+							kbd: Kbd,
+							ContactEmail,
+							Disclaimer,
+							TermsOfService,
+							DonsraadTerms,
+						}}
 					/>
 				</article>
 			</div>
@@ -74,7 +83,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 				</section>
 			)}
 			<ProjectStack stack={projectMetadata.techStack} />
-			<ProjectDownloads downloads={projectMetadata.downloads} />
+			<ProjectDownloads
+				downloads={projectMetadata.downloads}
+				terms={projectFolder === "donsraad" ? <DonsraadTerms /> : undefined}
+			/>
 		</div>
 	);
 }
