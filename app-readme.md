@@ -38,21 +38,23 @@ From the repo root (close `Donsraad.exe` first if it is running):
 .\build.cmd
 ```
 
-That writes a portable folder at `dist\Donsraad-<version>\` (currently `dist\Donsraad-0.1.4\`). Copy that folder anywhere and run `Donsraad.exe`. AutoHotkey does not need to be installed on the machine that runs it.
+That writes a portable folder at `dist\Donsraad-<version>\` (currently `dist\Donsraad-0.1.6\`). Copy that folder anywhere and run `Donsraad.exe`. AutoHotkey does not need to be installed on the machine that runs it.
 
 JSON and PNG files stay **next to the exe**, not locked inside it:
 
 | File | Role |
 | --- | --- |
-| `settings.json` | App settings (defaulted at compile; written by the GUI) |
-| `profiles.json` | Character profiles (defaulted at compile; written by the GUI) |
-| `player_state.json` | Active session / stats (defaulted at compile; written while running) |
+| `DISCLAIMER.txt` | Disclaimer (shipped in portable and source zips; Legal dialog reads it) |
+| `TERMS.txt` | Terms of use (shipped in portable and source zips; Legal dialog reads it) |
+| `settings.json` | App settings (created on first run; never shipped in the portable zip)
+| `profiles.json` | Character profiles (created on first run; never shipped in the portable zip) |
+| `player_state.json` | Active session / stats (created on first run; never shipped in the portable zip) |
 | `db\landsraad_houses.json` | House database (read; you can edit) |
 | `db\landsraad_missions.json` | Mission database (read; you can edit) |
 | `ui\donis.png` | About-tab photo |
-| `ui_elements\*.png` | In-game image-search anchors |
+| `anchors\1080p\*.png` / `anchors\1440p\*.png` | In-game image-search anchors |
 
-`settings.json`, `profiles.json`, and `player_state.json` are user-specific and gitignored. The build copies clean templates from `defaults/` into the portable folder. If you drop only `Donsraad.exe` into an empty folder, it seeds PNG files and mission databases from built-in copies, then **creates** those JSON files on first run. Files that already exist are never overwritten.
+`settings.json`, `profiles.json`, and `player_state.json` are user-specific and gitignored. The portable zip does **not** include them, so extracting an update over an existing folder cannot overwrite your settings, profiles, or stats. If you drop only `Donsraad.exe` into an empty folder, it seeds PNG files and mission databases from built-in copies, then **creates** those JSON files on first run. On load, missing keys from older file shapes are filled with defaults; existing values stay.
 
 Rebuild after source changes with `.\build.cmd`.
 
@@ -66,35 +68,63 @@ Rebuild after source changes with `.\build.cmd`.
 Donsraad/
 ├── main.ahk              # source entry
 ├── build.cmd             # compile to dist\Donsraad-<version>\
-├── defaults/             # clean JSON templates for the portable build
+├── release.cmd           # portable + source zips under releases\
+├── defaults/             # first-run JSON shapes (not copied into the portable zip)
 ├── db/                   # Landsraad houses and missions
 ├── ui/                   # dashboard and overlay
-├── ui_elements/          # ImageSearch PNGs
+├── anchors/              # ImageSearch PNGs (1080p / 1440p)
 ├── scenarios/            # initialize, accept, disband, orchestrate
 └── core/                 # state, OCR, input, resolution, Version.ahk
 ```
 
+
 ## Usage
 
-1. **Settings** — Character name, guild name, and faction. The guild name is required for the disband refresh. Add extra profiles if you have alts. Optionally enable **AutoRun** (see step 5).
-2. **Choose targets** — On Mission Picker, click a house cell and assign up to **3 missions** total. One specialization per cell, and it must be the specialization that house actually offers. Green cells are your targets. If the offers on that cell are a different spec, the run stops with **Wrong specialization** so it cannot loop forever.
-3. **First setup** — Have Dune: Awakening focused. Landsraad does not need to be open. Press **Initialize**, or press the Start key once, so Donsraad can read your current actives and mnemonic devices. If the menu is closed, the app opens it.
-4. **Run the picker** — Press **Start** (default `Home`) for each pass. The app fills leftover slots, disbands to refresh offers, and takes your targets when they show. You can press Start again after a run if AutoRun is off.
-5. **AutoRun** — Enable it in Settings. After your targets are accepted and the play timer is running, fly to the ornithopter and **leave the Travel confirmation window open**. Do not close it and do not confirm travel yet — that popup is what Donsraad looks for. When it sees Travel, it treats the run as complete, closes the popup, and starts the next picker loop. The overlay **AUTO** icon is green when the setting is on, gray when it is off.
-6. **Overlay** — Status, run, targets, mnemonic devices, and profile stay at the top of the screen. The target count turns green when all targets are active. Toggle most blocks in Settings.
-7. **Dashboard** — The window **X** hides the UI so you can play. Press **Delete** (default) to bring it back. `Pause` (default) closes Donsraad. All three keys can be changed in Settings → Keybinds.
+1. **Settings** — Character, guild name, and faction. Guild name is required for board refresh. Enable AutoRun if you want the next loop to start automatically.
+2. **Missions** — The grid matches the in-game Landsraad house board. Click the same house cell you use in game, then pick the mission(s) you want there. Up to 3 targets total; one specialization per cell.
+3. **First setup** — Focus Dune: Awakening, then Initialize or press Start once.
+4. **Run** — Press **Start** (`Home`) until your targets are active. **End** stops the picker and pauses AutoRun. **Delete** toggles AutoRun.
+5. **Play** — Run your missions. With AutoRun on, leave Travel confirmation open at the ornithopter, or finish so View mission report? appears — either starts the next picker loop. Leftover report prompts in the first 10 seconds after ready are closed with Enter.
+6. **Stats / Overlay / Dashboard** — Completes and best times on Stats. Overlay pins to the game window and hides when unfocused. Window **X** hides the dashboard; tray or the dashboard key brings it back. Rebind keys in Settings.
 
 ## Keybinds
 
 | Action | Default |
 | --- | --- |
-| Start / run mission picker | `Home` |
-| Show / hide dashboard | `Delete` |
+| Start picker | `Home` |
+| Stop picker | `End` |
+| Toggle AutoRun | `Delete` |
+| Show / hide dashboard | `F8` |
+| Show / hide overlay | `Insert` |
 | Exit Donsraad | `Pause` |
 
 Rebind them in **Settings → Keybinds**. Click a bind, press a key, `Esc` cancels.
 
 ## Changelog
+
+### 0.1.6
+
+- **Window-based resolution** — Coordinates and ImageSearch use the **game client** (`WinGetClientPos`), not the monitor. Windowed 1080p on a larger display works; ultrawide pillarbox padding is still handled. Anchor PNGs load from `anchors\1080p` or `anchors\1440p` by scale.
+- **Mission report AutoRun** — Reliable detection of the in-world diamond `!` prompt across sky and rocky backgrounds via a white-masked ImageSearch needle (tan fill + black bang, eroded edges). Search box is a tight padded crop at the HUD icon. Works on ultrawide 1440p, standard 1440p, and windowed 1080p.
+- **AutoRun safety** — Mission-report and travel confirmation polls no longer move the mouse (avoids yanking the gameplay camera). Polling only runs while the game is the foreground window.
+- **Cursor clear** — Menu ImageSearch still moves the cursor off the search box when needed so Unreal hover states do not break button matching; AutoRun HUD polls skip that move.
+- **Release** — `release.cmd` / `release.ps1` builds both the portable and source zips in one step.
+- **Claim completion stats** — Claiming completed actives no longer credits the wrong mission when the stack shifts. Claims run bottom → top and wait for the UI to settle before the next OCR.
+- **Keybinds** — Separate Start (`Home`), Stop (`End`), and Toggle AutoRun (`Delete`). Dashboard default is `F8`. Stop cancels a running picker and pauses AutoRun until Start again.
+- **Leftover mission report** — For 10 seconds after targets are ready, leftover View mission report? prompts are confirmed, then closed with Enter (avoids opening chat). Multiple leftovers are dismissed one by one; normal complete detection starts after that window.
+- **Overlay** — Pins to the game client (not the monitor) and hides when the game is unfocused. During Initialize / picker loops it moves to bottom left so Landsraad UI stays clear. Top middle is available again. New **SESSION** block counts completes this app run.
+- **Guild name** — Settings field limited to 3–100 characters.
+- **Settings UI** — Overlay section checkboxes laid out in two rows so labels no longer overlap.
+
+### 0.1.5
+
+- **AutoRun mission report** — Besides the Travel confirmation window, AutoRun watches the in-world **View mission report?** title. A masked ImageSearch of the tan glyphs (portable builds extract the PNG and generate the mask next to the exe) starts the next picker loop. Esc is never sent on that prompt (it would open the system menu). After targets are ready, that detection is paused for **30 seconds** so leftover HUD or a mid-mission report does not start another loop.
+- **Availability** — Stats stores the last 30 pick cycles (`abandonsUntilReveal`, newest first) per mission and shows **Availability** as `1 / (average abandons + 1)`. Ten abandons average is 1 in 11, about 9%. **Only tracked when you target exactly one mission from that specialization.** Two or more targets in the same spec are ignored.
+- **Ready notification** — When the picker finishes, the overlay also shows how many missions were abandoned that cycle.
+- **Overlay** — Top middle placement is removed; it covered the Landsraad tab and broke image searches. Existing top-middle settings fall back to top left.
+- **Mnemonic devices** — The HUD crop and parser now handle two-digit remaining counts (`11/35`). OCR often clipped the extra `1` or read `1 1/35`.
+- **Tray menu** — If the dashboard is hidden with **X** and you forget the show-UI key, the tray icon brings it back. Left-click shows the dashboard. Right-click: show dashboard, overlay, AutoRun (checkmark when on), start/stop picker, and exit. AutoRun in the tray uses the same setting as Settings.
+- **Fixes** — Later Start no longer extra-clicks the house grid after a claim when every target is already active. Mission-report AutoRun does not send Esc (that opened the system menu). Overlay no longer covers the Landsraad tab. Stats column headers line up with values.
 
 ### 0.1.4
 
