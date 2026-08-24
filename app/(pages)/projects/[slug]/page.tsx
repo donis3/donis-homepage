@@ -23,6 +23,7 @@ import ProjectHeader from "./_components/project-header";
 import ProjectMetadata from "./_components/project-metadata";
 import ProjectStack from "./_components/project-stack";
 import DonsraadTerms from "@/projects/donsraad/terms";
+import DonsraadNotice from "@/projects/donsraad/notice";
 
 type ProjectPageProps = PageProps<"/projects/[slug]">;
 
@@ -69,6 +70,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 							Disclaimer,
 							TermsOfService,
 							DonsraadTerms,
+							DonsraadNotice,
 						}}
 					/>
 				</article>

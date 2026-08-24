@@ -3,6 +3,7 @@ import Disclaimer from "@/components/disclaimer";
 import Kbd from "@/components/kbd";
 import TermsOfService from "@/components/terms-of-service";
 import DonsraadTerms from "@/projects/donsraad/terms";
+import DonsraadNotice from "@/projects/donsraad/notice";
 import Link from "next/link";
 import { ComponentPropsWithoutRef } from "react";
 
@@ -13,6 +14,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		Disclaimer,
 		TermsOfService,
 		DonsraadTerms,
+		DonsraadNotice,
 		a: ({ href, children, ...props }: ComponentPropsWithoutRef<"a">) => {
 			const className = "text-blue-500 hover:text-blue-700";
 			if (href?.startsWith("/")) {
