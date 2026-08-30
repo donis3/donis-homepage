@@ -13,6 +13,7 @@ import ContactEmail from "@/components/contact-email";
 import Disclaimer from "@/components/disclaimer";
 import Kbd from "@/components/kbd";
 import TermsOfService from "@/components/terms-of-service";
+import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import type { MDXRemoteOptions } from "next-mdx-remote-client/rsc";
 import { MDXRemote } from "next-mdx-remote-client/rsc";
@@ -24,6 +25,10 @@ import ProjectMetadata from "./_components/project-metadata";
 import ProjectStack from "./_components/project-stack";
 import DonsraadTerms from "@/projects/donsraad/terms";
 import DonsraadNotice from "@/projects/donsraad/notice";
+import DonsraadHero from "@/projects/donsraad/hero";
+import DonsraadFeatures from "@/projects/donsraad/features";
+import DonsraadHowToUse from "@/projects/donsraad/how-to-use";
+import DonsraadBeta from "@/projects/donsraad/beta";
 
 type ProjectPageProps = PageProps<"/projects/[slug]">;
 
@@ -48,9 +53,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 	// Read available images
 	const imageUrls = await getProjectImageUrls(projectFolder);
 	const coverImageUrl = await getProjectCoverUrl(projectFolder);
+	const isDonsraad = projectFolder === "donsraad";
 
 	return (
-		<div className="mb-12 w-full">
+		<div className={cn("mb-12 w-full", isDonsraad && "overflow-x-clip")}>
 			<ProjectHeader
 				title={projectMetadata.shortTitle || projectFolder}
 				tags={projectMetadata.tags}
@@ -59,8 +65,18 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 			<div className="mx-auto max-w-2xl px-4 py-4">
 				<ProjectMetadata metadata={projectMetadata} />
 			</div>
-			<div className="mx-auto max-w-2xl px-4">
-				<article className="prose dark:prose-invert mx-auto my-8 max-w-full">
+			<div
+				className={cn(
+					"mx-auto px-4",
+					isDonsraad ? "max-w-5xl" : "max-w-2xl",
+				)}
+			>
+				<article
+					className={cn(
+						"prose dark:prose-invert mx-auto my-8 max-w-full",
+						isDonsraad && "prose-headings:scroll-mt-24",
+					)}
+				>
 					<MDXRemote
 						source={projectContent}
 						options={options}
@@ -71,12 +87,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 							TermsOfService,
 							DonsraadTerms,
 							DonsraadNotice,
+							DonsraadHero,
+							DonsraadFeatures,
+							DonsraadHowToUse,
+							DonsraadBeta,
 						}}
 					/>
 				</article>
 			</div>
 			<Changelog entries={projectMetadata.changelog} className="mb-12" />
-			{imageUrls.length > 0 && (
+			{imageUrls.length > 0 && !isDonsraad && (
 				<section className="from-muted/50 bg-linear-to-b to-transparent px-4 pt-6 pb-12">
 					<ProjectGallery
 						images={imageUrls}
@@ -85,10 +105,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 				</section>
 			)}
 			<ProjectStack stack={projectMetadata.techStack} />
-			<ProjectDownloads
-				downloads={projectMetadata.downloads}
-				terms={projectFolder === "donsraad" ? <DonsraadTerms /> : undefined}
-			/>
+			<div id={isDonsraad ? "downloads" : undefined}>
+				<ProjectDownloads
+					downloads={projectMetadata.downloads}
+					terms={isDonsraad ? <DonsraadTerms /> : undefined}
+				/>
+			</div>
 		</div>
 	);
 }

@@ -3,7 +3,7 @@ title: Donsraad - Easy Landsraad Mission Picker for Dune Awakening
 description: The Easy Landsraad Mission Picker for Dune Awakening. Pick your targets, auto-refresh the board, and spend less time loading and more time playing.
 keywords: Donsraad, Dune Awakening, Landsraad, mission picker, Landsraad companion, auto mission picker, repeatable missions, guild refresh, Windows companion app
 author: Deniz Özkan
-date: 2026-08-24
+date: 2026-08-30
 tags: [Desktop App, Gaming]
 shortDescription: Easy Landsraad Mission Picker for Dune Awakening — pick your targets and let Donsraad handle the board rolls.
 shortTitle: Donsraad
@@ -15,93 +15,21 @@ featureOrder: 6
 downloads:
    - title: Portable (x64)
      description: Windows 10 or 11. Unzip and run Donsraad.exe. AutoHotkey is not required.
-     href: /download/donsraad_v0.1.6_x64_portable.zip
+     href: /download/donsraad_v0.2.0_x64_portable.zip
    - title: AutoHotkey v2 source
      description: Source scripts. Install AutoHotkey v2 and run main.ahk.
-     href: /download/donsraad_v0.1.6_ahkv2_source.zip
-changelog:
-   - version: "0.1.6"
-     date: 2026-08-24
-     items:
-        - title: Resolution support
-          body: Major update — Donsraad now supports 1080p, 1440p, and 3440×1440 in windowed or fullscreen windowed modes.
-        - title: AutoRun detection
-          body: Improved mission-complete detection. The app spots the View mission report icon and dismisses it after claiming rewards, so finished runs are not misread. App no longer needs to wait 30 seconds to start auto-detection this way.
-        - title: Session stats
-          body: The status bar now shows how many missions you completed this session.
-        - title: Keybinds
-          body: New hotkeys to stop the picker and toggle AutoRun without opening the dashboard.
-        - title: Out of the way
-          body: While missions are being picked, the status bar moves to the bottom left so it does not cover the Landsraad board.
-        - title: Game-window overlay
-          body: The status bar follows the game window instead of anchoring to your monitor.
-        - title: Fixes
-          body: Completed-mission stats now credit the correct mission when claims shift the active list.
-   - version: "0.1.5"
-     date: 2026-08-22
-     items:
-        - title: AutoRun mission complete
-          body: Auto mode can start the next loop from the in-world View mission report prompt. You no longer need the ornithopter Travel window. After you are ready, that prompt is ignored for 30 seconds so a leftover or mid-mission report does not fire again.
-        - title: Availability
-          body: Stats estimates how often a mission shows up, using your last 30 pick cycles. It only tracks when you target exactly one mission from that specialization.
-        - title: Ready notice
-          body: When the picker finishes, the overlay also tells you how many missions were abandoned that cycle.
-        - title: Overlay
-          body: Top-middle placement is gone. It sat on the Landsraad tab. Existing top-middle settings move to top left.
-        - title: Mnemonic devices
-          body: Remaining counts with two digits, such as 11/35, now read correctly.
-        - title: Tray menu
-          body: If you hide the dashboard with X, the tray icon brings it back. Left-click shows the dashboard. Right-click can show the overlay, toggle AutoRun, start or stop the picker, and exit.
-        - title: Fixes
-          body: Start no longer extra-clicks the house grid when every target is already active. Stats column headers line up with the values.
-   - version: "0.1.4"
-     date: 2026-08-20
-     items:
-        - title: Overlay position
-          body: Move the on-screen HUD to any corner or the top middle. Bottom placements sit above the taskbar.
-        - title: AutoRun
-          body: Leave the Travel confirmation open at the ornithopter and Donsraad starts the next picker loop for you. The overlay AUTO icon is green when this is on.
-        - title: Mnemonic devices
-          body: The overlay shows remaining tokens after you initialize. Stats tracks how many you actually spent.
-        - title: Travel window
-          body: Later Start runs close the Travel popup if it is blocking the menu.
-        - title: Fixes
-          body: Renaming a profile no longer crashes if you switch tabs too quickly. Mnemonic remaining no longer shows 0 before the first real read.
-   - version: "0.1.3"
-     date: 2026-08-20
-     items:
-        - title: Stats
-          body: Completes and best times per mission, plus session abandons and targeted accepts. Reset stats without wiping your settings.
-        - title: Run timers
-          body: Timing starts once all targets are accepted. Claiming them saves last and best times.
-        - title: Overlay
-          body: Optional notices when you are ready to run and when you set a new best time.
-        - title: Dashboard
-          body: Wider mission grid, clearer hotkey labels, and profile names that no longer clip.
-   - version: "0.1.2"
-     date: 2026-08-20
-     items:
-        - title: Action delay
-          body: Speed up or slow down the picker in Settings to match your client.
-        - title: Auto claim
-          body: Completed missions are claimed on initialize and again when you press Start after a run.
-        - title: Cancel
-          body: Press Start while a loop is running to stop it. The overlay shows the cancel hint.
-        - title: Reliability
-          body: Clearer overlay hints, snappier waiting, and a more reliable guild refresh.
-   - version: "0.1.1"
-     date: 2026-08-20
-     items:
-        - body: First release. Pick targets on the house grid, initialize, re-roll the board, and accept the missions you want.
+     href: /download/donsraad_v0.2.0_ahkv2_source.zip
 ---
 
 <DonsraadNotice />
 
-Stop chasing random Landsraad offers across the map.
+<DonsraadHero />
 
-Donsraad is the **Easy Landsraad Mission Picker** for [Dune: Awakening](https://duneawakening.com/). Choose up to three repeatable missions on the house grid, turn on AutoRun, and let the app refresh the board until your picks are active — then claim rewards and loop again when your run finishes.
+<DonsraadFeatures />
 
-Windows 10 or 11. Download the portable build, unzip, and run `Donsraad.exe`.
+<DonsraadHowToUse />
+
+<DonsraadBeta />
 
 <Disclaimer>
 
@@ -112,29 +40,3 @@ Donsraad is provided completely as-is, without warranty of any kind, express or 
 <TermsOfService>
 <DonsraadTerms />
 </TermsOfService>
-
-## How to use
-
-1. **Settings** — Enter your character, guild name, and faction. Guild name is required to refresh the board. Turn on **AutoRun** if you want the next pick loop to start automatically.
-2. **Pick your missions** — The mission board matches the in-game Landsraad house grid. Click the same house cell you use in game, then choose the mission you want from that spot. You can pick up to three targets — one specialization per cell.
-3. **Initialize and pick** — Press **Initialize** or the Start keybind (<kbd>Home</kbd>). This gets the app ready for your session. Press **Start** again to run the mission pickup loop. When all your targeted missions are accepted, your run begins!
-4. **Play and repeat** — Run your missions in game. With AutoRun on, finish a run so **View mission report?** appears, or leave the **Travel confirmation** at the ornithopter open — either one starts the next loop. Press **End** to stop the picker, or <kbd>Delete</kbd> to toggle AutoRun.
-
-Press <kbd>F8</kbd> or use the tray icon to show or hide the dashboard. <kbd>Insert</kbd> toggles the status bar. All keys can be changed in **Settings**.
-
-## Features
-
-- **House grid picker** — The mission board mirrors the in-game Landsraad house grid. Pick the same cell and mission you want in game, up to three targets total.
-- **AutoRun** — Claims rewards, re-rolls the board, and accepts your targets again when a run finishes.
-- **Guild refresh** — Re-rolls random offers by disbanding your guild until your picks show up.
-- **Profiles** — Separate settings per character: name, guild, faction, and mission picks.
-- **Status bar** — Run status pinned to the game window, with session completes and target progress. Moves to the bottom left while picking so it stays out of the way.
-- **Stats** — Mission completes, best times, and availability estimates.
-- **Tray menu** — Control the dashboard, status bar, AutoRun, and picker from the system tray.
-
-## Beta
-
-Donsraad is beta software. It has only been tested at **1080p**, **1440p**, and **3440×1440** — other resolutions may not work correctly. Bugs are still possible.
-
-If something breaks, turn on **debug** in Settings, reproduce the issue, then email a short description and the logs to <ContactEmail />.
-

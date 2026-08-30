@@ -2,6 +2,8 @@ import fs from "fs/promises";
 import path from "path";
 import matter from "gray-matter";
 import { config } from "../config";
+import { getProjectChangelog } from "./changelog";
+import type { ChangelogEntry } from "./changelog-schema";
 import {
 	ProjectMetadata,
 	projectMetadataSchema,
@@ -35,6 +37,7 @@ export type ProjectDetails = ProjectMetadata & {
 	slug: string;
 	thumbnailUrl: string;
 	coverUrl: string;
+	changelog: ChangelogEntry[];
 };
 
 export async function getProjectMetadata(
@@ -52,9 +55,18 @@ export async function getProjectMetadata(
 		);
 	}
 
-	const thumbnailUrl = await getProjectThumbnailUrl(projectFolder);
-	const coverUrl = await getProjectCoverUrl(projectFolder);
-	return { slug: projectFolder, ...valid.data, thumbnailUrl, coverUrl };
+	const [thumbnailUrl, coverUrl, changelog] = await Promise.all([
+		getProjectThumbnailUrl(projectFolder),
+		getProjectCoverUrl(projectFolder),
+		getProjectChangelog(projectFolder),
+	]);
+	return {
+		slug: projectFolder,
+		...valid.data,
+		thumbnailUrl,
+		coverUrl,
+		changelog,
+	};
 }
 
 export async function getProjectsMetadata(

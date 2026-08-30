@@ -1,0 +1,253 @@
+[
+	{
+		"version": "0.2.0",
+		"date": "2026-08-30",
+		"items": [
+			{
+				"title": "Major update",
+				"body": "Landsraad house grid, weekly goals, reward tracking, and a simpler picker workflow."
+			},
+			{
+				"title": "Unified Start",
+				"body": "Initialize is gone. Start runs first-time setup when needed, then goes straight into claim → refresh → accept."
+			},
+			{
+				"title": "Random guild names",
+				"body": "New profiles and profile Reset assign a random five-letter guild name so you can refresh the board right away."
+			},
+			{
+				"title": "Reward Hunter",
+				"body": "Mark reward items you are hunting. Icons show on Missions and Landsraad when those rewards appear on a scanned board."
+			},
+			{
+				"title": "House rewards",
+				"body": "Rewards tab rows open earned tiers, week labels, and item names for each house."
+			},
+			{
+				"title": "User guide",
+				"body": "How to use on the About tab opens an in-app guide for quick start, grid, Landsraad, rewards, and keybinds."
+			}
+		]
+	},
+	{
+		"version": "0.1.8",
+		"items": [
+			{
+				"title": "Landsraad tab",
+				"body": "Scan the in-game house grid. See crests, contribution, progress bars, and weekly goals. Set goals and mark swatch ownership."
+			},
+			{
+				"title": "Missions grid",
+				"body": "After a scan, the board shows revealed houses with icons and progress. Drag and drop to move or swap targets between cells."
+			},
+			{
+				"title": "Contribution tracking",
+				"body": "Claiming a mission adds its Landsraad contribution to your tracked house. Hitting a goal shows a notification and plays a sound."
+			},
+			{
+				"title": "Goal estimates",
+				"body": "After each claim, see how close you are to the weekly goal and how many similar missions are left."
+			},
+			{
+				"title": "Rewards tab",
+				"body": "Track unclaimed house reward tiers per week. Claim or reset reward tracking per profile."
+			},
+			{
+				"title": "Tab help",
+				"body": "Legend buttons on Missions and Landsraad explain colors, badges, and grid states."
+			},
+			{
+				"title": "Sound effects",
+				"body": "Optional run-start and goal-reach cues in Settings."
+			},
+			{
+				"title": "Settings",
+				"body": "Redesigned layout, configurable weekly reset day and hour, and a larger dashboard window."
+			},
+			{
+				"title": "Overlay",
+				"body": "Stays bottom-left during picker work so it does not cover Landsraad UI. Goal notifications show house icons."
+			},
+			{
+				"title": "Run timer",
+				"body": "Stop pauses the current-run timer. Start resumes without counting the paused time."
+			},
+			{
+				"title": "Smarter claiming",
+				"body": "Avoids partial claims when not every target is complete. Shows a notice if no targeted missions remain after a claim."
+			},
+			{
+				"title": "Mission hunt",
+				"body": "Skips house cells that already have your targets during filler passes, then accepts when every cell is ready."
+			},
+			{
+				"title": "Fixes",
+				"body": "Tab overlap after Rewards, reward icons and week sorting, toast stacking for goal progress, and related UI bugs."
+			}
+		]
+	},
+	{
+		"version": "0.1.7",
+		"items": [
+			{
+				"title": "Per-profile settings",
+				"body": "Guild name, faction, overlay, and delays are saved per profile. Hotkeys stay global."
+			},
+			{
+				"title": "Drag and drop",
+				"body": "Swap or move missions between house cells. Cursor hints show when you can pick, move, or are at the three-mission cap."
+			},
+			{
+				"title": "Fixes",
+				"body": "Cursor clear stays inside the game window in windowed mode. SESSION counter counts targeted leftovers during setup, then every claim after that."
+			}
+		]
+	},
+	{
+		"version": "0.1.6",
+		"date": "2026-08-24",
+		"items": [
+			{
+				"title": "Resolution support",
+				"body": "Donsraad now supports 1080p, 1440p, and 3440×1440 in windowed or fullscreen windowed modes. Coordinates follow the game window, not the monitor."
+			},
+			{
+				"title": "AutoRun detection",
+				"body": "Reliable View mission report detection across backgrounds. Finished runs are not misread, and the old 30-second wait is gone."
+			},
+			{
+				"title": "Session stats",
+				"body": "The status bar shows how many missions you completed this session."
+			},
+			{
+				"title": "Keybinds",
+				"body": "Separate hotkeys for Start, Stop, and Toggle AutoRun. Dashboard default is F8."
+			},
+			{
+				"title": "Overlay",
+				"body": "Pins to the game window and hides when unfocused. Moves to the bottom left while picking so it stays out of the way."
+			},
+			{
+				"title": "Leftover mission report",
+				"body": "For 10 seconds after targets are ready, leftover View mission report prompts are dismissed automatically."
+			},
+			{
+				"title": "Fixes",
+				"body": "Completed-mission stats credit the correct mission when claims shift the active list. Guild name limited to 3–100 characters. Overlay settings layout no longer overlaps."
+			}
+		]
+	},
+	{
+		"version": "0.1.5",
+		"date": "2026-08-22",
+		"items": [
+			{
+				"title": "AutoRun mission complete",
+				"body": "Auto mode can start the next loop from the in-world View mission report prompt. You no longer need the ornithopter Travel window. After you are ready, that prompt is ignored for 30 seconds so a leftover or mid-mission report does not fire again."
+			},
+			{
+				"title": "Availability",
+				"body": "Stats estimates how often a mission shows up, using your last 30 pick cycles. It only tracks when you target exactly one mission from that specialization."
+			},
+			{
+				"title": "Ready notice",
+				"body": "When the picker finishes, the overlay also tells you how many missions were abandoned that cycle."
+			},
+			{
+				"title": "Overlay",
+				"body": "Top-middle placement is gone. It sat on the Landsraad tab. Existing top-middle settings move to top left."
+			},
+			{
+				"title": "Mnemonic devices",
+				"body": "Remaining counts with two digits, such as 11/35, now read correctly."
+			},
+			{
+				"title": "Tray menu",
+				"body": "If you hide the dashboard with X, the tray icon brings it back. Left-click shows the dashboard. Right-click can show the overlay, toggle AutoRun, start or stop the picker, and exit."
+			},
+			{
+				"title": "Fixes",
+				"body": "Start no longer extra-clicks the house grid when every target is already active. Stats column headers line up with the values."
+			}
+		]
+	},
+	{
+		"version": "0.1.4",
+		"date": "2026-08-20",
+		"items": [
+			{
+				"title": "Overlay position",
+				"body": "Move the on-screen HUD to any corner or the top middle. Bottom placements sit above the taskbar."
+			},
+			{
+				"title": "AutoRun",
+				"body": "Leave the Travel confirmation open at the ornithopter and Donsraad starts the next picker loop for you. The overlay AUTO icon is green when this is on."
+			},
+			{
+				"title": "Mnemonic devices",
+				"body": "The overlay shows remaining tokens after you initialize. Stats tracks how many you actually spent."
+			},
+			{
+				"title": "Travel window",
+				"body": "Later Start runs close the Travel popup if it is blocking the menu."
+			},
+			{
+				"title": "Fixes",
+				"body": "Renaming a profile no longer crashes if you switch tabs too quickly. Mnemonic remaining no longer shows 0 before the first real read."
+			}
+		]
+	},
+	{
+		"version": "0.1.3",
+		"date": "2026-08-20",
+		"items": [
+			{
+				"title": "Stats",
+				"body": "Completes and best times per mission, plus session abandons and targeted accepts. Reset stats without wiping your settings."
+			},
+			{
+				"title": "Run timers",
+				"body": "Timing starts once all targets are accepted. Claiming them saves last and best times."
+			},
+			{
+				"title": "Overlay",
+				"body": "Optional notices when you are ready to run and when you set a new best time."
+			},
+			{
+				"title": "Dashboard",
+				"body": "Wider mission grid, clearer hotkey labels, and profile names that no longer clip."
+			}
+		]
+	},
+	{
+		"version": "0.1.2",
+		"date": "2026-08-20",
+		"items": [
+			{
+				"title": "Action delay",
+				"body": "Speed up or slow down the picker in Settings to match your client."
+			},
+			{
+				"title": "Auto claim",
+				"body": "Completed missions are claimed on initialize and again when you press Start after a run."
+			},
+			{
+				"title": "Cancel",
+				"body": "Press Start while a loop is running to stop it. The overlay shows the cancel hint."
+			},
+			{
+				"title": "Reliability",
+				"body": "Clearer overlay hints, snappier waiting, and a more reliable guild refresh."
+			}
+		]
+	},
+	{
+		"version": "0.1.1",
+		"date": "2026-08-20",
+		"items": [
+			{
+				"body": "First release. Pick targets on the house grid, initialize, re-roll the board, and accept the missions you want."
+			}
+		]
+	}
+]

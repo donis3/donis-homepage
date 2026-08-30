@@ -1,18 +1,8 @@
 import { Badge } from "@/components/ui/badge";
+import type { ChangelogEntry } from "@/core/project-helpers/changelog-schema";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
-
-export type ChangelogItem = {
-	title?: string;
-	body: string;
-};
-
-export type ChangelogEntry = {
-	version: string;
-	date?: Date;
-	items: ChangelogItem[];
-};
 
 type ChangelogProps = {
 	entries: ChangelogEntry[];

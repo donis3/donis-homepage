@@ -38,7 +38,7 @@ From the repo root (close `Donsraad.exe` first if it is running):
 .\build.cmd
 ```
 
-That writes a portable folder at `dist\Donsraad-<version>\` (currently `dist\Donsraad-0.1.6\`). Copy that folder anywhere and run `Donsraad.exe`. AutoHotkey does not need to be installed on the machine that runs it.
+That writes a portable folder at `dist\Donsraad-<version>\` (currently `dist\Donsraad-0.2.0\`). Copy that folder anywhere and run `Donsraad.exe`. AutoHotkey does not need to be installed on the machine that runs it.
 
 JSON and PNG files stay **next to the exe**, not locked inside it:
 
@@ -51,6 +51,12 @@ JSON and PNG files stay **next to the exe**, not locked inside it:
 | `player_state.json` | Active session / stats (created on first run; never shipped in the portable zip) |
 | `db\landsraad_houses.json` | House database (read; you can edit) |
 | `db\landsraad_missions.json` | Mission database (read; you can edit) |
+| `db\landsraad_rewards.json` | Landsraad reward item database (read; you can edit) |
+| `db\house_icons\` | House crest PNGs (UI badges and notifications) |
+| `db\house_icons_scaled\` | Scaled house icons for grid and Rewards tab |
+| `db\spec_icons\` | Specialization icons for the mission grid |
+| `db\reward_icons\` | Reward tier icons for the UI |
+| `sfx\` | Run-start and goal-reach sound cues (WAV; MP3 optional) |
 | `ui\donis.png` | About-tab photo |
 | `anchors\1080p\*.png` / `anchors\1440p\*.png` | In-game image-search anchors |
 
@@ -80,12 +86,13 @@ Donsraad/
 
 ## Usage
 
-1. **Settings** — Character, guild name, and faction. Guild name is required for board refresh. Enable AutoRun if you want the next loop to start automatically.
-2. **Missions** — The grid matches the in-game Landsraad house board. Click the same house cell you use in game, then pick the mission(s) you want there. Up to 3 targets total; one specialization per cell.
-3. **First setup** — Focus Dune: Awakening, then Initialize or press Start once.
-4. **Run** — Press **Start** (`Home`) until your targets are active. **End** stops the picker and pauses AutoRun. **Delete** toggles AutoRun.
+1. **Settings** — Character, guild name, and faction. Guild name is required for board refresh (new profiles get a random 5-letter name). Enable AutoRun if you want the next loop to start automatically.
+2. **Landsraad** — Scan the in-game house grid once per week. Set contribution goals on houses you care about.
+3. **Missions** — The grid matches the in-game Landsraad house board. Click the same house cell you use in game, then pick the mission(s) you want there. Up to 3 targets total; one specialization per cell.
+4. **Run** — Focus Dune: Awakening, then press **Start** (`Home`). First Start runs setup, then the picker loop (claim → refresh → accept). **End** stops the picker and pauses AutoRun. **Delete** toggles AutoRun.
 5. **Play** — Run your missions. With AutoRun on, leave Travel confirmation open at the ornithopter, or finish so View mission report? appears — either starts the next picker loop. Leftover report prompts in the first 10 seconds after ready are closed with Enter.
-6. **Stats / Overlay / Dashboard** — Completes and best times on Stats. Overlay pins to the game window and hides when unfocused. Window **X** hides the dashboard; tray or the dashboard key brings it back. Rebind keys in Settings.
+6. **Rewards** — Claim house tier rewards in game, then mark them claimed on the Rewards tab. Use **Reward Hunter** to mark items you are hunting.
+7. **Stats / Overlay / Dashboard** — Completes and best times on Stats. Overlay pins to the game window and hides when unfocused. Window **X** hides the dashboard; tray or the dashboard key brings it back. Rebind keys in Settings.
 
 ## Keybinds
 
@@ -101,6 +108,41 @@ Donsraad/
 Rebind them in **Settings → Keybinds**. Click a bind, press a key, `Esc` cancels.
 
 ## Changelog
+
+### 0.2.0
+
+Major release: Landsraad house-grid companion, weekly goals, reward tracking, and a simpler picker workflow. Upgrading from 0.1.7 or earlier? The 0.1.8 section below lists the large Landsraad feature set that ships in this release.
+
+- **Unified Start** — Removed the separate Initialize step. The **Start** button and `Home` keybind run first-time setup when needed, then continue straight into the mission picker loop (claim → refresh → accept).
+- **Random guild names** — New profiles and **Reset** on the Settings profile row assign a random 5-letter guild name so you can refresh the board without choosing a name first.
+- **Reward Hunter** — Browse `db/landsraad_rewards.json`, mark items you are hunting per profile, and see hunted icons on the Missions grid and Landsraad tab when those rewards appear on a scanned board.
+- **House earned rewards** — Rewards tab rows open a detail window listing earned tiers, week labels, and resolved item names for that house.
+- **Landsraad rewards database** — `db/landsraad_rewards.json` plus OCR matching for house tooltip reward lines during grid scans.
+- **User guide** — **How to use** on the About tab opens an in-app guide (quick start, grid, Landsraad, rewards, keybinds).
+
+### 0.1.8
+
+- **Landsraad tab** — Scan the in-game 5×5 house grid from the dashboard. Shows house crests, specialization icons, personal contribution, progress bars, and weekly goal tracking. Click a house to set a contribution goal or mark swatch ownership. **Reset board** clears this week’s scan data for the active profile.
+- **Missions grid** — After a Landsraad scan, the Missions tab switches to a revealed-house board with house/spec icons, contribution progress, tracked highlighting, and drag-and-drop to move or swap targets between cells.
+- **Contribution on claim** — Claiming a completed mission OCRs the Landsraad contribution line from the reward panel and adds it to the tracked house. Goal reached shows a house-icon notification and plays a sound.
+- **Missions-to-goal estimate** — After each claim on a tracked house, a notification shows contribution progress and how many similar missions remain until the weekly goal (e.g. `8,400 / 10,500 · 2 missions left`).
+- **Rewards tab** — Tracks unclaimed Landsraad house reward tiers (700 → 14,000) per profile. One row per house for the current week; older weeks roll into the tier display until you claim. **Claim** marks the current week claimed and removes prior-week entries. **Reset rewards** clears all reward tracking for the profile.
+- **Tab help** — `?` buttons on Missions and Landsraad open a legend explaining colors, badges, and grid states.
+- **Sound effects** — Optional run-start and goal-reach cues (Settings → Sound effects). Uses bundled WAV/MP3 via a non-blocking player.
+- **Settings** — Redesigned layout; configurable Landsraad weekly reset day/hour; sound toggle. Dashboard window is 1000×900.
+- **Overlay** — Status bar pins bottom-left during picker/scan/claim scenarios so it does not cover Landsraad UI. Rich goal-reached and goal-progress splash notifications with house icons.
+- **Run timer** — Stop pauses the current-run timer; Start resumes it if paused (elapsed time excludes the paused segment).
+- **Claim rules** — Later Start will not claim completed missions unless every targeted mission is complete when all targets are already active (avoids partial claims). After a claim, if no targeted missions remain, the menu closes and the overlay shows “No targeted missions”.
+- **Mission hunt** — Done-cell tracking: when a house cell already shows all your targets, it is marked done and skipped on later hunt passes (including after guild disband) until every targeted cell is ready, then targeted missions are accepted. Cuts redundant cell opens and OCR during the filler loop.
+- **Fixes** — Landsraad swatch indicators no longer bleed onto other tabs. Settings/Stats tab overlap after Rewards was added. Rewards tab house icons and week-date sorting. Rewards claim button handler. ISO week strings compared with `StrCompare` instead of numeric `<`. Goal-progress notifications use a separate stacked toast queue (up to 4) so they are not replaced by other overlay messages. `Gui` / `gui` name clash crash when showing house progress toasts after claim.
+
+### 0.1.7
+
+- **Fixes — cursor clear** — Moving the mouse out of the way for ImageSearch now stays inside the game client with top/bottom padding and respects the monitor work area, so windowed mode no longer parks the cursor on the taskbar and leaves Unreal hover stuck.
+- **Fixes — SESSION counter** — During first Initialize, only targeted leftover completions count toward SESSION; after init, every claimed completion counts even if you changed targets before claiming.
+- **Fixes — profiles** — Guild name, faction, overlay, delays, and other character settings are stored per profile. Switching profiles loads that profile’s settings; new profiles start from defaults. Hotkeys stay global.
+- **Missions grid drag** — Drag a filled house cell onto another to swap missions; drop on an empty cell to move them. Click without dragging still selects the cell as before.
+- **Missions grid cursors** — Hand on empty selectable cells, move on filled/draggable cells, and not-allowed when the 3-mission cap blocks new picks.
 
 ### 0.1.6
 
