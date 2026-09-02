@@ -95,7 +95,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 					/>
 				</article>
 			</div>
-			<Changelog entries={projectMetadata.changelog} className="mb-12" />
 			{imageUrls.length > 0 && !isDonsraad && (
 				<section className="from-muted/50 bg-linear-to-b to-transparent px-4 pt-6 pb-12">
 					<ProjectGallery
@@ -111,6 +110,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 					terms={isDonsraad ? <DonsraadTerms /> : undefined}
 				/>
 			</div>
+			<Changelog entries={projectMetadata.changelog} className="mb-12" />
 		</div>
 	);
 }

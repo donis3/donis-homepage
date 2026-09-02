@@ -36,7 +36,7 @@ export const donsraadFeatureSlides: FeatureSlide[] = [
 		shortTitle: "Progress",
 		description:
 			"After a scan, every house shows how much you’ve contributed this week. Finishing missions adds progress automatically — no need to re-scan the board after every run.",
-		image: "/assets/projects/donsraad/donsraad-4.jpg",
+		image: "/assets/projects/donsraad/donsraad-11.jpg",
 		alt: "Donsraad Landsraad progress per house",
 	},
 	{

@@ -38,7 +38,7 @@ From the repo root (close `Donsraad.exe` first if it is running):
 .\build.cmd
 ```
 
-That writes a portable folder at `dist\Donsraad-<version>\` (currently `dist\Donsraad-0.2.0\`). Copy that folder anywhere and run `Donsraad.exe`. AutoHotkey does not need to be installed on the machine that runs it.
+That writes a portable folder at `dist\Donsraad-<version>\` (currently `dist\Donsraad-0.2.1\`). Copy that folder anywhere and run `Donsraad.exe`. AutoHotkey does not need to be installed on the machine that runs it.
 
 JSON and PNG files stay **next to the exe**, not locked inside it:
 
@@ -108,6 +108,17 @@ Donsraad/
 Rebind them in **Settings → Keybinds**. Click a bind, press a key, `Esc` cancels.
 
 ## Changelog
+
+### 0.2.1
+
+- **House Swatches** — New **House Swatches** button on the Rewards tab opens a window with checkboxes for every house. Mark which cosmetic swatches you already own; reaching 14,000 contribution with a house still auto-marks it.
+- **Contribution goal dialog** — Redesigned picker with clearer tier buttons and a read-only swatch status row. Swatch ownership is edited in House Swatches instead of the goal dialog.
+- **Missions not revealed** — Landsraad rows and Missions grid cells gray out when a house is on the scanned board but missions are not unlocked yet. A dim overlay blocks clicks until missions appear in game.
+- **Landsraad click rules** — Weekly goals open only for houses with revealed missions after a scan. Rows show **Scan grid first**, **Not on board**, or **Missions not revealed** when applicable.
+- **House mission dialog** — A green track badge marks the reward tier that matches your active weekly goal.
+- **Tab help** — Landsraad legend no longer shows hex color codes. Added entries for not-available and missions-not-revealed states.
+- **Mission grid** — Grid rendering stays on the Missions tab with improved caching and tab-visibility handling to reduce flicker when switching tabs.
+- **Fixes** — Landsraad week rollover no longer drops scanned house data on partial profile updates.
 
 ### 0.2.0
 

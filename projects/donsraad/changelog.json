@@ -1,5 +1,31 @@
 [
 	{
+		"version": "0.2.1",
+		"date": "2026-09-02",
+		"items": [
+			{
+				"title": "House Swatches",
+				"body": "Mark which cosmetic swatches you already own from the Rewards tab. Houses that hit 14,000 contribution are still marked automatically."
+			},
+			{
+				"title": "Contribution goals",
+				"body": "Clearer goal picker. Manage swatch ownership in the new House Swatches window instead."
+			},
+			{
+				"title": "Locked missions",
+				"body": "Houses without unlocked missions gray out and cannot be picked yet. The Landsraad tab shows clearer status when you need to scan first or wait for missions to open."
+			},
+			{
+				"title": "Mission picker",
+				"body": "Green badge on the reward tier that matches your weekly goal."
+			},
+			{
+				"title": "Fixes & polish",
+				"body": "Week rollover keeps your scanned board data. Less grid flicker when switching tabs, updated tab help, and other small fixes."
+			}
+		]
+	},
+	{
 		"version": "0.2.0",
 		"date": "2026-08-30",
 		"items": [
