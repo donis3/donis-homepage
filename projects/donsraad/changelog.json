@@ -1,5 +1,19 @@
 [
 	{
+		"version": "0.2.2",
+		"date": "2026-09-04",
+		"items": [
+			{
+				"title": "Stop at zero recollections",
+				"body": "New Automation setting stops the picker after claims when mnemonic recollections hit zero. AutoRun will not start another loop. The overlay shows when you are out of tokens."
+			},
+			{
+				"title": "Mnemonic footer",
+				"body": "Dashboard footer shows remaining recollections beside your target progress — green while tokens remain, yellow at zero, and a dash until the first HUD read."
+			}
+		]
+	},
+	{
 		"version": "0.2.1",
 		"date": "2026-09-02",
 		"items": [
