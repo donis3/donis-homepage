@@ -47,7 +47,7 @@ const steps: Step[] = [
 	{
 		icon: RefreshCw,
 		title: "Play & AutoRun",
-		body: "Run your missions in game. With AutoRun on, the overlay shows a green indicator — finished actives trigger the next claim-and-pick cycle with a notification and sound when ready.",
+		body: "Run your missions in game. With AutoRun on, the overlay shows a green indicator — finished actives trigger the next claim-and-pick cycle with a notification and sound when ready. Running low on mnemonic recollections? Turn on auto stop and the picker halts once they are spent.",
 	},
 	{
 		icon: Trophy,

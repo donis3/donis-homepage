@@ -1,12 +1,22 @@
 [
 	{
+		"version": "0.2.3",
+		"date": "2026-09-18",
+		"items": [
+			{
+				"title": "Dune: Awakening 1.5",
+				"body": "Donsraad now supports game version 1.5."
+			},
+			{
+				"title": "Auto stop at zero recollections",
+				"body": "New Automation setting. When your mnemonic recollections are spent, the picker stops after claiming and AutoRun will not start another loop."
+			}
+		]
+	},
+	{
 		"version": "0.2.2",
 		"date": "2026-09-04",
 		"items": [
-			{
-				"title": "Stop at zero recollections",
-				"body": "New Automation setting stops the picker after claims when mnemonic recollections hit zero. AutoRun will not start another loop. The overlay shows when you are out of tokens."
-			},
 			{
 				"title": "Mnemonic footer",
 				"body": "Dashboard footer shows remaining recollections beside your target progress — green while tokens remain, yellow at zero, and a dash until the first HUD read."

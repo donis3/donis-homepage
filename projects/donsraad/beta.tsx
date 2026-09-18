@@ -24,7 +24,11 @@ export default function DonsraadBeta({ className }: DonsraadBetaProps) {
 						Beta
 					</h2>
 					<p className="text-muted-foreground m-0 text-sm leading-relaxed">
-						Donsraad has been tested at{" "}
+						Built for{" "}
+						<strong className="text-foreground font-medium">
+							Dune: Awakening 1.5
+						</strong>
+						. Tested at{" "}
 						<strong className="text-foreground font-medium">1080p</strong>,{" "}
 						<strong className="text-foreground font-medium">1440p</strong>, and{" "}
 						<strong className="text-foreground font-medium">3440×1440</strong>{" "}

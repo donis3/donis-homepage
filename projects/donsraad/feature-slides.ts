@@ -151,7 +151,7 @@ export const donsraadFeatureGroups: FeatureGroup[] = [
 			},
 			{
 				title: "AutoRun",
-				body: "Claims finished missions and starts the next pick loop for you.",
+				body: "Claims finished missions and starts the next pick loop for you. Optionally stops when mnemonic recollections run out.",
 			},
 			{
 				title: "Overlay",
