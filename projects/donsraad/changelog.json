@@ -1,5 +1,15 @@
 [
 	{
+		"version": "0.2.4",
+		"date": "2026-09-26",
+		"items": [
+			{
+				"title": "Fixes & optimizations",
+				"body": "Bug fixes, performance tweaks, and small stability improvements across the picker, board scan, and reward tracking."
+			}
+		]
+	},
+	{
 		"version": "0.2.3",
 		"date": "2026-09-18",
 		"items": [
